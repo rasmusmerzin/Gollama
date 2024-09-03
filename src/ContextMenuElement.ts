@@ -6,6 +6,7 @@ export interface ContextMenuElementParameters {
   y: number;
   options: Array<{
     name: string;
+    color?: string;
     action(): unknown;
   }>;
 }
@@ -13,16 +14,32 @@ export interface ContextMenuElementParameters {
 export class ContextMenuElement extends Element {
   constructor({ x, y, options }: ContextMenuElementParameters) {
     super();
-    this.style.setProperty("--x", x.toString());
-    this.style.setProperty("--y", y.toString());
     for (const option of options) {
       const button = document.createElement("button");
       button.innerText = option.name;
       button.onclick = option.action;
+      if (option.color) button.style.color = option.color;
       this.append(button);
     }
-    addEventListener("click", () => this.remove(), this.control);
     document.body.append(this);
+    setTimeout(() => {
+      addEventListener("click", () => this.remove(), this.control);
+      addEventListener("contextmenu", () => this.remove(), this.control);
+      this.setPosition(x, y);
+    });
+  }
+
+  getSize() {
+    const { left, top, right, bottom } = this.getBoundingClientRect();
+    return { x: right - left, y: bottom - top };
+  }
+
+  setPosition(x: number, y: number) {
+    const size = this.getSize();
+    x = Math.min(innerWidth - size.x, x);
+    y = Math.min(innerHeight - size.y, y);
+    this.style.setProperty("--x", x.toString());
+    this.style.setProperty("--y", y.toString());
   }
 }
 

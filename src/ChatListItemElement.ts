@@ -1,11 +1,14 @@
 import "./ChatListItemElement.css";
 import { ActiveChatStore } from "./ActiveChatStore";
 import { Chat } from "./Chat";
+import { ChatService } from "./ChatService";
+import { ContextMenuElement } from "./ContextMenuElement";
 import { Element } from "./Element";
 import { createElement } from "./createElement";
 
 export class ChatListItemElement extends Element {
   active_chat_store = ActiveChatStore.get();
+  chat_service = ChatService.get();
 
   name = createElement("div");
   model = createElement("i");
@@ -14,12 +17,24 @@ export class ChatListItemElement extends Element {
     super();
     this.render();
     this.append(this.name, this.model);
-    this.onclick = () => this.active_chat_store.set(this.chat.id);
     this.active_chat_store.addEventListener(
       "change",
       this.render.bind(this),
       this.control,
     );
+    this.onclick = () => this.active_chat_store.set(this.chat.id);
+    this.oncontextmenu = ({ clientX, clientY }) => {
+      const delete_option = {
+        name: "Delete",
+        color: "red",
+        action: () => this.chat_service.deleteChat(chat.id),
+      };
+      new ContextMenuElement({
+        x: clientX,
+        y: clientY,
+        options: [delete_option],
+      });
+    };
   }
 
   render() {
