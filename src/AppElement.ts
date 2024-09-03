@@ -15,6 +15,7 @@ export class AppElement extends HTMLElement {
 
   constructor() {
     super();
+    this.chat_store.load();
     this.render();
     this.active_chat_store.addEventListener("change", this.render.bind(this));
   }
@@ -25,11 +26,8 @@ export class AppElement extends HTMLElement {
     this.append(this.navigation_element);
     const { chat_id } = this.active_chat_store;
     const chat = this.chat_store.chats.get(<string>chat_id);
-    this.append(
-      chat
-        ? (this.chat_element = new ChatElement(chat))
-        : this.new_chat_element,
-    );
+    if (chat) this.append((this.chat_element = new ChatElement(chat)));
+    else this.append(this.new_chat_element);
   }
 }
 

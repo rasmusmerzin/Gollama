@@ -7,6 +7,10 @@ export class Chat extends EventTarget {
   model = "phi3:latest";
   messages = new Array<ChatMessage>();
 
+  get last_message() {
+    return this.messages[this.messages.length - 1];
+  }
+
   static from({ id, title, model, messages }: Partial<Chat> = {}) {
     const chat = new Chat();
     if (id) chat.id = id;
@@ -19,6 +23,6 @@ export class Chat extends EventTarget {
 
   add(message: ChatMessage) {
     this.messages.push(message);
-    this.dispatchEvent(new Event("change"));
+    this.dispatchEvent(new Event("add"));
   }
 }

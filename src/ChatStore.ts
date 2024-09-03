@@ -20,11 +20,6 @@ export class ChatStore extends EventTarget {
     this.dispatchEvent(new Event("change"));
   }
 
-  saveAll() {
-    this.saveIndex();
-    for (const chat of this.chats.values()) this.saveChat(chat);
-  }
-
   saveIndex() {
     const chat_ids = Array.from(this.chats.keys());
     const index = JSON.stringify(chat_ids);
