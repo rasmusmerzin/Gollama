@@ -1,3 +1,5 @@
+![Screenshot](./screenshot.png)
+
 # Gollama
 
 A GUI front-end for [Ollama](https://ollama.com) made with [Electron](https://www.electronjs.org).
