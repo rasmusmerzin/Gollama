@@ -16,6 +16,11 @@ export class ChatInputElement extends Element {
     this.input.addEventListener("keyup", this.keyup.bind(this), this.control);
   }
 
+  set disabled(value: boolean) {
+    this.input.disabled = value;
+    this.button.disabled = value;
+  }
+
   keyup({ key }: KeyboardEvent) {
     if (key === "Enter") this.send();
   }

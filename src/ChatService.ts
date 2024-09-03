@@ -40,6 +40,8 @@ export class ChatService {
       message.pushContent(response.content);
     } finally {
       message.setLoading(false);
+      this.chat_store.saveIndex();
+      this.chat_store.saveChat(chat);
     }
   }
 }

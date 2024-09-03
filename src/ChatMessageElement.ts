@@ -8,6 +8,7 @@ export class ChatMessageElement extends Element {
 
   constructor(readonly message: ChatMessage) {
     super();
+    this.id = message.id;
     this.append(this.content);
     this.render();
     message.addEventListener("change", this.render.bind(this), this.control);

@@ -14,7 +14,13 @@ export class ChatElement extends Element {
     super();
     this.append(this.container, this.input);
     for (const message of chat.messages) this.addMessage(message);
+    chat.addEventListener("change", this.renderInput.bind(this), this.control);
     chat.addEventListener("add", this.addLastMessage.bind(this), this.control);
+    this.renderInput();
+  }
+
+  renderInput() {
+    this.input.disabled = this.chat.last_message?.loading;
   }
 
   addLastMessage() {
