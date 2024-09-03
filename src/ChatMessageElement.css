@@ -1,2 +1,9 @@
 chat-message-element {
+  display: flex;
+  pre {
+    margin: 0;
+  }
+  &.user {
+    justify-content: flex-end;
+  }
 }

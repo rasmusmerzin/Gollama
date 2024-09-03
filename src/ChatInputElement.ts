@@ -17,6 +17,7 @@ export class ChatInputElement extends Element {
 
   send() {
     this.chat_service.pushMessage(this.input.value);
+    this.chat_service.generateResponse();
   }
 }
 

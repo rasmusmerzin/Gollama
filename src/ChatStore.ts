@@ -3,7 +3,10 @@ import { Chat } from "./Chat";
 export class ChatStore extends EventTarget {
   static instance: ChatStore | null = null;
   static get() {
-    return this.instance || (ChatStore.instance = new ChatStore());
+    if (this.instance) return this.instance;
+    this.instance = new ChatStore();
+    this.instance.load();
+    return this.instance;
   }
 
   chats = new Map<string, Chat>();

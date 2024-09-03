@@ -2,3 +2,30 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, Helvetica, sans-serif;
   margin: 0;
 }
+
+.loading {
+  &::after {
+    animation: 0.5s infinite loading;
+    content: "⠇";
+  }
+}
+@keyframes loading {
+  0% {
+    content: "⠇";
+  }
+  17% {
+    content: "⠋";
+  }
+  33% {
+    content: "⠙";
+  }
+  50% {
+    content: "⠸";
+  }
+  67% {
+    content: "⠴";
+  }
+  83% {
+    content: "⠦";
+  }
+}

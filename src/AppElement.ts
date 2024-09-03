@@ -15,7 +15,6 @@ export class AppElement extends HTMLElement {
 
   constructor() {
     super();
-    this.chat_store.load();
     this.render();
     this.active_chat_store.addEventListener("change", this.render.bind(this));
   }
