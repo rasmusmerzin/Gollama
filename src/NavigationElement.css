@@ -1,0 +1,6 @@
+navigation-element {
+  display: flex;
+  flex-direction: column;
+  width: 160px;
+  background: #8882;
+}

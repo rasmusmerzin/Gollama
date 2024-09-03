@@ -1,0 +1,7 @@
+chat-list-item-element {
+  user-select: none;
+  cursor: pointer;
+  &.selected {
+    font-weight: bold;
+  }
+}

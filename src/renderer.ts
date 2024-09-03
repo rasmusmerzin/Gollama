@@ -1,3 +1,4 @@
-import "./index.css";
+import "./style.css";
+import { AppElement } from "./AppElement";
 
-document.body.innerHTML = "<h1>Hello World!</h1>";
+document.body.append(new AppElement());
