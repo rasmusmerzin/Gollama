@@ -4,6 +4,9 @@ import { ChatService } from "./ChatService";
 import { ContextMenuElement } from "./ContextMenuElement";
 import { Element } from "./Element";
 import { createElement } from "./createElement";
+import markdownit from "markdown-it";
+
+const MD = markdownit();
 
 export class ChatMessageElement extends Element {
   chat_service = ChatService.get();
@@ -29,13 +32,14 @@ export class ChatMessageElement extends Element {
         ],
       });
     };
+    this.content.onclick = (e) => e.preventDefault();
   }
 
   render() {
     if (this.message.loading) this.content.classList.add("loading");
     else this.content.classList.remove("loading");
     this.classList.add(this.message.role);
-    this.content.innerText = this.message.content;
+    this.content.innerHTML = MD.render(this.message.content);
   }
 }
 
