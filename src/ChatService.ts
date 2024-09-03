@@ -15,6 +15,15 @@ export class ChatService {
   chat_store = ChatStore.get();
   ollama_service = OllamaService.get();
 
+  deleteMessage(message_id: string) {
+    const { chat_id } = this.active_chat_store;
+    const chat = this.chat_store.chats.get(<string>chat_id);
+    if (!chat) return;
+    chat.delete(message_id);
+    this.chat_store.saveIndex();
+    this.chat_store.saveChat(chat);
+  }
+
   pushMessage(content: string) {
     const { chat_id } = this.active_chat_store;
     const chat = this.chat_store.chats.get(<string>chat_id);

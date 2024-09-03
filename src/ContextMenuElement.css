@@ -1,0 +1,7 @@
+context-menu-element {
+  position: fixed;
+  left: calc(var(--x) * 1px);
+  top: calc(var(--y) * 1px);
+  display: flex;
+  flex-direction: column;
+}

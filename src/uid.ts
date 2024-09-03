@@ -3,6 +3,7 @@ const BASE64 =
 
 export function uid() {
   let id = "";
-  for (let i = 0; i < 24; i++) id += BASE64.charAt(Math.random() * 62);
+  id += BASE64.charAt(Math.random() * 52);
+  for (let i = 0; i < 23; i++) id += BASE64.charAt(Math.random() * 62);
   return id;
 }

@@ -1,9 +1,13 @@
 import "./ChatMessageElement.css";
 import { ChatMessage } from "./ChatMessage";
+import { ChatService } from "./ChatService";
+import { ContextMenuElement } from "./ContextMenuElement";
 import { Element } from "./Element";
 import { createElement } from "./createElement";
 
 export class ChatMessageElement extends Element {
+  chat_service = ChatService.get();
+
   content = createElement("div");
 
   constructor(readonly message: ChatMessage) {
@@ -12,6 +16,19 @@ export class ChatMessageElement extends Element {
     this.append(this.content);
     this.render();
     message.addEventListener("change", this.render.bind(this), this.control);
+    this.oncontextmenu = ({ clientX, clientY }) => {
+      if (this.message.loading) return;
+      new ContextMenuElement({
+        x: clientX,
+        y: clientY,
+        options: [
+          {
+            name: "Delete",
+            action: () => this.chat_service.deleteMessage(this.id),
+          },
+        ],
+      });
+    };
   }
 
   render() {

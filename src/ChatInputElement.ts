@@ -21,6 +21,10 @@ export class ChatInputElement extends Element {
     this.button.disabled = value;
   }
 
+  focus() {
+    this.input.focus();
+  }
+
   keyup({ key }: KeyboardEvent) {
     if (key === "Enter") this.send();
   }
