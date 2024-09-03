@@ -9,7 +9,6 @@ chat-element {
     overflow: hidden auto;
     padding: 8px;
     grid-gap: 4px;
-    overflow: auto;
     &::-webkit-scrollbar {
       width: 6px;
       height: 6px;

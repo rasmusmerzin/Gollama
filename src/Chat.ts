@@ -21,6 +21,11 @@ export class Chat extends EventTarget {
     return chat;
   }
 
+  setTitle(title: string) {
+    this.title = title;
+    this.dispatchEvent(new Event("change"));
+  }
+
   delete(message_id: string) {
     const index = this.messages.findIndex((msg) => msg.id === message_id);
     if (index === -1) return;

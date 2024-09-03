@@ -1,6 +1,12 @@
 chat-list-item-element {
   user-select: none;
   cursor: pointer;
+  > div {
+    height: 1.2em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
   > i {
     opacity: 0.5;
   }

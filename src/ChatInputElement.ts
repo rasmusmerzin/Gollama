@@ -29,9 +29,8 @@ export class ChatInputElement extends Element {
     if (key === "Enter") this.send();
   }
 
-  send() {
-    this.chat_service.pushMessage(this.input.value);
-    this.chat_service.generateResponse();
+  async send() {
+    await this.chat_service.ask(this.input.value);
     this.input.value = "";
   }
 }

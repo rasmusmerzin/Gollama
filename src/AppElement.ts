@@ -22,7 +22,8 @@ export class AppElement extends HTMLElement {
   render() {
     this.new_chat_element.remove();
     this.chat_element?.remove();
-    this.append(this.navigation_element);
+    if (!this.navigation_element.parentElement)
+      this.append(this.navigation_element);
     const { chat_id } = this.active_chat_store;
     const chat = this.chat_store.chats.get(<string>chat_id);
     if (chat) this.append((this.chat_element = new ChatElement(chat)));

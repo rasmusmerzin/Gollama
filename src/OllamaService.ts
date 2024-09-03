@@ -14,7 +14,7 @@ export class OllamaService {
 
   readonly origin = "http://localhost:11434";
 
-  async generateChatResponse(
+  async chatResponse(
     model: string,
     messages: Array<ChatMessage>,
   ): Promise<ChatMessage> {

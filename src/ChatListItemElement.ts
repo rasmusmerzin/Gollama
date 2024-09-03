@@ -17,6 +17,7 @@ export class ChatListItemElement extends Element {
     super();
     this.render();
     this.append(this.name, this.model);
+    this.chat.addEventListener("change", this.render.bind(this), this.control);
     this.active_chat_store.addEventListener(
       "change",
       this.render.bind(this),
@@ -41,7 +42,7 @@ export class ChatListItemElement extends Element {
     const selected = this.active_chat_store.chat_id === this.chat.id;
     if (selected) this.classList.add("selected");
     else this.classList.remove("selected");
-    this.name.innerText = this.chat.title;
+    this.title = this.name.innerText = this.chat.title;
     this.model.innerText = this.chat.model;
   }
 }
