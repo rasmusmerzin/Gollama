@@ -2,6 +2,14 @@ chat-list-item-element {
   user-select: none;
   cursor: pointer;
   &.selected {
-    font-weight: bold;
+    background: #8884;
+    > div {
+      font-weight: bold;
+    }
+  }
+  padding: 8px 12px;
+  border-radius: 8px;
+  &:hover {
+    background: #8882;
   }
 }

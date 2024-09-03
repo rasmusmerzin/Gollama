@@ -1,9 +1,22 @@
 chat-message-element {
   display: flex;
-  pre {
-    margin: 0;
+  > div {
+    padding: 8px 12px;
+    min-height: 1em;
+    border-radius: 8px;
+    overflow: hidden;
   }
   &.user {
+    padding-left: 16px;
     justify-content: flex-end;
+    > div {
+      background: #8886;
+    }
+  }
+  &.assistant {
+    padding-right: 16px;
+    > div {
+      background: #8882;
+    }
   }
 }

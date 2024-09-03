@@ -1,4 +1,5 @@
 chat-list-element {
   display: flex;
   flex-direction: column;
+  grid-gap: 4px;
 }

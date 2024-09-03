@@ -14,8 +14,8 @@ export class ChatMessageElement extends Element {
   }
 
   render() {
-    if (this.message.loading) this.classList.add("loading");
-    else this.classList.remove("loading");
+    if (this.message.loading) this.content.classList.add("loading");
+    else this.content.classList.remove("loading");
     this.classList.add(this.message.role);
     this.content.innerText = this.message.content;
   }

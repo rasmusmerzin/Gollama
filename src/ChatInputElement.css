@@ -1,5 +1,7 @@
 chat-input-element {
   display: flex;
+  padding: 8px;
+  grid-gap: 4px;
   input {
     flex: 1;
   }
