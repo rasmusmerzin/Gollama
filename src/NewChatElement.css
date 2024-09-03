@@ -4,4 +4,13 @@ new-chat-element {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  > form {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 16px;
+    > div {
+      display: flex;
+      flex-direction: column;
+    }
+  }
 }

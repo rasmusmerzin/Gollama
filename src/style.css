@@ -11,15 +11,15 @@ body {
 
 input {
   user-select: none;
-  padding: 8px 12px;
-  border-radius: 8px;
+  padding: 4px;
+  border-radius: 4px;
   border: 1px solid #888;
 }
 
 button {
   user-select: none;
   cursor: pointer;
-  padding: 8px 12px;
+  padding: 6px 10px;
   border-radius: 8px;
   border: 1px solid #888;
   font-size: 16px;
