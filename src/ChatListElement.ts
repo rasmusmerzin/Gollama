@@ -10,12 +10,7 @@ export class ChatListElement extends Element {
     super();
     this.render();
     this.chat_store.addEventListener(
-      "add",
-      this.render.bind(this),
-      this.control,
-    );
-    this.chat_store.addEventListener(
-      "delete",
+      "change",
       this.render.bind(this),
       this.control,
     );
