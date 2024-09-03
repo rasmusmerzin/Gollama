@@ -26,7 +26,10 @@ export class AppElement extends HTMLElement {
     const { chat_id } = this.active_chat_store;
     const chat = this.chat_store.chats.get(<string>chat_id);
     if (chat) this.append((this.chat_element = new ChatElement(chat)));
-    else this.append(this.new_chat_element);
+    else {
+      this.append(this.new_chat_element);
+      this.new_chat_element.start();
+    }
   }
 }
 

@@ -22,7 +22,10 @@ export class ChatElement extends Element {
 
   renderInput() {
     this.input.disabled = this.chat.last_message?.loading;
-    this.input.focus();
+    setTimeout(() => {
+      this.input.focus();
+      this.scrollToBottom();
+    });
   }
 
   addLastMessage() {
@@ -31,6 +34,11 @@ export class ChatElement extends Element {
 
   addMessage(message: ChatMessage) {
     this.container.append(new ChatMessageElement(message));
+    setTimeout(() => this.scrollToBottom());
+  }
+
+  scrollToBottom() {
+    this.container.scrollTo(0, this.container.scrollHeight);
   }
 
   ondelete(event: Event) {

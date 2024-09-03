@@ -47,6 +47,7 @@ export class NewChatElement extends HTMLElement {
 
   render() {
     this.innerHTML = "";
+    this.form.innerHTML = "";
     this.form.append(
       createElement("div", {}, [
         createElement("label", { innerText: "Model" }),
