@@ -10,10 +10,10 @@ export class NewChatElement extends HTMLElement {
   chat_store = ChatStore.get();
   ollama_service = OllamaService.get();
 
-  title_input = createElement("input", { value: "New Chat" });
+  title_input = createElement("input");
   model_select = createElement("select");
   submit_button = createElement("button", { innerText: "Create New Chat" });
-  form = createElement("form");
+  form = createElement("div");
 
   constructor() {
     super();
@@ -48,6 +48,7 @@ export class NewChatElement extends HTMLElement {
   render() {
     this.innerHTML = "";
     this.form.innerHTML = "";
+    this.title_input.value = "New Chat";
     this.form.append(
       createElement("div", {}, [
         createElement("label", { innerText: "Model" }),
