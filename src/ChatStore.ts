@@ -10,47 +10,41 @@ export class ChatStore extends EventTarget {
   }
 
   chats = new Map<string, Chat>();
-  deleted = new Set<string>();
 
   add(chat: Chat) {
     this.chats.set(chat.id, chat);
+    chat.save();
+    this.save();
     this.dispatchEvent(new Event("change"));
   }
 
   delete(chat_id: string) {
+    this.chats.get(chat_id)?.remove();
     this.chats.delete(chat_id);
-    this.deleted.add(chat_id);
+    this.save();
     this.dispatchEvent(new Event("change"));
   }
 
-  saveIndex() {
+  save() {
     const chat_ids = Array.from(this.chats.keys());
     const index = JSON.stringify(chat_ids);
     localStorage.setItem("chats", index);
-    for (const chat_id of this.deleted) localStorage.removeItem(chat_id);
-  }
-
-  saveChat(chat: Chat) {
-    const chat_data = JSON.stringify(chat);
-    localStorage.setItem(chat.id, chat_data);
   }
 
   load() {
     const index = localStorage.getItem("chats");
     if (!index) return;
     const chat_ids = JSON.parse(index);
-    for (const chat_id of chat_ids) this.loadChat(chat_id);
-  }
-
-  loadChat(chat_id: string) {
-    const chat_data = localStorage.getItem(chat_id);
-    if (!chat_data) return;
-    try {
-      const chat = Chat.from(JSON.parse(chat_data));
-      this.add(chat);
-    } catch (error) {
-      console.error(error);
-      localStorage.removeItem(chat_id);
+    for (const chat_id of chat_ids) {
+      const data = localStorage.getItem(chat_id);
+      if (!data) return;
+      try {
+        const chat = Chat.from(JSON.parse(data));
+        this.chats.set(chat.id, chat);
+      } catch (error) {
+        console.error(error);
+        localStorage.removeItem(chat_id);
+      }
     }
   }
 }

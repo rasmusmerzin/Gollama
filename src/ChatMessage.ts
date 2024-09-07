@@ -8,15 +8,16 @@ export class ChatMessage extends EventTarget {
   loading = false;
   chat: Chat | null = null;
 
-  static from({ role, content }: Partial<ChatMessage> = {}) {
+  static from({ id, role, content }: Partial<ChatMessage> = {}) {
     const message = new ChatMessage();
+    if (id) message.id = id;
     if (role) message.role = role;
     if (content) message.content = content;
     return message;
   }
 
   toJSON() {
-    return { role: this.role, content: this.content };
+    return { id: this.id, role: this.role, content: this.content };
   }
 
   setLoading(loading: boolean) {
@@ -27,7 +28,13 @@ export class ChatMessage extends EventTarget {
 
   pushContent(content: string) {
     this.content += content;
+    this.save();
     this.dispatchEvent(new Event("change"));
     this.chat?.dispatchEvent(new Event("change"));
+  }
+
+  save() {
+    const data = JSON.stringify(this);
+    localStorage.setItem(this.id, data);
   }
 }

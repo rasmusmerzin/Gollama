@@ -12,8 +12,9 @@ export class ChatElement extends Element {
 
   constructor(readonly chat: Chat) {
     super();
+    chat.load();
     this.append(this.container, this.input);
-    for (const message of chat.messages) this.addMessage(message);
+    for (const message of chat.messages.values()) this.addMessage(message);
     chat.addEventListener("change", this.renderInput.bind(this), this.control);
     chat.addEventListener("add", this.addLastMessage.bind(this), this.control);
     chat.addEventListener("delete", this.ondelete.bind(this), this.control);
@@ -21,7 +22,7 @@ export class ChatElement extends Element {
   }
 
   renderInput() {
-    this.input.disabled = this.chat.last_message?.loading;
+    this.input.disabled = this.chat.last_message?.loading || false;
     setTimeout(() => {
       this.input.focus();
       this.scrollToBottom();
@@ -29,7 +30,8 @@ export class ChatElement extends Element {
   }
 
   addLastMessage() {
-    this.addMessage(this.chat.last_message);
+    const msg = this.chat.last_message;
+    if (msg) this.addMessage(msg);
   }
 
   addMessage(message: ChatMessage) {

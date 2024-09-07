@@ -20,7 +20,6 @@ export class ChatService {
     if (this.active_chat_store.chat_id === chat_id)
       this.active_chat_store.set(null);
     this.chat_store.delete(chat_id);
-    this.chat_store.saveIndex();
   }
 
   deleteMessage(message_id: string) {
@@ -28,8 +27,6 @@ export class ChatService {
     const chat = this.chat_store.chats.get(<string>chat_id);
     if (!chat) return;
     chat.delete(message_id);
-    this.chat_store.saveIndex();
-    this.chat_store.saveChat(chat);
   }
 
   async ask(content: string) {
@@ -44,12 +41,10 @@ export class ChatService {
 
   pushMessage(chat: Chat, content: string) {
     chat.add(ChatMessage.from({ content }));
-    this.chat_store.saveIndex();
-    this.chat_store.saveChat(chat);
   }
 
   async generateResponse(chat: Chat) {
-    const history = Array.from(chat.messages);
+    const history = Array.from(chat.messages.values());
     const message = ChatMessage.from({ role: "assistant" });
     message.setLoading(true);
     chat.add(message);
@@ -61,13 +56,11 @@ export class ChatService {
       );
     } finally {
       message.setLoading(false);
-      this.chat_store.saveIndex();
-      this.chat_store.saveChat(chat);
     }
   }
 
   async generateChatTitle(chat: Chat) {
-    const history = Array.from(chat.messages);
+    const history = Array.from(chat.messages.values());
     const content = "Write only one single short two-word title for this chat.";
     history.push(ChatMessage.from({ content }));
     const response = await this.ollama_service.chatResponse(
@@ -76,6 +69,5 @@ export class ChatService {
     );
     const [first_line] = response.content.split("\n");
     chat.setTitle(first_line.replaceAll(/['"]/g, ""));
-    this.chat_store.saveChat(chat);
   }
 }
