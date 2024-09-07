@@ -54,11 +54,11 @@ export class ChatService {
     message.setLoading(true);
     chat.add(message);
     try {
-      const response = await this.ollama_service.chatResponse(
+      await this.ollama_service.chatStreamingResponse(
         chat.model,
         history,
+        (msg) => message.pushContent(msg.content),
       );
-      message.pushContent(response.content);
     } finally {
       message.setLoading(false);
       this.chat_store.saveIndex();
