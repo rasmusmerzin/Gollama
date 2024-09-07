@@ -23,8 +23,8 @@ export class ContextMenuElement extends Element {
     }
     document.body.append(this);
     setTimeout(() => {
-      addEventListener("click", () => this.remove(), this.control);
-      addEventListener("contextmenu", () => this.remove(), this.control);
+      this.bind(window, "click", () => this.remove());
+      this.bind(window, "contextmenu", () => this.remove());
       this.setPosition(x, y);
     });
   }

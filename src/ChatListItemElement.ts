@@ -17,12 +17,8 @@ export class ChatListItemElement extends Element {
     super();
     this.render();
     this.append(this.name, this.model);
-    this.chat.addEventListener("change", this.render.bind(this), this.control);
-    this.active_chat_store.addEventListener(
-      "change",
-      this.render.bind(this),
-      this.control,
-    );
+    this.bind(this.chat, "change");
+    this.bind(this.active_chat_store, "change");
     this.onclick = () => this.active_chat_store.set(this.chat.id);
     this.oncontextmenu = ({ clientX, clientY }) => {
       const delete_option = {

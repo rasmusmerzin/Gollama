@@ -2,10 +2,11 @@ import "./AppElement.css";
 import { ActiveChatStore } from "./ActiveChatStore";
 import { ChatElement } from "./ChatElement";
 import { ChatStore } from "./ChatStore";
+import { Element } from "./Element";
 import { NavigationElement } from "./NavigationElement";
 import { NewChatElement } from "./NewChatElement";
 
-export class AppElement extends HTMLElement {
+export class AppElement extends Element {
   active_chat_store = ActiveChatStore.get();
   chat_store = ChatStore.get();
 
@@ -16,7 +17,7 @@ export class AppElement extends HTMLElement {
   constructor() {
     super();
     this.render();
-    this.active_chat_store.addEventListener("change", this.render.bind(this));
+    this.bind(this.active_chat_store, "change");
   }
 
   render() {

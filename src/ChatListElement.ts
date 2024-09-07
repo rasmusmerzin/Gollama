@@ -8,12 +8,8 @@ export class ChatListElement extends Element {
 
   constructor() {
     super();
+    this.bind(this.chat_store, "change");
     this.render();
-    this.chat_store.addEventListener(
-      "change",
-      this.render.bind(this),
-      this.control,
-    );
   }
 
   render() {

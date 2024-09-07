@@ -23,16 +23,8 @@ export class ChatInputElement extends Element {
     super();
     this.text_container.append(this.text_input, this.send_button);
     this.append(this.file_input, this.text_container);
-    this.send_button.addEventListener(
-      "click",
-      this.send.bind(this),
-      this.control,
-    );
-    this.text_input.addEventListener(
-      "keydown",
-      this.keydown.bind(this),
-      this.control,
-    );
+    this.send_button.onclick = this.send.bind(this);
+    this.text_input.onkeydown = this.keydown.bind(this);
   }
 
   set disabled(value: boolean) {

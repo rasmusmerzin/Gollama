@@ -64,6 +64,7 @@ export class ChatService {
       history,
     );
     const [first_line] = response.content.split("\n");
-    chat.setTitle(first_line.replaceAll(/['"]/g, ""));
+    if (chat.title === "New Chat")
+      chat.setTitle(first_line.replaceAll(/['"]/g, ""));
   }
 }

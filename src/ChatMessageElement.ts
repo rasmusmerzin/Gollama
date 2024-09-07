@@ -21,21 +21,23 @@ export class ChatMessageElement extends Element {
     this.container.append(this.content, this.images);
     this.append(this.container);
     this.render();
-    message.addEventListener("change", this.render.bind(this), this.control);
+    this.bind(message, "change");
     this.content.onclick = (e) => e.preventDefault();
-    this.container.oncontextmenu = ({ clientX, clientY }) => {
-      if (this.message.loading) return;
-      const delete_option = {
-        name: "Delete Message",
-        color: "red",
-        action: () => this.chat_service.deleteMessage(this.id),
-      };
-      new ContextMenuElement({
-        x: clientX,
-        y: clientY,
-        options: [delete_option],
-      });
+    this.container.oncontextmenu = this.contextmenu.bind(this);
+  }
+
+  contextmenu({ clientX, clientY }: MouseEvent) {
+    if (this.message.loading) return;
+    const delete_option = {
+      name: "Delete Message",
+      color: "red",
+      action: () => this.chat_service.deleteMessage(this.id),
     };
+    new ContextMenuElement({
+      x: clientX,
+      y: clientY,
+      options: [delete_option],
+    });
   }
 
   render() {

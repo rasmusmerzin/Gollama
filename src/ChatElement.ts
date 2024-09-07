@@ -15,9 +15,9 @@ export class ChatElement extends Element {
     chat.load();
     this.append(this.container, this.input);
     for (const message of chat.messages.values()) this.addMessage(message);
-    chat.addEventListener("change", this.renderInput.bind(this), this.control);
-    chat.addEventListener("add", this.addLastMessage.bind(this), this.control);
-    chat.addEventListener("delete", this.ondelete.bind(this), this.control);
+    this.bind(chat, "change", this.renderInput.bind(this));
+    this.bind(chat, "add", this.addLastMessage.bind(this));
+    this.bind(chat, "delete", this.ondelete.bind(this));
     this.renderInput();
   }
 
