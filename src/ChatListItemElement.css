@@ -9,6 +9,11 @@ chat-list-item-element {
   }
   > i {
     opacity: 0.5;
+    display: block;
+    height: 1.2em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   &.selected {
     background: #8884;
