@@ -1,15 +1,24 @@
 chat-message-element {
   display: flex;
   > div {
+    display: flex;
+    flex-direction: column;
     padding: 12px;
     min-height: 1em;
     border-radius: 8px;
     overflow: hidden;
-    > p:first-child {
-      margin-top: 0;
+    > .images:not(:empty) {
+      margin-top: 16px;
+      display: flex;
+      grid-gap: 8px;
     }
-    > p:last-child {
-      margin-bottom: 0;
+    > .content {
+      p:first-child {
+        margin-top: 0;
+      }
+      p:last-child {
+        margin-bottom: 0;
+      }
     }
   }
   &.user {
@@ -17,6 +26,9 @@ chat-message-element {
     justify-content: flex-end;
     > div {
       background: #8886;
+      > .images {
+        justify-content: flex-end;
+      }
     }
   }
   &.assistant {

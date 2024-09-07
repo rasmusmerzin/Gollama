@@ -29,18 +29,14 @@ export class ChatService {
     chat.delete(message_id);
   }
 
-  async ask(content: string) {
+  async ask(message: ChatMessage) {
     const { chat_id } = this.active_chat_store;
     const chat = this.chat_store.chats.get(<string>chat_id);
     if (!chat) return;
-    this.pushMessage(chat, content);
+    chat.add(message);
     const promises = [this.generateResponse(chat)];
     if (chat.title === "New Chat") promises.push(this.generateChatTitle(chat));
     await Promise.all(promises);
-  }
-
-  pushMessage(chat: Chat, content: string) {
-    chat.add(ChatMessage.from({ content }));
   }
 
   async generateResponse(chat: Chat) {
@@ -52,7 +48,7 @@ export class ChatService {
       await this.ollama_service.chatStreamingResponse(
         chat.model,
         history,
-        (msg) => message.pushContent(msg.content),
+        (msg) => message.push(msg),
       );
     } finally {
       message.setLoading(false);

@@ -1,8 +1,13 @@
 chat-input-element {
   display: flex;
+  flex-direction: column;
   padding: 8px;
   grid-gap: 4px;
-  input {
-    flex: 1;
+  > div {
+    display: flex;
+    grid-gap: 4px;
+    input[type="text"] {
+      flex: 1;
+    }
   }
 }

@@ -11,19 +11,22 @@ const MD = markdownit();
 export class ChatMessageElement extends Element {
   chat_service = ChatService.get();
 
-  content = createElement("div");
+  container = createElement("div");
+  content = createElement("div", { className: "content" });
+  images = createElement("div", { className: "images" });
 
   constructor(readonly message: ChatMessage) {
     super();
     this.id = message.id;
-    this.append(this.content);
+    this.container.append(this.content, this.images);
+    this.append(this.container);
     this.render();
     message.addEventListener("change", this.render.bind(this), this.control);
     this.content.onclick = (e) => e.preventDefault();
-    this.content.oncontextmenu = ({ clientX, clientY }) => {
+    this.container.oncontextmenu = ({ clientX, clientY }) => {
       if (this.message.loading) return;
       const delete_option = {
-        name: "Delete",
+        name: "Delete Message",
         color: "red",
         action: () => this.chat_service.deleteMessage(this.id),
       };
@@ -36,10 +39,18 @@ export class ChatMessageElement extends Element {
   }
 
   render() {
-    if (this.message.loading) this.content.classList.add("loading");
-    else this.content.classList.remove("loading");
+    if (this.message.loading) this.container.classList.add("loading");
+    else this.container.classList.remove("loading");
     this.classList.add(this.message.role);
     this.content.innerHTML = MD.render(this.message.content);
+    this.images.innerHTML = "";
+    for (const image_base64 of this.message.images) {
+      const img = createElement("img");
+      img.src = "data:;base64," + image_base64;
+      img.alt = "Image";
+      img.height = 96;
+      this.images.append(img);
+    }
   }
 }
 

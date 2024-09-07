@@ -5,19 +5,26 @@ export class ChatMessage extends EventTarget {
   id = uid();
   role: "user" | "assistant" = "user";
   content = "";
+  images = new Array<string>();
   loading = false;
   chat: Chat | null = null;
 
-  static from({ id, role, content }: Partial<ChatMessage> = {}) {
+  static from({ id, role, content, images }: Partial<ChatMessage> = {}) {
     const message = new ChatMessage();
     if (id) message.id = id;
     if (role) message.role = role;
     if (content) message.content = content;
+    if (images) message.images = images;
     return message;
   }
 
   toJSON() {
-    return { id: this.id, role: this.role, content: this.content };
+    return {
+      id: this.id,
+      role: this.role,
+      content: this.content,
+      images: this.images,
+    };
   }
 
   setLoading(loading: boolean) {
@@ -26,8 +33,9 @@ export class ChatMessage extends EventTarget {
     this.chat?.dispatchEvent(new Event("change"));
   }
 
-  pushContent(content: string) {
-    this.content += content;
+  push(msg: ChatMessage) {
+    this.content += msg.content;
+    if (msg.images) this.images.push(...msg.images);
     this.save();
     this.dispatchEvent(new Event("change"));
     this.chat?.dispatchEvent(new Event("change"));

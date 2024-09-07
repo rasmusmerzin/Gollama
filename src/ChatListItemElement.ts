@@ -26,7 +26,7 @@ export class ChatListItemElement extends Element {
     this.onclick = () => this.active_chat_store.set(this.chat.id);
     this.oncontextmenu = ({ clientX, clientY }) => {
       const delete_option = {
-        name: "Delete",
+        name: "Delete Chat",
         color: "red",
         action: () => this.chat_service.deleteChat(chat.id),
       };
