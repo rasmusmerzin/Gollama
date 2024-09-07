@@ -4,7 +4,7 @@ import { uid } from "./uid";
 export class Chat extends EventTarget {
   id = uid();
   title = "New Chat";
-  model = "phi3:latest";
+  model = "gemma2:2b";
   index = new Set<string>();
   messages = new Map<string, ChatMessage>();
 

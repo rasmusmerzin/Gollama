@@ -2,13 +2,24 @@
 
 # Gollama
 
-A GUI front-end for [Ollama](https://ollama.com) made with [Electron](https://www.electronjs.org).
+A GUI front-end for [Ollama](https://ollama.com) made with
+[Electron](https://www.electronjs.org).
+
+## Using the Application
+
+When creating a new chat you can choose from a list of local models. Make sure
+you have at least one local model. For example pull `gemma2:2b` model with
+
+```
+ollama pull gemma2:2b
+```
 
 ## Building the Application
 
 Make sure you have `nodejs`, `npm` and `ollama` installed.
 
-Clone the project with `git` and inside the repository run `npm install` and `npm run make`.
+Clone the project with `git` and inside the repository run `npm install` and
+`npm run make`.
 
 The `make` script will output distributables in `./out/make/` directory.
 
