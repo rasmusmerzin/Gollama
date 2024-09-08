@@ -1,0 +1,13 @@
+chat-rename-modal > .container {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 24px;
+  > h3 {
+    margin: 0;
+  }
+  > form {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 16px;
+  }
+}

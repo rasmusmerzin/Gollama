@@ -6,6 +6,7 @@ import { ContextMenuElement } from "./ContextMenuElement";
 import { Element } from "./Element";
 import { createElement } from "./createElement";
 import { DialogueModal } from "./DialogueModal";
+import { ChatRenameModal } from "./ChatRenameModal";
 
 export class ChatListItemElement extends Element {
   active_chat_store = ActiveChatStore.get();
@@ -28,7 +29,7 @@ export class ChatListItemElement extends Element {
     new ContextMenuElement([
       {
         name: "Rename",
-        action: () => {},
+        action: () => new ChatRenameModal(this.chat),
       },
       {
         name: "Delete",

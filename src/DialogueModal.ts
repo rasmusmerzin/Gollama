@@ -1,6 +1,6 @@
-import { createElement } from "./createElement";
 import "./DialogueModal.css";
 import { Modal } from "./Modal";
+import { createElement } from "./createElement";
 
 export interface DialogueOptions {
   title_text: string;

@@ -10,6 +10,8 @@ export class Modal extends Element {
     this.append(this.container);
     this.classList.add("modal");
     this.bind(window, "keydown", this.keydown.bind(this));
+    this.bind(this.container, "click", (event) => event.stopPropagation());
+    this.bind(this, "click", () => this.remove());
     document.body.append(this);
   }
 

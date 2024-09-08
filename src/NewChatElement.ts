@@ -13,7 +13,7 @@ export class NewChatElement extends HTMLElement {
   title_input = createElement("input");
   model_select = createElement("select");
   submit_button = createElement("button", { innerText: "Create New Chat" });
-  form = createElement("div");
+  form = createElement("form");
 
   constructor() {
     super();
