@@ -39,8 +39,12 @@ export class OllamaService {
     let part;
     while ((part = await reader.read())) {
       const str = part.value ? decoder.decode(part.value) : "{}";
-      const object = JSON.parse(str);
-      if (object.message) onmessage(ChatMessage.from(object.message));
+      try {
+        const object = JSON.parse(str);
+        if (object.message) onmessage(ChatMessage.from(object.message));
+      } catch (e) {
+        onmessage(ChatMessage.from({ role: "assistant", content: "[?]" }));
+      }
       if (part.done) return;
     }
   }
