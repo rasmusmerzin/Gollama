@@ -5,6 +5,7 @@ import { ChatService } from "./ChatService";
 import { ContextMenuElement } from "./ContextMenuElement";
 import { Element } from "./Element";
 import { createElement } from "./createElement";
+import { DialogueModal } from "./DialogueModal";
 
 export class ChatListItemElement extends Element {
   active_chat_store = ActiveChatStore.get();
@@ -32,7 +33,14 @@ export class ChatListItemElement extends Element {
       {
         name: "Delete",
         color: "red",
-        action: () => this.chat_service.deleteChat(this.chat.id),
+        action: () =>
+          new DialogueModal({
+            title_text: `Delete chat?`,
+            body_text: `Are you sure you want to delete chat "${this.chat.title.trim()}"?`,
+            submit_text: "Delete",
+            color: "red",
+            action: () => this.chat_service.deleteChat(this.chat.id),
+          }),
       },
     ]);
   }

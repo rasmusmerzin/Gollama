@@ -1,19 +1,20 @@
 body {
   font-family: -apple-system, BlinkMacSystemFont, Helvetica, sans-serif;
   margin: 0;
-  color: #fff;
-  background: #222;
+  --foreground: #fff;
+  --background: #222;
+  --primary: #0ff;
   @media (prefers-color-scheme: light) {
-    background: #fff;
-    color: #000;
+    --background: #fff;
+    --foreground: #000;
+    --primary: #088;
   }
+  color: var(--foreground);
+  background: var(--background);
 }
 
 a {
-  color: #0ff;
-  @media (prefers-color-scheme: light) {
-    color: #088;
-  }
+  color: var(--primary);
   text-decoration: none;
   &:hover {
     text-decoration: underline;
