@@ -4,4 +4,18 @@ context-menu-element {
   top: calc(var(--y) * 1px);
   display: flex;
   flex-direction: column;
+  min-width: 100px;
+
+  button {
+    text-align: left;
+    &:not(:first-child) {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      margin-top: -1px;
+    }
+    &:not(:last-child) {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
 }

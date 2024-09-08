@@ -1,18 +1,17 @@
 import "./ContextMenuElement.css";
 import { Element } from "./Element";
+import { Mouse } from "./Mouse";
 
-export interface ContextMenuElementParameters {
-  x: number;
-  y: number;
-  options: Array<{
-    name: string;
-    color?: string;
-    action(): unknown;
-  }>;
-}
+export type ContextMenuOption = {
+  name: string;
+  color?: string;
+  action(): unknown;
+};
 
 export class ContextMenuElement extends Element {
-  constructor({ x, y, options }: ContextMenuElementParameters) {
+  mouse = Mouse.get();
+
+  constructor(options: Array<ContextMenuOption>) {
     super();
     for (const option of options) {
       const button = document.createElement("button");
@@ -25,7 +24,7 @@ export class ContextMenuElement extends Element {
     setTimeout(() => {
       this.bind(window, "click", () => this.remove());
       this.bind(window, "contextmenu", () => this.remove());
-      this.setPosition(x, y);
+      this.setPosition(this.mouse.x, this.mouse.y);
     });
   }
 

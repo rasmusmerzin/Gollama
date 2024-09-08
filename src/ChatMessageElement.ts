@@ -26,18 +26,15 @@ export class ChatMessageElement extends Element {
     this.container.oncontextmenu = this.contextmenu.bind(this);
   }
 
-  contextmenu({ clientX, clientY }: MouseEvent) {
+  contextmenu() {
     if (this.message.loading) return;
-    const delete_option = {
-      name: "Delete Message",
-      color: "red",
-      action: () => this.chat_service.deleteMessage(this.id),
-    };
-    new ContextMenuElement({
-      x: clientX,
-      y: clientY,
-      options: [delete_option],
-    });
+    new ContextMenuElement([
+      {
+        name: "Delete Message",
+        color: "red",
+        action: () => this.chat_service.deleteMessage(this.id),
+      },
+    ]);
   }
 
   render() {
