@@ -9,24 +9,30 @@ import { ChatMessageElement } from "./ChatMessageElement";
 export class ChatElement extends Element {
   container = createElement("div");
   input = new ChatInputElement();
+  fixed_at_bottom = true;
 
   constructor(readonly chat: Chat) {
     super();
     chat.load();
     this.append(this.container, this.input);
     for (const message of chat.messages.values()) this.addMessage(message);
-    this.bind(chat, "change", this.renderInput.bind(this));
+    this.bind(chat, "change", this.onChange.bind(this));
     this.bind(chat, "add", this.addLastMessage.bind(this));
     this.bind(chat, "delete", this.ondelete.bind(this));
-    this.renderInput();
+    this.bind(window, "resize", this.onChange.bind(this));
+    this.bind(this.container, "scroll", this.onScroll.bind(this));
+    this.onChange();
   }
 
-  renderInput() {
+  onScroll() {
+    this.fixed_at_bottom = this.isAtBottom();
+  }
+
+  onChange() {
     this.input.disabled = this.chat.last_message?.loading || false;
-    setTimeout(() => {
-      this.input.focus();
-      this.scrollToBottom();
-    });
+    if (this.fixed_at_bottom) this.scrollToBottom();
+    else this.fixed_at_bottom = this.isAtBottom();
+    setTimeout(() => this.input.focus());
   }
 
   addLastMessage() {
@@ -39,7 +45,14 @@ export class ChatElement extends Element {
     setTimeout(() => this.scrollToBottom());
   }
 
+  isAtBottom() {
+    const scroll_bottom =
+      this.container.scrollTop + this.container.clientHeight;
+    return scroll_bottom >= this.container.scrollHeight - 1;
+  }
+
   scrollToBottom() {
+    this.fixed_at_bottom = true;
     this.container.scrollTo(0, this.container.scrollHeight);
   }
 

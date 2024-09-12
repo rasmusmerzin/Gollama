@@ -5,6 +5,10 @@ if (require("electron-squirrel-startup")) app.quit();
 
 function createWindow() {
   const mainWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+    minWidth: 500,
+    minHeight: 300,
     icon: path.join(__dirname, "ollama.png"),
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),

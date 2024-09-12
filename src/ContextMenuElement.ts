@@ -28,15 +28,9 @@ export class ContextMenuElement extends Element {
     });
   }
 
-  getSize() {
-    const { left, top, right, bottom } = this.getBoundingClientRect();
-    return { x: right - left, y: bottom - top };
-  }
-
   setPosition(x: number, y: number) {
-    const size = this.getSize();
-    x = Math.min(innerWidth - size.x, x);
-    y = Math.min(innerHeight - size.y, y);
+    x = Math.min(innerWidth - this.clientWidth, x);
+    y = Math.min(innerHeight - this.clientHeight, y);
     this.style.setProperty("--x", x.toString());
     this.style.setProperty("--y", y.toString());
   }
