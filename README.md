@@ -25,16 +25,22 @@ The `make` script will output distributables in `./out/make/` directory.
 
 ## Installing Distributables
 
+On Windows run the setup `.exe` with
+
+```cmd
+"out\make\squirrel.windows\x64\Gollama-0.2.1 Setup.exe"
+```
+
 On Fedora install the `.rpm` package with
 
 ```bash
-sudo rpm -i out/make/rpm/x64/Gollama-0.0.1-1.x86_64.rpm
+sudo rpm -i out/make/rpm/x64/Gollama-0.2.1-1.x86_64.rpm
 ```
 
 On Debian install the `.deb` package with
 
 ```bash
-sudo dpkg -i out/make/deb/x64/gollama_0.0.1_amd64.deb
+sudo dpkg -i out/make/deb/x64/gollama_0.2.1_amd64.deb
 ```
 
 > Note: architecture and version may be different.
