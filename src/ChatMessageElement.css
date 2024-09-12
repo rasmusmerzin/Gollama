@@ -19,6 +19,26 @@ chat-message-element {
       p:last-child {
         margin-bottom: 0;
       }
+      pre {
+        padding: 4px;
+        border-radius: 8px;
+        background: #222;
+        color: #fff;
+      }
+      code {
+        border-radius: 4px;
+        padding: 0 4px;
+        background: #8884;
+      }
+      code,
+      pre {
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+      pre code {
+        padding: 0;
+        background: none;
+      }
     }
   }
   &.user {

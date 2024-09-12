@@ -17,7 +17,7 @@ export class ChatInputElement extends Element {
     multiple: true,
   });
   text_container = createElement("div");
-  send_button = createElement("button", { innerText: "Send" });
+  send_button = createElement("button", { innerText: "Ask" });
 
   constructor() {
     super();
@@ -44,7 +44,8 @@ export class ChatInputElement extends Element {
   async send() {
     const content = this.text_input.value;
     const images = await this.getImages();
-    const message = ChatMessage.from({ content, images });
+    const message =
+      content || images.length ? ChatMessage.from({ content, images }) : null;
     await this.chat_service.ask(message);
     this.file_input.value = "";
     this.text_input.value = "";

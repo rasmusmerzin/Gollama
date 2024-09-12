@@ -29,11 +29,11 @@ export class ChatService {
     chat.delete(message_id);
   }
 
-  async ask(message: ChatMessage) {
+  async ask(message: ChatMessage | null) {
     const { chat_id } = this.active_chat_store;
     const chat = this.chat_store.chats.get(<string>chat_id);
     if (!chat) return;
-    chat.add(message);
+    if (message) chat.add(message);
     const promises = [this.generateResponse(chat)];
     if (chat.title === "New Chat") promises.push(this.generateChatTitle(chat));
     await Promise.all(promises);
