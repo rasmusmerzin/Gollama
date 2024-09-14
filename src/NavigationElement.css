@@ -1,8 +1,55 @@
 navigation-element {
   display: flex;
   flex-direction: column;
-  width: 200px;
+  width: 30%;
+  min-width: 200px;
+  max-width: 300px;
   background: #8884;
   padding: 8px;
   grid-gap: 8px;
+  transition: 100ms;
+
+  > chat-list-element {
+    flex: 1;
+  }
+
+  > button {
+    height: 2em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  > button.menu {
+    background: none;
+    color: var(--foreground);
+    &::after {
+      content: "Hide";
+    }
+  }
+
+  &.closed {
+    min-width: 0;
+    width: 0;
+    padding: 0;
+    > button.menu {
+      color: var(--background);
+      background: var(--foreground);
+      position: absolute;
+      left: 8px;
+      top: 8px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 100%;
+      &::after {
+        content: "☰";
+      }
+    }
+    > button.new-chat {
+      display: none;
+    }
+  }
 }

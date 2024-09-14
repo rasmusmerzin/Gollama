@@ -18,6 +18,7 @@ export class ChatListItemElement extends Element {
   constructor(readonly chat: Chat) {
     super();
     this.render();
+    this.tabIndex = 0;
     this.append(this.name, this.model);
     this.bind(this.chat, "change");
     this.bind(this.active_chat_store, "change");

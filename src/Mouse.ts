@@ -16,6 +16,16 @@ export class Mouse {
     addEventListener("click", this.onmouse.bind(this));
     addEventListener("wheel", this.onmouse.bind(this));
     addEventListener("contextmenu", this.onmouse.bind(this));
+    addEventListener("keydown", this.keydown.bind(this));
+  }
+
+  keydown(event: KeyboardEvent) {
+    const { key, target } = event;
+    if ([" ", "Enter"].includes(key)) {
+      event.preventDefault();
+      (target as HTMLElement).click();
+    }
+    if (key == "Escape") (target as HTMLElement).blur();
   }
 
   onmouse({ clientX, clientY }: MouseEvent) {
@@ -23,3 +33,5 @@ export class Mouse {
     this.y = clientY;
   }
 }
+
+Mouse.get();
