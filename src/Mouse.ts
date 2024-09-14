@@ -21,11 +21,25 @@ export class Mouse {
 
   keydown(event: KeyboardEvent) {
     const { key, target } = event;
-    if ([" ", "Enter"].includes(key)) {
-      event.preventDefault();
-      (target as HTMLElement).click();
+    const main = document.querySelector("main");
+    switch (key) {
+      case " ":
+      case "Enter":
+        event.preventDefault();
+        (target as HTMLElement).click();
+        break;
+      case "Escape":
+        (target as HTMLElement).blur();
+        break;
+      case "ArrowDown":
+        event.preventDefault();
+        main?.scrollBy({ top: 100 });
+        break;
+      case "ArrowUp":
+        event.preventDefault();
+        main?.scrollBy({ top: -100 });
+        break;
     }
-    if (key == "Escape") (target as HTMLElement).blur();
   }
 
   onmouse({ clientX, clientY }: MouseEvent) {

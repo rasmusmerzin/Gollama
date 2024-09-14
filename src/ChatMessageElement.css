@@ -42,17 +42,19 @@ chat-message-element {
     }
   }
   &.user {
-    padding-left: 16px;
+    padding-left: 64px;
     justify-content: flex-end;
     > div {
-      background: #8886;
+      /* background: #8886; */
+      background: var(--foreground);
+      color: var(--background);
       > .images {
         justify-content: flex-end;
       }
     }
   }
   &.assistant {
-    padding-right: 16px;
+    padding-right: 64px;
     > div {
       background: #8882;
     }

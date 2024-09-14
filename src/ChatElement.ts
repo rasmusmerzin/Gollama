@@ -5,8 +5,11 @@ import { createElement } from "./createElement";
 import { ChatInputElement } from "./ChatInputElement";
 import { ChatMessage } from "./ChatMessage";
 import { ChatMessageElement } from "./ChatMessageElement";
+import { AppElement } from "./AppElement";
 
 export class ChatElement extends Element {
+  app = AppElement.get();
+
   container = createElement("div");
   input = new ChatInputElement();
   fixed_at_bottom = true;
@@ -20,7 +23,7 @@ export class ChatElement extends Element {
     this.bind(chat, "add", this.addLastMessage.bind(this));
     this.bind(chat, "delete", this.ondelete.bind(this));
     this.bind(window, "resize", this.onChange.bind(this));
-    this.bind(this.container, "scroll", this.onScroll.bind(this));
+    this.bind(this.app.main, "scroll", this.onScroll.bind(this));
     this.onChange();
   }
 
@@ -46,14 +49,13 @@ export class ChatElement extends Element {
   }
 
   isAtBottom() {
-    const scroll_bottom =
-      this.container.scrollTop + this.container.clientHeight;
-    return scroll_bottom >= this.container.scrollHeight - 1;
+    const scroll_bottom = this.app.main.scrollTop + this.app.main.clientHeight;
+    return scroll_bottom >= this.app.main.scrollHeight - 1;
   }
 
   scrollToBottom() {
     this.fixed_at_bottom = true;
-    this.container.scrollTo(0, this.container.scrollHeight);
+    this.app.main.scrollTo(0, this.app.main.scrollHeight);
   }
 
   ondelete(event: Event) {

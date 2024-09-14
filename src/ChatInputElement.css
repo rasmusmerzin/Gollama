@@ -1,8 +1,14 @@
 chat-input-element {
+  position: sticky;
+  bottom: 0;
   display: flex;
   flex-direction: column;
-  padding: 8px;
+  padding: 10px;
   grid-gap: 4px;
+  height: 96px;
+  justify-content: flex-end;
+  width: calc(100% - 16px);
+  background: var(--background);
   > div {
     display: flex;
     grid-gap: 4px;

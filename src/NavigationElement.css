@@ -21,6 +21,7 @@ navigation-element {
   }
 
   > button.menu {
+    z-index: 10;
     background: none;
     color: var(--foreground);
     &::after {

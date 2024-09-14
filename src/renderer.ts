@@ -1,4 +1,6 @@
 import "./style.css";
 import { AppElement } from "./AppElement";
 
-document.body.append(new AppElement());
+const app = AppElement.get();
+app.render();
+document.body.append(app);
