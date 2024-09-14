@@ -3,7 +3,7 @@ chat-element {
   width: 100%;
   max-width: 800px;
   > div {
-    min-height: calc(100dvh - 128px);
+    min-height: calc(100dvh - 100px);
     display: flex;
     flex-direction: column;
     padding: 8px;

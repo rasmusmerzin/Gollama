@@ -6,7 +6,7 @@ chat-message-element {
     padding: 12px;
     min-height: 1em;
     border-radius: 8px;
-    overflow: hidden;
+    /* overflow: hidden; */
     > .images:not(:empty) {
       margin-top: 16px;
       display: flex;

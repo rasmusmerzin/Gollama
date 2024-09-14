@@ -28,13 +28,16 @@ export class ChatMessageElement extends Element {
 
   contextmenu() {
     if (this.message.loading) return;
-    new ContextMenuElement([
-      {
-        name: "Delete Message",
-        color: "red",
-        action: () => this.chat_service.deleteMessage(this.id),
-      },
-    ]);
+    new ContextMenuElement({
+      target: this.container,
+      options: [
+        {
+          name: "Delete Message",
+          color: "red",
+          action: () => this.chat_service.deleteMessage(this.id),
+        },
+      ],
+    });
   }
 
   render() {

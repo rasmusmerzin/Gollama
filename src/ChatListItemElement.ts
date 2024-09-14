@@ -27,24 +27,27 @@ export class ChatListItemElement extends Element {
   }
 
   contextmenu() {
-    new ContextMenuElement([
-      {
-        name: "Rename",
-        action: () => new ChatRenameModal(this.chat),
-      },
-      {
-        name: "Delete",
-        color: "red",
-        action: () =>
-          new DialogueModal({
-            title_text: `Delete chat?`,
-            body_text: `Are you sure you want to delete chat "${this.chat.title.trim()}"?`,
-            submit_text: "Delete",
-            color: "red",
-            action: () => this.chat_service.deleteChat(this.chat.id),
-          }),
-      },
-    ]);
+    new ContextMenuElement({
+      target: this,
+      options: [
+        {
+          name: "Rename",
+          action: () => new ChatRenameModal(this.chat),
+        },
+        {
+          name: "Delete",
+          color: "red",
+          action: () =>
+            new DialogueModal({
+              title_text: `Delete chat?`,
+              body_text: `Are you sure you want to delete chat "${this.chat.title.trim()}"?`,
+              submit_text: "Delete",
+              color: "red",
+              action: () => this.chat_service.deleteChat(this.chat.id),
+            }),
+        },
+      ],
+    });
   }
 
   render() {

@@ -5,7 +5,7 @@ chat-input-element {
   flex-direction: column;
   padding: 10px;
   grid-gap: 4px;
-  height: 96px;
+  height: 64px;
   justify-content: flex-end;
   width: calc(100% - 16px);
   background: var(--background);

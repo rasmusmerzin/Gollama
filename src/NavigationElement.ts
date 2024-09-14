@@ -20,7 +20,7 @@ export class NavigationElement extends Element {
       new ChatListElement(),
       createElement("button", {
         className: "menu",
-        title: "Press Ctrl-N to toggle menu",
+        title: "Press Ctrl+N to toggle menu",
         onclick: () => this.toggle(),
       }),
     );

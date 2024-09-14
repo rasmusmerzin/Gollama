@@ -2,17 +2,24 @@ import "./ContextMenuElement.css";
 import { Element } from "./Element";
 import { Mouse } from "./Mouse";
 
-export type ContextMenuOption = {
+export interface ContextMenuOption {
   name: string;
   color?: string;
   action(): unknown;
-};
+}
+
+export interface ContextMenuParams {
+  options: Array<ContextMenuOption>;
+  target?: HTMLElement;
+}
 
 export class ContextMenuElement extends Element {
   mouse = Mouse.get();
+  target?: HTMLElement;
 
-  constructor(options: Array<ContextMenuOption>) {
+  constructor({ options, target }: ContextMenuParams) {
     super();
+    this.target = target;
     for (const option of options) {
       const button = document.createElement("button");
       button.innerText = option.name;
@@ -22,8 +29,10 @@ export class ContextMenuElement extends Element {
     }
     document.body.append(this);
     setTimeout(() => {
+      this.target?.classList.add("focus");
       this.bind(window, "click", () => this.remove());
       this.bind(window, "contextmenu", () => this.remove());
+      this.bind(window, "wheel", () => this.remove());
       this.setPosition(this.mouse.x, this.mouse.y);
     });
   }
@@ -33,6 +42,11 @@ export class ContextMenuElement extends Element {
     y = Math.min(innerHeight - this.clientHeight, y);
     this.style.setProperty("--x", x.toString());
     this.style.setProperty("--y", y.toString());
+  }
+
+  remove() {
+    super.remove();
+    this.target?.classList.remove("focus");
   }
 }
 
