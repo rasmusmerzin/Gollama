@@ -6,7 +6,21 @@ chat-message-element {
     padding: 12px;
     min-height: 1em;
     border-radius: 8px;
-    /* overflow: hidden; */
+    position: relative;
+    border: 1px solid #888;
+    &::after {
+      position: absolute;
+      top: 0;
+      margin: 0 8px;
+      width: 40px;
+      height: 40px;
+      border-radius: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid #888;
+      font-size: 14px;
+    }
     > .images:not(:empty) {
       margin-top: 16px;
       display: flex;
@@ -45,7 +59,12 @@ chat-message-element {
     padding-left: 64px;
     justify-content: flex-end;
     > div {
-      /* background: #8886; */
+      &::after {
+        left: 100%;
+        content: "ME";
+        color: var(--background);
+        background: var(--foreground);
+      }
       background: var(--foreground);
       color: var(--background);
       > .images {
@@ -56,6 +75,11 @@ chat-message-element {
   &.assistant {
     padding-right: 64px;
     > div {
+      &::after {
+        right: 100%;
+        content: "AI";
+        background: #8882;
+      }
       background: #8882;
     }
   }

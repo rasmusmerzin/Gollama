@@ -20,7 +20,7 @@ export class Mouse {
   }
 
   keydown(event: KeyboardEvent) {
-    const { key, target } = event;
+    const { key, ctrlKey, target } = event;
     const main = document.querySelector("main");
     switch (key) {
       case " ":
@@ -33,11 +33,19 @@ export class Mouse {
         break;
       case "ArrowDown":
         event.preventDefault();
-        main?.scrollBy({ top: 100 });
+        if (ctrlKey) main?.scrollTo(0, main.scrollHeight);
+        else main?.scrollBy({ top: 100 });
         break;
       case "ArrowUp":
         event.preventDefault();
-        main?.scrollBy({ top: -100 });
+        if (ctrlKey) main?.scrollTo(0, 0);
+        else main?.scrollBy({ top: -100 });
+        break;
+      case "Home":
+        main?.scrollTo(0, 0);
+        break;
+      case "End":
+        main?.scrollTo(0, main.scrollHeight);
         break;
     }
   }

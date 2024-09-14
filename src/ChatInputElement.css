@@ -7,7 +7,8 @@ chat-input-element {
   grid-gap: 4px;
   height: 64px;
   justify-content: flex-end;
-  width: calc(100% - 16px);
+  margin-left: -50px;
+  width: calc(100% + 80px);
   background: var(--background);
   > div {
     display: flex;
