@@ -22,6 +22,8 @@ export class Mouse {
   keydown(event: KeyboardEvent) {
     const { key, ctrlKey, target } = event;
     const main = document.querySelector("main");
+    const modal = document.getElementById("modal");
+    const input = document.getElementById("input");
     switch (key) {
       case " ":
       case "Enter":
@@ -46,6 +48,14 @@ export class Mouse {
         break;
       case "End":
         main?.scrollTo(0, main.scrollHeight);
+        break;
+      case "Tab":
+      case "Shift":
+      case "Control":
+      case "CapsLock":
+        break;
+      default:
+        if (!modal) input?.focus();
         break;
     }
   }

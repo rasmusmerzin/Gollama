@@ -9,7 +9,16 @@ export class ChatListElement extends Element {
   constructor() {
     super();
     this.bind(this.chat_store, "change");
+    this.bind(window, "keydown", this.keydown.bind(this));
     this.render();
+  }
+
+  keydown(event: Event) {
+    const { keyCode, ctrlKey } = event as KeyboardEvent;
+    if (!ctrlKey) return;
+    const index = keyCode - 49;
+    if (index < 0 || index > 8) return;
+    (this.children[index] as HTMLElement)?.click();
   }
 
   render() {

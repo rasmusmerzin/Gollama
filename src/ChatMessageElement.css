@@ -7,7 +7,7 @@ chat-message-element {
     min-height: 1em;
     border-radius: 8px;
     position: relative;
-    border: 1px solid #888;
+    border: 1px solid #8888;
     &::after {
       position: absolute;
       top: 0;
@@ -18,7 +18,7 @@ chat-message-element {
       display: flex;
       justify-content: center;
       align-items: center;
-      border: 1px solid #888;
+      border: 1px solid #8888;
       font-size: 14px;
     }
     > .images:not(:empty) {

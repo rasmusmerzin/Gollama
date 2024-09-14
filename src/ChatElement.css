@@ -8,5 +8,13 @@ chat-element {
     flex-direction: column;
     padding: 8px;
     grid-gap: 16px;
+    &:empty {
+      justify-content: center;
+      align-items: center;
+      &::after {
+        font-style: italic;
+        content: "No messages";
+      }
+    }
   }
 }

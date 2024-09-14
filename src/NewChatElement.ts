@@ -10,7 +10,9 @@ export class NewChatElement extends HTMLElement {
   chat_store = ChatStore.get();
   ollama_service = OllamaService.get();
 
-  title_input = createElement("input");
+  models: Array<OllamaModel> | null = null;
+
+  title_input = createElement("input", { id: "input" });
   model_select = createElement("select");
   submit_button = createElement("button", { innerText: "Create New Chat" });
   form = createElement("form");
@@ -30,23 +32,25 @@ export class NewChatElement extends HTMLElement {
   }
 
   load(models: Array<OllamaModel>) {
+    this.models = models;
+  }
+
+  done() {
+    this.classList.remove("loading");
+    this.render();
+  }
+
+  render() {
+    this.innerHTML = "";
+    if (!this.models?.length) return;
     this.model_select.innerHTML = "";
-    for (const model of models) {
+    for (const model of this.models) {
       const option = createElement("option", {
         value: model.name,
         innerText: model.name,
       });
       this.model_select.append(option);
     }
-    this.render();
-  }
-
-  done() {
-    this.classList.remove("loading");
-  }
-
-  render() {
-    this.innerHTML = "";
     this.form.innerHTML = "";
     this.title_input.value = "New Chat";
     this.form.append(

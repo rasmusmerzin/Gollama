@@ -7,8 +7,9 @@ export class Modal extends Element {
 
   constructor() {
     super();
-    this.append(this.container);
+    this.id = "modal";
     this.classList.add("modal");
+    this.append(this.container);
     this.bind(window, "keydown", this.keydown.bind(this));
     this.bind(this.container, "click", (event) => event.stopPropagation());
     this.bind(this, "click", () => this.remove());

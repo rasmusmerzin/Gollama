@@ -8,6 +8,7 @@ navigation-element {
   padding: 8px;
   grid-gap: 8px;
   transition: 100ms;
+  border-right: 1px solid #888;
 
   > chat-list-element {
     flex: 1;
@@ -49,8 +50,11 @@ navigation-element {
         content: "☰";
       }
     }
-    > button.new-chat {
+    > button {
       display: none;
+      &.menu {
+        display: block;
+      }
     }
   }
 }

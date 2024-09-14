@@ -35,7 +35,6 @@ export class ChatElement extends Element {
     this.input.disabled = this.chat.last_message?.loading || false;
     if (this.fixed_at_bottom) this.scrollToBottom();
     else this.fixed_at_bottom = this.isAtBottom();
-    setTimeout(() => this.input.focus());
   }
 
   addLastMessage() {

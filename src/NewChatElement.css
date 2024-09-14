@@ -1,5 +1,17 @@
 new-chat-element {
   margin: 64px;
+  width: 320px;
+  max-width: 80%;
+  &:empty:not(.loading) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    &::after {
+      content: "No models found. Check your Ollama installation.";
+      text-align: center;
+    }
+  }
   > form {
     display: flex;
     flex-direction: column;

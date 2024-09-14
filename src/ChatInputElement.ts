@@ -8,6 +8,7 @@ export class ChatInputElement extends Element {
   chat_service = ChatService.get();
 
   text_input = createElement("input", {
+    id: "input",
     type: "text",
     placeholder: "Write a message...",
   });
