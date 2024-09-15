@@ -20,6 +20,7 @@ export class Mouse {
   }
 
   keydown(event: KeyboardEvent) {
+    this.x = this.y = 0;
     const { key, ctrlKey, target } = event;
     const main = document.querySelector("main");
     const modal = document.getElementById("modal");

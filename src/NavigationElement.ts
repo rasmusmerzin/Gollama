@@ -17,11 +17,11 @@ export class NavigationElement extends Element {
     this.append(
       (this.new_chat_button = createElement("button", {
         innerText: "New Chat",
+        className: "primary",
         onclick: () => this.active_chat_store.set(null),
       })),
       new ChatListElement(),
       (this.settings_button = createElement("button", {
-        className: "settings",
         innerText: "Settings",
         title: "Press Ctrl+I to toggle settings menu",
         onclick: () => {

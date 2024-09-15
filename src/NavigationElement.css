@@ -10,27 +10,25 @@ navigation-element {
   transition: 100ms;
   border-right: 1px solid #888;
 
+  > chat-list-element {
+    margin: 16px 0;
+  }
+
   > button {
     height: 2em;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-  }
-
-  > button.menu,
-  > button.settings {
-    background: none;
-    color: var(--foreground);
-  }
-
-  > button.menu {
-    z-index: 2;
-    &::after {
-      content: "Hide";
+    &.menu {
+      z-index: 2;
+      &::after {
+        content: "Hide";
+      }
     }
   }
 
   &.closed {
+    border: none;
     min-width: 0;
     width: 0;
     padding: 0;

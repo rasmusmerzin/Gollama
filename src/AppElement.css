@@ -8,13 +8,5 @@ app-element {
     align-items: center;
     height: 100%;
     overflow: hidden auto;
-    &::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-    }
-    &::-webkit-scrollbar-thumb {
-      background-color: #ccc;
-      border-radius: 3px;
-    }
   }
 }

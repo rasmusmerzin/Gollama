@@ -4,12 +4,4 @@ chat-list-element {
   flex-direction: column;
   grid-gap: 4px;
   overflow: hidden auto;
-  &::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-  &::-webkit-scrollbar-thumb {
-    background-color: #ccc;
-    border-radius: 3px;
-  }
 }

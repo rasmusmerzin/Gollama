@@ -18,7 +18,10 @@ export class ChatInputElement extends Element {
     multiple: true,
   });
   text_container = createElement("div");
-  send_button = createElement("button", { innerText: "Ask" });
+  send_button = createElement("button", {
+    innerText: "➤",
+    className: "primary",
+  });
 
   constructor() {
     super();

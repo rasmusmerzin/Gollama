@@ -39,6 +39,11 @@ export class ContextMenuElement extends Element {
   }
 
   setPosition(x: number, y: number) {
+    if (x === 0 && y === 0 && this.target) {
+      x = this.target.clientLeft + this.target.clientWidth / 2;
+      y = this.target.clientTop + this.target.clientHeight / 2;
+      console.log(x, y);
+    }
     x = Math.min(innerWidth - this.clientWidth, x);
     y = Math.min(innerHeight - this.clientHeight, y);
     this.style.setProperty("--x", x.toString());
