@@ -64,9 +64,11 @@ export class NavigationElement extends Element {
 
   render() {
     if (this.settings_store.navigation_open) {
+      document.body.removeAttribute("navigation_closed");
       this.classList.remove("closed");
       this.menu_button.classList.remove("primary");
     } else {
+      document.body.setAttribute("navigation_closed", "");
       this.classList.add("closed");
       this.menu_button.classList.add("primary");
     }

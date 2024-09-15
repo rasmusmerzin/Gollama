@@ -1,4 +1,5 @@
 context-menu-element {
+  z-index: 6;
   background: var(--background);
   position: fixed;
   left: calc(var(--x) * 1px);

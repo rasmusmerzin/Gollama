@@ -1,11 +1,10 @@
 navigation-element {
+  flex: 0 0 240px;
+  width: 240px;
   display: flex;
   flex-direction: column;
-  width: 30%;
-  min-width: 200px;
-  max-width: 300px;
   background: #8884;
-  padding: 16px 8px;
+  padding: 8px 0;
   grid-gap: 8px;
   transition: 100ms;
   border-right: 1px solid #888;
@@ -21,7 +20,7 @@ navigation-element {
     overflow: hidden;
     text-overflow: ellipsis;
     &.menu {
-      z-index: 2;
+      z-index: 4;
       &::after {
         content: "Hide";
       }
@@ -29,24 +28,25 @@ navigation-element {
   }
 
   &.closed {
+    flex: 0 0 0;
     chat-list-element {
       display: none;
     }
     border: none;
-    min-width: 0;
     width: 0;
     padding: 0;
     > button.menu {
       position: absolute;
       margin: 0;
-      left: 16px;
+      left: 12px;
       top: 8px;
-      width: 40px;
-      height: 40px;
+      width: 32px;
+      height: 32px;
       display: flex;
       justify-content: center;
       align-items: center;
       border-radius: 100%;
+      padding: 2px 0 0;
       &::after {
         content: "☰";
         font-size: 18px;

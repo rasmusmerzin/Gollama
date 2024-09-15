@@ -1,0 +1,42 @@
+chat-header-element {
+  z-index: 2;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 240px;
+  height: 52px;
+  background: var(--background);
+  border-bottom: 1px solid #888;
+  display: flex;
+  justify-content: center;
+  transition: 100ms;
+  > div {
+    width: 100%;
+    padding: 0 16px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    > * {
+      height: 1.2em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+  h4 {
+    margin: 0;
+  }
+}
+
+[navigation_closed] chat-header-element {
+  left: 0;
+  > div {
+    @media (max-width: 900px) {
+      padding-left: 56px;
+    }
+  }
+}
+
+[layout="normal"] chat-header-element > div {
+  max-width: 800px;
+}

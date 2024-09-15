@@ -34,13 +34,12 @@ export class Mouse {
     const main = document.querySelector("main");
     const modal = document.getElementById("modal");
     const input = document.getElementById("input");
+    const is_text_input =
+      target.nodeName === "INPUT" &&
+      (target as HTMLInputElement).type === "text";
     switch (key) {
       case " ":
-        if (
-          target.nodeName === "INPUT" &&
-          (target as HTMLInputElement).type === "text"
-        )
-          break;
+        if (is_text_input) break;
         event.preventDefault();
         if (modKey) target?.dispatchEvent(new Event("contextmenu"));
         else target.click();
@@ -66,10 +65,12 @@ export class Mouse {
         else main?.scrollBy({ top: -100 });
         break;
       case "Home":
+        if (is_text_input) break;
         if (modal) break;
         main?.scrollTo(0, 0);
         break;
       case "End":
+        if (is_text_input) break;
         if (modal) break;
         main?.scrollTo(0, main.scrollHeight);
         break;

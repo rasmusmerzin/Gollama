@@ -21,6 +21,9 @@ chat-message-element {
       align-items: center;
       border: 1px solid #8888;
       font-size: 14px;
+      @media (max-width: 720px) {
+        display: none;
+      }
     }
     > .images:not(:empty) {
       margin-top: 16px;
@@ -62,7 +65,7 @@ chat-message-element {
       }
     }
   }
-  @media (max-width: 600px) {
+  @media (max-width: 800px) {
     --message-padding: 0;
   }
   &.user {

@@ -16,6 +16,7 @@ export class NewChatElement extends HTMLElement {
   model_items = new Map<string, HTMLInputElement>();
   title_input = createElement("input", {
     id: "input",
+    type: "text",
     placeholder: "New Chat",
   });
   submit_button = createElement("button", {

@@ -7,6 +7,7 @@ import { ChatMessageElement } from "./ChatMessageElement";
 import { Element } from "./Element";
 import { SettingsStore } from "./SettingsStore";
 import { createElement } from "./createElement";
+import { ChatHeaderElement } from "./ChatHeaderElement";
 
 export class ChatElement extends Element {
   app = AppElement.get();
@@ -18,7 +19,7 @@ export class ChatElement extends Element {
 
   constructor(readonly chat: Chat) {
     super();
-    this.append(this.container, this.input);
+    this.append(new ChatHeaderElement(chat), this.container, this.input);
     this.bind(chat, "change");
     this.bind(window, "resize");
     this.bind(this.settings, "change");
