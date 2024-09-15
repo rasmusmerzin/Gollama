@@ -22,19 +22,30 @@ export class Mouse {
 
   keydown(event: KeyboardEvent) {
     this.focus = "keyboard";
-    const { key, ctrlKey, altKey, target } = event;
+    const { key, ctrlKey, altKey } = event;
+    const target = event.target as HTMLElement;
     const modKey = ctrlKey || altKey;
     const main = document.querySelector("main");
     const modal = document.getElementById("modal");
     const input = document.getElementById("input");
     switch (key) {
+      case " ":
+        if (
+          target.nodeName === "INPUT" &&
+          (target as HTMLInputElement).type === "text"
+        )
+          break;
+        event.preventDefault();
+        if (modKey) target?.dispatchEvent(new Event("contextmenu"));
+        else target.click();
+        break;
       case "Enter":
         event.preventDefault();
         if (modKey) target?.dispatchEvent(new Event("contextmenu"));
-        else (target as HTMLElement).click();
+        else target.click();
         break;
       case "Escape":
-        (target as HTMLElement).blur();
+        target.blur();
         break;
       case "ArrowDown":
         event.preventDefault();
