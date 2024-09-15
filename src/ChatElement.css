@@ -28,15 +28,15 @@ chat-element {
       }
     }
   }
+}
 
-  &[layout="normal"] > div {
-    max-width: 800px;
-  }
+[layout="normal"] chat-element > div {
+  max-width: 800px;
+}
 
-  &[layout="dense"] {
-    > div {
-      --message-padding: 16px;
-      grid-gap: 8px;
-    }
+[layout="dense"] chat-element {
+  > div {
+    --message-padding: 16px;
+    grid-gap: 8px;
   }
 }

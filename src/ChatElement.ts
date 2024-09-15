@@ -7,7 +7,6 @@ import { ChatMessageElement } from "./ChatMessageElement";
 import { Element } from "./Element";
 import { SettingsStore } from "./SettingsStore";
 import { createElement } from "./createElement";
-import { ChatHeaderElement } from "./ChatHeaderElement";
 
 export class ChatElement extends Element {
   app = AppElement.get();
@@ -19,7 +18,7 @@ export class ChatElement extends Element {
 
   constructor(readonly chat: Chat) {
     super();
-    this.append(new ChatHeaderElement(chat), this.container, this.input);
+    this.append(this.container, this.input);
     this.bind(chat, "change");
     this.bind(window, "resize");
     this.bind(this.settings, "change");
@@ -44,7 +43,6 @@ export class ChatElement extends Element {
   }
 
   render() {
-    this.setAttribute("layout", this.settings.layout);
     this.input.disabled = this.chat.last_message?.loading || false;
     if (this.fixed_at_bottom) this.scrollToBottom();
     else this.fixed_at_bottom = this.isAtBottom();

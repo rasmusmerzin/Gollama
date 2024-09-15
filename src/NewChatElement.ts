@@ -57,7 +57,6 @@ export class NewChatElement extends HTMLElement {
     }
     this.submit_button.disabled = true;
     this.append(
-      createElement("h2", { innerText: "New Chat" }),
       createElement("form", {}, [
         createElement("div", {}, [
           createElement("div", { innerText: "Title" }),

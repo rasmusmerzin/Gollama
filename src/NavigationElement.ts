@@ -33,7 +33,7 @@ export class NavigationElement extends Element {
       })),
       (this.menu_button = createElement("button", {
         className: "menu",
-        title: "Press Ctrl+N to toggle chat list",
+        title: "Press Ctrl+M to toggle chat list",
         onclick: () => this.toggle(),
       })),
     );
@@ -53,7 +53,7 @@ export class NavigationElement extends Element {
     if (!ctrlKey && !altKey) return;
     if (key === "0") this.new_chat_button.click();
     else if (["I", "i"].includes(key)) this.settings_button.click();
-    else if (["N", "n"].includes(key)) this.menu_button.click();
+    else if (["M", "m"].includes(key)) this.menu_button.click();
   }
 
   toggle() {

@@ -55,6 +55,6 @@ chat-input-element {
   }
 }
 
-[layout="normal"] > chat-input-element {
+[layout="normal"] chat-input-element {
   max-width: 800px;
 }

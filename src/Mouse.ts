@@ -18,6 +18,7 @@ export class Mouse {
     addEventListener("wheel", this.onmouse.bind(this));
     addEventListener("contextmenu", this.onmouse.bind(this));
     addEventListener("keydown", this.keydown.bind(this));
+    addEventListener("contextmenu", (e) => e.preventDefault());
   }
 
   click(event: MouseEvent) {
