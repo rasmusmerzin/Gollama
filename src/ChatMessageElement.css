@@ -24,10 +24,13 @@ chat-message-element {
     }
     > .images:not(:empty) {
       margin-top: 16px;
+      padding: 0 8px;
       display: flex;
-      grid-gap: 8px;
       image-element:not(.open) {
         height: 96px;
+        transform: rotate(-5deg);
+        margin-left: -6px;
+        margin-right: -6px;
       }
     }
     > .content {
@@ -66,11 +69,9 @@ chat-message-element {
       > .author {
         left: 100%;
         content: "ME";
-        color: var(--background);
-        background: var(--foreground);
+        background: #888;
       }
-      background: var(--foreground);
-      color: var(--background);
+      background: #888;
       > .images {
         justify-content: flex-end;
       }

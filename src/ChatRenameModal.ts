@@ -6,7 +6,7 @@ import { createElement } from "./createElement";
 export class ChatRenameModal extends Modal {
   title_label = createElement("h2", { innerText: "Rename Chat" });
   form = createElement("form");
-  input = createElement("input");
+  input = createElement("input", { type: "text" });
   button = createElement("button", { innerText: "Rename" });
 
   constructor(readonly chat: Chat) {

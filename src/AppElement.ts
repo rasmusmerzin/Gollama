@@ -6,7 +6,6 @@ import { Element } from "./Element";
 import { NavigationElement } from "./NavigationElement";
 import { NewChatElement } from "./NewChatElement";
 import { SettingsStore } from "./SettingsStore";
-import { createElement } from "./createElement";
 
 export class AppElement extends Element {
   static instance: AppElement | null = null;
@@ -21,7 +20,7 @@ export class AppElement extends Element {
   settings_store = SettingsStore.get();
 
   navigation_element = new NavigationElement();
-  main = createElement("main", { tabIndex: -1 });
+  main = document.createElement("main");
   new_chat_element = new NewChatElement();
   chat_element: ChatElement | null = null;
 

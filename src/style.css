@@ -4,17 +4,21 @@ body {
   --foreground: #fff;
   --background: #222;
   --primary: #0ff;
+  --red: #f44;
   @media (prefers-color-scheme: light) {
+    --red: red;
     --background: #fff;
     --foreground: #000;
     --primary: #088;
   }
   &[theme="dark"] {
+    --red: #f44;
     --foreground: #fff;
     --background: #222;
     --primary: #0ff;
   }
   &[theme="light"] {
+    --red: red;
     --background: #fff;
     --foreground: #000;
     --primary: #088;
@@ -38,6 +42,10 @@ input:focus,
 button:focus,
 [tabindex="0"]:focus {
   outline: solid var(--foreground);
+}
+
+main {
+  outline: none;
 }
 
 a {
@@ -132,7 +140,7 @@ button {
     right: 0;
     bottom: 0;
     top: 0;
-    animation: 0.5s infinite loading;
+    animation: 0.25s infinite loading;
     content: "⠇";
   }
 }

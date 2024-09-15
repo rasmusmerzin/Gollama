@@ -36,13 +36,13 @@ export class ChatListItemElement extends Element {
         },
         {
           name: "Delete",
-          color: "red",
+          color: "var(--red)",
           action: () =>
             new DialogueModal({
               title_text: `Delete chat?`,
               body_text: `Are you sure you want to delete chat "${this.chat.title.trim()}"?`,
               submit_text: "Delete",
-              color: "red",
+              color: "var(--red)",
               action: () => this.chat_service.deleteChat(this.chat.id),
             }),
         },

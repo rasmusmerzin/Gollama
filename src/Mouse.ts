@@ -28,7 +28,6 @@ export class Mouse {
     const modal = document.getElementById("modal");
     const input = document.getElementById("input");
     switch (key) {
-      case " ":
       case "Enter":
         event.preventDefault();
         if (modKey) target?.dispatchEvent(new Event("contextmenu"));

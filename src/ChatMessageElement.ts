@@ -19,6 +19,7 @@ export class ChatMessageElement extends Element {
 
   constructor(readonly message: ChatMessage) {
     super();
+    this.container.tabIndex = 0;
     this.id = message.id;
     this.container.append(this.author, this.content, this.images);
     this.append(this.container);
@@ -35,7 +36,7 @@ export class ChatMessageElement extends Element {
       options: [
         {
           name: "Delete Message",
-          color: "red",
+          color: "var(--red)",
           action: () => this.chat_service.deleteMessage(this.id),
         },
       ],

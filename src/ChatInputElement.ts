@@ -76,6 +76,7 @@ export class ChatInputElement extends Element {
     await this.chat_service.ask(message);
     this.file_input.value = "";
     this.text_input.value = "";
+    this.filechange();
   }
 
   async getImages() {

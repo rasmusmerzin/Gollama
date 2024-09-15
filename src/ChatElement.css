@@ -1,8 +1,10 @@
 chat-element {
   width: calc(100% - 100px);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 
   > div {
-    min-height: calc(100dvh - 168px);
     flex: 1;
     display: flex;
     flex-direction: column;
