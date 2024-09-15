@@ -37,6 +37,10 @@ chat-header-element {
   }
 }
 
+[navigation_closed] [layout="dense"] chat-header-element > div {
+  padding-left: 56px;
+}
+
 [layout="normal"] chat-header-element > div {
   max-width: 800px;
 }
