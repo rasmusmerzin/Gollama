@@ -21,10 +21,14 @@ navigation-element {
     text-overflow: ellipsis;
   }
 
-  > button.menu {
-    z-index: 2;
+  > button.menu,
+  > button.settings {
     background: none;
     color: var(--foreground);
+  }
+
+  > button.menu {
+    z-index: 2;
     &::after {
       content: "Hide";
     }

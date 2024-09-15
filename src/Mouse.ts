@@ -55,7 +55,7 @@ export class Mouse {
       case "CapsLock":
         break;
       default:
-        if (!modal) input?.focus();
+        if (!modal && !ctrlKey) input?.focus();
         break;
     }
   }

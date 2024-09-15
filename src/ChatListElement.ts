@@ -14,8 +14,8 @@ export class ChatListElement extends Element {
   }
 
   keydown(event: Event) {
-    const { keyCode, ctrlKey } = event as KeyboardEvent;
-    if (!ctrlKey) return;
+    const { keyCode, ctrlKey, altKey } = event as KeyboardEvent;
+    if (!ctrlKey && !altKey) return;
     const index = keyCode - 49;
     if (index < 0 || index > 8) return;
     (this.children[index] as HTMLElement)?.click();

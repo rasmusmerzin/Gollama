@@ -2,7 +2,7 @@ dialogue-modal > .container {
   display: flex;
   flex-direction: column;
   grid-gap: 32px;
-  > h3,
+  > h2,
   > p {
     margin: 0;
   }

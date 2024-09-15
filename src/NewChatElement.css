@@ -2,7 +2,7 @@ new-chat-element {
   margin: 64px;
   width: 320px;
   max-width: 80%;
-  &:empty:not(.loading) {
+  &:not(.loading):empty {
     display: flex;
     justify-content: center;
     align-items: center;

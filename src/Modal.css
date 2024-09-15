@@ -13,7 +13,7 @@
   backdrop-filter: blur(4px);
 
   > .container {
-    width: 320px;
+    width: 400px;
     background: var(--background);
     border: 1px solid #888;
     padding: 32px 24px;

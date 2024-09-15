@@ -24,6 +24,7 @@ export class NewChatElement extends HTMLElement {
   }
 
   start() {
+    this.innerHTML = "";
     this.classList.add("loading");
     this.ollama_service
       .listModels()

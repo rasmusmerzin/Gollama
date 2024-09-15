@@ -8,7 +8,7 @@ chat-message-element {
     border-radius: 8px;
     position: relative;
     border: 1px solid #8888;
-    &::after {
+    > .author {
       position: absolute;
       top: 0;
       margin: 0 8px;
@@ -59,7 +59,7 @@ chat-message-element {
     padding-left: 64px;
     justify-content: flex-end;
     > div {
-      &::after {
+      > .author {
         left: 100%;
         content: "ME";
         color: var(--background);
@@ -75,7 +75,7 @@ chat-message-element {
   &.assistant {
     padding-right: 64px;
     > div {
-      &::after {
+      > .author {
         right: 100%;
         content: "AI";
         background: #8882;

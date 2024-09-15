@@ -5,6 +5,7 @@ import { ChatStore } from "./ChatStore";
 import { Element } from "./Element";
 import { NavigationElement } from "./NavigationElement";
 import { NewChatElement } from "./NewChatElement";
+import { SettingsStore } from "./SettingsStore";
 
 export class AppElement extends Element {
   static instance: AppElement | null = null;
@@ -16,6 +17,7 @@ export class AppElement extends Element {
 
   active_chat_store = ActiveChatStore.get();
   chat_store = ChatStore.get();
+  settings_store = SettingsStore.get();
 
   navigation_element = new NavigationElement();
   main = document.createElement("main");
@@ -25,9 +27,11 @@ export class AppElement extends Element {
   constructor() {
     super();
     this.bind(this.active_chat_store, "change");
+    this.bind(this.settings_store, "change");
   }
 
   render() {
+    document.body.setAttribute("theme", this.settings_store.theme);
     this.new_chat_element.remove();
     this.chat_element?.remove();
     this.append(this.navigation_element, this.main);

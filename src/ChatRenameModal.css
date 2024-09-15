@@ -2,7 +2,7 @@ chat-rename-modal > .container {
   display: flex;
   flex-direction: column;
   grid-gap: 24px;
-  > h3 {
+  > h2 {
     margin: 0;
   }
   > form {

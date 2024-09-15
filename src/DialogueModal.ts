@@ -11,7 +11,7 @@ export interface DialogueOptions {
 }
 
 export class DialogueModal extends Modal {
-  title_label = createElement("h3");
+  title_label = createElement("h2");
   body_label = createElement("p");
   cancel_button = createElement("button", { innerText: "Cancel" });
   submit_button = createElement("button", { innerText: "OK" });
