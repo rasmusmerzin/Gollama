@@ -1,4 +1,5 @@
 context-menu-element {
+  background: var(--background);
   position: fixed;
   left: calc(var(--x) * 1px);
   top: calc(var(--y) * 1px);
@@ -21,6 +22,7 @@ context-menu-element {
   }
 
   button {
+    white-space: nowrap;
     background: var(--background);
     text-align: left;
     &:not(:first-child) {

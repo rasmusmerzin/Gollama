@@ -9,8 +9,10 @@ import { createElement } from "./createElement";
 export class NavigationElement extends Element {
   active_chat_store = ActiveChatStore.get();
   settings_store = SettingsStore.get();
+
   new_chat_button: HTMLButtonElement;
   settings_button: HTMLButtonElement;
+  menu_button: HTMLButtonElement;
 
   constructor() {
     super();
@@ -30,11 +32,11 @@ export class NavigationElement extends Element {
           if (!modal || !(modal instanceof SettingsModal)) new SettingsModal();
         },
       })),
-      createElement("button", {
+      (this.menu_button = createElement("button", {
         className: "menu",
         title: "Press Ctrl+N to toggle chat list",
         onclick: () => this.toggle(),
-      }),
+      })),
     );
     this.bind(this.settings_store, "change");
     this.bind(window, "keydown", this.keydown.bind(this));
@@ -44,9 +46,16 @@ export class NavigationElement extends Element {
   keydown(event: Event) {
     const { key, ctrlKey, altKey } = event as KeyboardEvent;
     if (!ctrlKey && !altKey) return;
-    if (key === "0") this.new_chat_button.click();
-    else if (["I", "i"].includes(key)) this.settings_button.click();
-    else if (["N", "n"].includes(key)) this.toggle();
+    if (key === "0") {
+      this.new_chat_button.click();
+      this.new_chat_button.focus();
+    } else if (["I", "i"].includes(key)) {
+      this.settings_button.click();
+      this.settings_button.focus();
+    } else if (["N", "n"].includes(key)) {
+      this.menu_button.click();
+      this.menu_button.focus();
+    }
   }
 
   toggle() {

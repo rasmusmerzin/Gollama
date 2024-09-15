@@ -8,6 +8,7 @@ export class Mouse {
 
   x = 0;
   y = 0;
+  focus: "keyboard" | "mouse" | null = null;
 
   constructor() {
     addEventListener("mousemove", this.onmouse.bind(this));
@@ -20,8 +21,9 @@ export class Mouse {
   }
 
   keydown(event: KeyboardEvent) {
-    this.x = this.y = 0;
-    const { key, ctrlKey, target } = event;
+    this.focus = "keyboard";
+    const { key, ctrlKey, altKey, target } = event;
+    const modKey = ctrlKey || altKey;
     const main = document.querySelector("main");
     const modal = document.getElementById("modal");
     const input = document.getElementById("input");
@@ -29,7 +31,7 @@ export class Mouse {
       case " ":
       case "Enter":
         event.preventDefault();
-        if (ctrlKey) target?.dispatchEvent(new Event("contextmenu"));
+        if (modKey) target?.dispatchEvent(new Event("contextmenu"));
         else (target as HTMLElement).click();
         break;
       case "Escape":
@@ -37,32 +39,36 @@ export class Mouse {
         break;
       case "ArrowDown":
         event.preventDefault();
-        if (ctrlKey) main?.scrollTo(0, main.scrollHeight);
+        if (modal) break;
+        if (modKey) main?.scrollTo(0, main.scrollHeight);
         else main?.scrollBy({ top: 100 });
         break;
       case "ArrowUp":
         event.preventDefault();
-        if (ctrlKey) main?.scrollTo(0, 0);
+        if (modal) break;
+        if (modKey) main?.scrollTo(0, 0);
         else main?.scrollBy({ top: -100 });
         break;
       case "Home":
+        if (modal) break;
         main?.scrollTo(0, 0);
         break;
       case "End":
+        if (modal) break;
         main?.scrollTo(0, main.scrollHeight);
         break;
       case "Tab":
       case "Shift":
-      case "Control":
       case "CapsLock":
         break;
       default:
-        if (!modal && !ctrlKey) input?.focus();
+        if (!modal && !modKey) input?.focus();
         break;
     }
   }
 
   onmouse({ clientX, clientY }: MouseEvent) {
+    this.focus = "mouse";
     this.x = clientX;
     this.y = clientY;
   }

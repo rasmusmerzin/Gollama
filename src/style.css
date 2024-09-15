@@ -55,6 +55,11 @@ input {
       color: var(--foreground);
     }
   }
+  &:disabled {
+    cursor: auto;
+    color: #aaa;
+    opacity: 0.5;
+  }
 }
 
 button {
@@ -75,6 +80,11 @@ button {
     &:hover {
       background: #888;
     }
+  }
+  &:disabled {
+    cursor: auto;
+    background: #888;
+    opacity: 0.5;
   }
 }
 

@@ -12,12 +12,18 @@ export class SettingsModal extends Modal {
     onclick: () => this.remove(),
   });
 
-  theme_system_radio = createElement("input", { type: "radio" });
-  theme_dark_radio = createElement("input", { type: "radio" });
-  theme_light_radio = createElement("input", { type: "radio" });
+  theme_system_radio = createElement("input", { name: "theme", type: "radio" });
+  theme_dark_radio = createElement("input", { name: "theme", type: "radio" });
+  theme_light_radio = createElement("input", { name: "theme", type: "radio" });
 
-  layout_normal_radio = createElement("input", { type: "radio" });
-  layout_dense_radio = createElement("input", { type: "radio" });
+  layout_normal_radio = createElement("input", {
+    name: "layout",
+    type: "radio",
+  });
+  layout_dense_radio = createElement("input", {
+    name: "layout",
+    type: "radio",
+  });
 
   constructor() {
     super();

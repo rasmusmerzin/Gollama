@@ -4,6 +4,7 @@ chat-input-element {
   display: flex;
   flex-direction: column;
   padding: 0 10px 10px;
+  height: 86px;
   grid-gap: 4px;
   justify-content: flex-end;
   margin-left: -50px;

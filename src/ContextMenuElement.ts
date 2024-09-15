@@ -19,6 +19,8 @@ export class ContextMenuElement extends Element {
 
   constructor({ options, target }: ContextMenuParams) {
     super();
+    document.getElementById("context-menu")?.remove();
+    this.id = "context-menu";
     this.target = target;
     for (const option of options) {
       const button = document.createElement("button");
@@ -34,15 +36,18 @@ export class ContextMenuElement extends Element {
       this.bind(window, "click", () => this.remove());
       this.bind(window, "contextmenu", () => this.remove());
       this.bind(window, "wheel", () => this.remove());
-      this.setPosition(this.mouse.x, this.mouse.y);
+      this.bind(window, "keydown", this.keydown.bind(this));
+      this.setPosition();
     });
   }
 
-  setPosition(x: number, y: number) {
-    if (x === 0 && y === 0 && this.target) {
-      x = this.target.clientLeft + this.target.clientWidth / 2;
-      y = this.target.clientTop + this.target.clientHeight / 2;
-      console.log(x, y);
+  setPosition() {
+    let x = this.mouse.x;
+    let y = this.mouse.y;
+    if (this.mouse.focus !== "mouse" && this.target) {
+      const { left, top, bottom, right } = this.target.getBoundingClientRect();
+      x = (right + left) / 2;
+      y = (top + bottom) / 2;
     }
     x = Math.min(innerWidth - this.clientWidth, x);
     y = Math.min(innerHeight - this.clientHeight, y);
@@ -53,6 +58,11 @@ export class ContextMenuElement extends Element {
   remove() {
     super.remove();
     this.target?.classList.remove("focus");
+  }
+
+  keydown(event: Event) {
+    const { key } = event as KeyboardEvent;
+    if (key === "Escape") this.remove();
   }
 }
 
