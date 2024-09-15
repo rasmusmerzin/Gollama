@@ -1,4 +1,5 @@
 export type Theme = "system" | "dark" | "light";
+export type Layout = "normal" | "dense";
 
 export class SettingsStore extends EventTarget {
   static instance: SettingsStore | null = null;
@@ -11,6 +12,13 @@ export class SettingsStore extends EventTarget {
 
   navigation_open = true;
   theme: Theme = "system";
+  layout: Layout = "normal";
+
+  setLayout(layout: Layout) {
+    this.layout = layout;
+    this.dispatchEvent(new Event("change"));
+    this.save();
+  }
 
   setTheme(theme: Theme) {
     this.theme = theme;

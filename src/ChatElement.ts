@@ -1,14 +1,16 @@
 import "./ChatElement.css";
+import { AppElement } from "./AppElement";
 import { Chat } from "./Chat";
-import { Element } from "./Element";
-import { createElement } from "./createElement";
 import { ChatInputElement } from "./ChatInputElement";
 import { ChatMessage } from "./ChatMessage";
 import { ChatMessageElement } from "./ChatMessageElement";
-import { AppElement } from "./AppElement";
+import { Element } from "./Element";
+import { SettingsStore } from "./SettingsStore";
+import { createElement } from "./createElement";
 
 export class ChatElement extends Element {
   app = AppElement.get();
+  settings = SettingsStore.get();
 
   container = createElement("div");
   input = new ChatInputElement();
@@ -19,19 +21,21 @@ export class ChatElement extends Element {
     chat.load();
     this.append(this.container, this.input);
     for (const message of chat.messages.values()) this.addMessage(message);
-    this.bind(chat, "change", this.onChange.bind(this));
+    this.bind(chat, "change");
+    this.bind(window, "resize");
+    this.bind(this.settings, "change");
     this.bind(chat, "add", this.addLastMessage.bind(this));
     this.bind(chat, "delete", this.ondelete.bind(this));
-    this.bind(window, "resize", this.onChange.bind(this));
     this.bind(this.app.main, "scroll", this.onScroll.bind(this));
-    this.onChange();
+    this.render();
   }
 
   onScroll() {
     this.fixed_at_bottom = this.isAtBottom();
   }
 
-  onChange() {
+  render() {
+    this.setAttribute("layout", this.settings.layout);
     this.input.disabled = this.chat.last_message?.loading || false;
     if (this.fixed_at_bottom) this.scrollToBottom();
     else this.fixed_at_bottom = this.isAtBottom();

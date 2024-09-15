@@ -1,7 +1,7 @@
 chat-element {
   position: relative;
   width: calc(100% - 100px);
-  max-width: 800px;
+
   > div {
     min-height: calc(100dvh - 100px);
     display: flex;
@@ -15,6 +15,17 @@ chat-element {
         font-style: italic;
         content: "No messages";
       }
+    }
+  }
+
+  &[layout="normal"] {
+    max-width: 800px;
+  }
+
+  &[layout="dense"] {
+    > div {
+      --message-padding: 16px;
+      grid-gap: 8px;
     }
   }
 }

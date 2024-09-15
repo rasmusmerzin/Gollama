@@ -7,24 +7,17 @@ export class SettingsModal extends Modal {
   settings = SettingsStore.get();
 
   title_label = createElement("h2", { innerText: "Settings" });
-  theme_system_radio = createElement("input", {
-    type: "radio",
-    name: "theme",
-    value: "system",
-    onclick: () => this.settings.setTheme("system"),
+  button = createElement("button", {
+    innerText: "Close",
+    onclick: () => this.remove(),
   });
-  theme_dark_radio = createElement("input", {
-    type: "radio",
-    name: "theme",
-    value: "dark",
-    onclick: () => this.settings.setTheme("dark"),
-  });
-  theme_light_radio = createElement("input", {
-    type: "radio",
-    name: "theme",
-    value: "light",
-    onclick: () => this.settings.setTheme("light"),
-  });
+
+  theme_system_radio = createElement("input", { type: "radio" });
+  theme_dark_radio = createElement("input", { type: "radio" });
+  theme_light_radio = createElement("input", { type: "radio" });
+
+  layout_normal_radio = createElement("input", { type: "radio" });
+  layout_dense_radio = createElement("input", { type: "radio" });
 
   constructor() {
     super();
@@ -35,21 +28,55 @@ export class SettingsModal extends Modal {
         createElement("div", {}, [
           createElement("label", { innerText: "Theme" }),
           createElement("div", {}, [
-            createElement("div", {}, [
-              this.theme_system_radio,
-              createElement("label", { innerText: "System" }),
-            ]),
-            createElement("div", {}, [
-              this.theme_dark_radio,
-              createElement("label", { innerText: "Dark" }),
-            ]),
-            createElement("div", {}, [
-              this.theme_light_radio,
-              createElement("label", { innerText: "Light" }),
-            ]),
+            createElement(
+              "div",
+              { onclick: () => this.settings.setTheme("system") },
+              [
+                this.theme_system_radio,
+                createElement("label", { innerText: "System" }),
+              ],
+            ),
+            createElement(
+              "div",
+              { onclick: () => this.settings.setTheme("dark") },
+              [
+                this.theme_dark_radio,
+                createElement("label", { innerText: "Dark" }),
+              ],
+            ),
+            createElement(
+              "div",
+              { onclick: () => this.settings.setTheme("light") },
+              [
+                this.theme_light_radio,
+                createElement("label", { innerText: "Light" }),
+              ],
+            ),
+          ]),
+        ]),
+        createElement("div", {}, [
+          createElement("label", { innerText: "Layout" }),
+          createElement("div", {}, [
+            createElement(
+              "div",
+              { onclick: () => this.settings.setLayout("normal") },
+              [
+                this.layout_normal_radio,
+                createElement("label", { innerText: "Normal" }),
+              ],
+            ),
+            createElement(
+              "div",
+              { onclick: () => this.settings.setLayout("dense") },
+              [
+                this.layout_dense_radio,
+                createElement("label", { innerText: "Dense" }),
+              ],
+            ),
           ]),
         ]),
       ]),
+      this.button,
     );
     this.render();
   }
@@ -58,6 +85,8 @@ export class SettingsModal extends Modal {
     this.theme_system_radio.checked = this.settings.theme === "system";
     this.theme_dark_radio.checked = this.settings.theme === "dark";
     this.theme_light_radio.checked = this.settings.theme === "light";
+    this.layout_normal_radio.checked = this.settings.layout === "normal";
+    this.layout_dense_radio.checked = this.settings.layout === "dense";
   }
 }
 
