@@ -28,7 +28,8 @@ export class Mouse {
       case " ":
       case "Enter":
         event.preventDefault();
-        (target as HTMLElement).click();
+        if (ctrlKey) target?.dispatchEvent(new Event("contextmenu"));
+        else (target as HTMLElement).click();
         break;
       case "Escape":
         (target as HTMLElement).blur();

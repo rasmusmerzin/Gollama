@@ -10,10 +10,6 @@ navigation-element {
   transition: 100ms;
   border-right: 1px solid #888;
 
-  > chat-list-element {
-    flex: 1;
-  }
-
   > button {
     height: 2em;
     white-space: nowrap;

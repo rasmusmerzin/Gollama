@@ -34,10 +34,6 @@ export class ChatInputElement extends Element {
     this.send_button.disabled = value;
   }
 
-  focus() {
-    this.text_input.focus();
-  }
-
   keydown({ key }: KeyboardEvent) {
     if (key === "Enter") this.send();
   }

@@ -26,6 +26,7 @@ export class AppElement extends Element {
 
   constructor() {
     super();
+    this.append(this.navigation_element, this.main);
     this.bind(this.active_chat_store, "change");
     this.bind(this.settings_store, "change");
   }
@@ -34,7 +35,6 @@ export class AppElement extends Element {
     document.body.setAttribute("theme", this.settings_store.theme);
     this.new_chat_element.remove();
     this.chat_element?.remove();
-    this.append(this.navigation_element, this.main);
     const { chat_id } = this.active_chat_store;
     const chat = this.chat_store.chats.get(<string>chat_id);
     if (chat) this.main.append((this.chat_element = new ChatElement(chat)));

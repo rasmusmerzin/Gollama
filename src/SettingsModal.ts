@@ -26,7 +26,7 @@ export class SettingsModal extends Modal {
       this.title_label,
       createElement("form", {}, [
         createElement("div", {}, [
-          createElement("label", { innerText: "Theme" }),
+          createElement("div", { innerText: "Theme" }),
           createElement("div", {}, [
             createElement(
               "div",
@@ -55,7 +55,7 @@ export class SettingsModal extends Modal {
           ]),
         ]),
         createElement("div", {}, [
-          createElement("label", { innerText: "Layout" }),
+          createElement("div", { innerText: "Layout" }),
           createElement("div", {}, [
             createElement(
               "div",

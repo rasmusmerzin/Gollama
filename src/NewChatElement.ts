@@ -11,70 +11,79 @@ export class NewChatElement extends HTMLElement {
   ollama_service = OllamaService.get();
 
   models: Array<OllamaModel> | null = null;
+  model: string | null = null;
 
-  title_input = createElement("input", { id: "input" });
-  model_select = createElement("select");
-  submit_button = createElement("button", { innerText: "Create New Chat" });
-  form = createElement("form");
+  model_items = new Map<string, HTMLInputElement>();
+  title_input = createElement("input", {
+    id: "input",
+    placeholder: "New Chat",
+  });
+  submit_button = createElement("button", {
+    innerText: "Create New Chat",
+    onclick: () => this.submit(),
+  });
 
   constructor() {
     super();
-    this.submit_button.onclick = this.submit.bind(this);
     this.start();
   }
 
-  start() {
+  async start() {
     this.innerHTML = "";
     this.classList.add("loading");
-    this.ollama_service
-      .listModels()
-      .then(this.load.bind(this))
-      .finally(this.done.bind(this));
-  }
-
-  load(models: Array<OllamaModel>) {
-    this.models = models;
-  }
-
-  done() {
-    this.classList.remove("loading");
-    this.render();
+    try {
+      this.models = await this.ollama_service.listModels();
+    } finally {
+      this.classList.remove("loading");
+      this.render();
+    }
   }
 
   render() {
     this.innerHTML = "";
-    if (!this.models?.length) return;
-    this.model_select.innerHTML = "";
+    if (!this.models) return;
+    const model_container = createElement("div", { className: "models" });
     for (const model of this.models) {
-      const option = createElement("option", {
-        value: model.name,
-        innerText: model.name,
-      });
-      this.model_select.append(option);
+      const input = createElement("input", { type: "radio", name: "model" });
+      this.model_items.set(model.name, input);
+      model_container.append(
+        createElement("div", { onclick: () => this.selectModel(model.name) }, [
+          input,
+          createElement("label", { innerText: model.name }),
+        ]),
+      );
     }
-    this.form.innerHTML = "";
-    this.title_input.value = "New Chat";
-    this.form.append(
-      createElement("div", {}, [
-        createElement("label", { innerText: "Model" }),
-        this.model_select,
+    this.submit_button.disabled = true;
+    this.append(
+      createElement("h2", { innerText: "New Chat" }),
+      createElement("form", {}, [
+        createElement("div", {}, [
+          createElement("div", { innerText: "Title" }),
+          this.title_input,
+        ]),
+        createElement("div", {}, [
+          createElement("div", { innerText: "Model" }),
+          model_container,
+        ]),
+        this.submit_button,
       ]),
-      createElement("div", {}, [
-        createElement("label", { innerText: "Title" }),
-        this.title_input,
-      ]),
-      this.submit_button,
     );
-    this.append(createElement("h2", { innerText: "New Chat" }), this.form);
+  }
+
+  selectModel(model: string) {
+    this.model = model;
+    this.submit_button.disabled = false;
+    const input = this.model_items.get(model);
+    if (input) input.checked = true;
   }
 
   submit() {
-    const chat = Chat.from({
-      title: this.title_input.value,
-      model: this.model_select.value,
-    });
+    const { model } = this;
+    if (!model) return;
+    const chat = Chat.from({ model, title: this.title_input.value });
     this.chat_store.add(chat);
     this.active_chat_store.set(chat.id);
+    this.title_input.value = "";
   }
 }
 

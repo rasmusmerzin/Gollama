@@ -5,6 +5,7 @@ import { Element } from "./Element";
 
 export class ChatListElement extends Element {
   chat_store = ChatStore.get();
+  items = new Map<string, ChatListItemElement>();
 
   constructor() {
     super();
@@ -22,9 +23,17 @@ export class ChatListElement extends Element {
   }
 
   render() {
-    for (const child of Array.from(this.children)) child.remove();
-    for (const chat of this.chat_store.chats.values())
-      this.append(new ChatListItemElement(chat));
+    for (const [chat_id, item] of this.items) {
+      if (this.chat_store.chats.has(chat_id)) continue;
+      item.remove();
+      this.items.delete(chat_id);
+    }
+    for (const chat of this.chat_store.chats.values()) {
+      if (this.items.has(chat.id)) continue;
+      const item = new ChatListItemElement(chat);
+      this.items.set(chat.id, item);
+      this.append(item);
+    }
   }
 }
 

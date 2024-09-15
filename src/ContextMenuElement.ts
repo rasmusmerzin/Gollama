@@ -27,7 +27,8 @@ export class ContextMenuElement extends Element {
       if (option.color) button.style.color = option.color;
       this.append(button);
     }
-    document.body.append(this);
+    if (target) target.after(this);
+    else document.body.append(this);
     setTimeout(() => {
       this.target?.classList.add("focus");
       this.bind(window, "click", () => this.remove());

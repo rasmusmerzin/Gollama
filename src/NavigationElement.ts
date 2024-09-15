@@ -23,7 +23,7 @@ export class NavigationElement extends Element {
       (this.settings_button = createElement("button", {
         className: "settings",
         innerText: "Settings",
-        title: "Press Ctrl+I to toggle menu",
+        title: "Press Ctrl+I to toggle settings menu",
         onclick: () => {
           const modal = document.getElementById("modal");
           if (modal) modal.remove();
@@ -32,7 +32,7 @@ export class NavigationElement extends Element {
       })),
       createElement("button", {
         className: "menu",
-        title: "Press Ctrl+N to toggle menu",
+        title: "Press Ctrl+N to toggle chat list",
         onclick: () => this.toggle(),
       }),
     );

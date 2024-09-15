@@ -1,4 +1,5 @@
 new-chat-element {
+  user-select: none;
   margin: 64px;
   width: 320px;
   max-width: 80%;
@@ -8,7 +9,8 @@ new-chat-element {
     align-items: center;
     width: 100%;
     &::after {
-      content: "No models found. Check your Ollama installation.";
+      content: "Couldn't communicate with the service. Check your Ollama installation.";
+      font-style: italic;
       text-align: center;
     }
   }
@@ -19,6 +21,17 @@ new-chat-element {
     > div {
       display: flex;
       flex-direction: column;
+    }
+    input[type="radio"],
+    label {
+      cursor: pointer;
+    }
+    .models:empty {
+      &::after {
+        content: "No models installed.";
+        font-style: italic;
+        opacity: 0.5;
+      }
     }
   }
 }

@@ -14,6 +14,13 @@ export class OllamaService {
 
   readonly origin = "http://localhost:11434";
 
+  async listModels(): Promise<Array<OllamaModel>> {
+    const url = new URL("/api/tags", this.origin);
+    const response = await fetch(url);
+    const object = await response.json();
+    return object.models;
+  }
+
   async chatResponse(
     model: string,
     messages: Array<ChatMessage>,
@@ -47,12 +54,5 @@ export class OllamaService {
       }
       if (part.done) return;
     }
-  }
-
-  async listModels(): Promise<Array<OllamaModel>> {
-    const url = new URL("/api/tags", this.origin);
-    const response = await fetch(url);
-    const object = await response.json();
-    return object.models;
   }
 }

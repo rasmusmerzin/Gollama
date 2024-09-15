@@ -18,6 +18,10 @@ settings-modal > .container {
         display: flex;
         grid-gap: 8px;
       }
+      input[type="radio"],
+      label {
+        cursor: pointer;
+      }
     }
   }
 }
