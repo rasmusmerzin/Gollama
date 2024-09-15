@@ -26,6 +26,9 @@ chat-message-element {
       margin-top: 16px;
       display: flex;
       grid-gap: 8px;
+      image-element:not(.open) {
+        height: 96px;
+      }
     }
     > .content {
       p:first-child {

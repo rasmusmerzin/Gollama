@@ -4,7 +4,7 @@ chat-input-element {
   display: flex;
   flex-direction: column;
   padding: 0 10px 10px;
-  min-height: 86px;
+  min-height: 120px;
   grid-gap: 4px;
   justify-content: flex-end;
   margin-left: -50px;
@@ -25,7 +25,7 @@ chat-input-element {
         overflow: hidden;
       }
       display: flex;
-      img {
+      image-element:not(.open) {
         margin-left: -6px;
         margin-right: -6px;
         height: 64px;

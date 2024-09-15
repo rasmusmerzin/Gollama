@@ -3,5 +3,6 @@ chat-list-element {
   display: flex;
   flex-direction: column;
   grid-gap: 4px;
-  overflow: hidden auto;
+  overflow: visible auto;
+  padding: 8px;
 }

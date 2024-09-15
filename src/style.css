@@ -34,6 +34,12 @@ body {
   }
 }
 
+input:focus,
+button:focus,
+[tabindex="0"]:focus {
+  outline: solid var(--foreground);
+}
+
 a {
   color: var(--primary);
   text-decoration: none;

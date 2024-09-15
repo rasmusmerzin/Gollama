@@ -1,8 +1,9 @@
 import "./ChatInputElement.css";
-import { Element } from "./Element";
-import { createElement } from "./createElement";
-import { ChatService } from "./ChatService";
 import { ChatMessage } from "./ChatMessage";
+import { ChatService } from "./ChatService";
+import { Element } from "./Element";
+import { ImageElement } from "./ImageElement";
+import { createElement } from "./createElement";
 
 export class ChatInputElement extends Element {
   static instance: ChatInputElement | null = null;
@@ -62,10 +63,7 @@ export class ChatInputElement extends Element {
       child.remove();
     for (const image of await this.getImages())
       this.file_container.append(
-        createElement("img", {
-          src: "data:;base64," + image,
-          alt: "Image",
-        }),
+        new ImageElement({ src: "data:;base64," + image }),
       );
     this.dispatchEvent(new Event("filechange"));
   }

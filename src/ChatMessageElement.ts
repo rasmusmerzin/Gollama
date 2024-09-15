@@ -5,6 +5,7 @@ import { ContextMenuElement } from "./ContextMenuElement";
 import { Element } from "./Element";
 import { createElement } from "./createElement";
 import markdownit from "markdown-it";
+import { ImageElement } from "./ImageElement";
 
 const MD = markdownit();
 
@@ -48,14 +49,8 @@ export class ChatMessageElement extends Element {
     this.classList.add(this.message.role);
     this.content.innerHTML = MD.render(this.message.content);
     this.images.innerHTML = "";
-    for (const image_base64 of this.message.images)
-      this.images.append(
-        createElement("img", {
-          src: "data:;base64," + image_base64,
-          alt: "Image",
-          height: 96,
-        }),
-      );
+    for (const image of this.message.images)
+      this.images.append(new ImageElement({ src: "data:;base64," + image }));
   }
 }
 

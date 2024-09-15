@@ -5,7 +5,7 @@ navigation-element {
   min-width: 200px;
   max-width: 300px;
   background: #8884;
-  padding: 8px;
+  padding: 8px 0;
   grid-gap: 8px;
   transition: 100ms;
   border-right: 1px solid #888;
@@ -15,6 +15,7 @@ navigation-element {
   }
 
   > button {
+    margin: 0 8px;
     height: 2em;
     white-space: nowrap;
     overflow: hidden;
@@ -28,6 +29,9 @@ navigation-element {
   }
 
   &.closed {
+    chat-list-element {
+      display: none;
+    }
     border: none;
     min-width: 0;
     width: 0;

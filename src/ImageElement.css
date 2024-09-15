@@ -1,0 +1,30 @@
+image-element {
+  cursor: pointer;
+  transition: background 100ms;
+  background: #0000;
+
+  &:not(.open) {
+    img {
+      height: 100%;
+    }
+  }
+
+  &.open {
+    z-index: 10;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0008;
+    backdrop-filter: blur(4px);
+
+    img {
+      max-height: 90%;
+      max-width: 90%;
+    }
+  }
+}
