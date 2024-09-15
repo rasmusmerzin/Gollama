@@ -73,10 +73,10 @@ export class ChatInputElement extends Element {
     const images = await this.getImages();
     const message =
       content || images.length ? ChatMessage.from({ content, images }) : null;
-    await this.chat_service.ask(message);
     this.file_input.value = "";
     this.text_input.value = "";
     this.filechange();
+    await this.chat_service.ask(message);
   }
 
   async getImages() {

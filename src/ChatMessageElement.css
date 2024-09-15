@@ -8,6 +8,7 @@ chat-message-element {
     border-radius: 10px;
     position: relative;
     border: 1px solid #8888;
+    min-height: 40px;
     > .author {
       user-select: none;
       position: absolute;
@@ -27,13 +28,11 @@ chat-message-element {
     }
     > .images:not(:empty) {
       margin-top: 16px;
-      padding: 0 8px;
       display: flex;
+      flex-wrap: wrap;
+      grid-gap: 4px;
       image-element:not(.open) {
         height: 96px;
-        transform: rotate(-5deg);
-        margin-left: -6px;
-        margin-right: -6px;
       }
     }
     > .content {

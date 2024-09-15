@@ -38,6 +38,10 @@ export class Mouse {
       target.nodeName === "INPUT" &&
       (target as HTMLInputElement).type === "text";
     switch (key) {
+      case "w":
+      case "W":
+        if (ctrlKey) window.close();
+        break;
       case " ":
         if (is_text_input) break;
         event.preventDefault();

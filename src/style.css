@@ -136,7 +136,6 @@ button {
     transition: 100ms;
     border-radius: inherit;
     background: #0004;
-    backdrop-filter: blur(4px);
     display: flex;
     justify-content: center;
     align-items: center;
