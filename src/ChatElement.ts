@@ -13,7 +13,7 @@ export class ChatElement extends Element {
   settings = SettingsStore.get();
 
   container = createElement("div");
-  input = new ChatInputElement();
+  input = ChatInputElement.get();
   fixed_at_bottom = true;
 
   constructor(readonly chat: Chat) {
@@ -24,6 +24,7 @@ export class ChatElement extends Element {
     this.bind(chat, "change");
     this.bind(window, "resize");
     this.bind(this.settings, "change");
+    this.bind(this.input, "filechange");
     this.bind(chat, "add", this.addLastMessage.bind(this));
     this.bind(chat, "delete", this.ondelete.bind(this));
     this.bind(this.app.main, "scroll", this.onScroll.bind(this));

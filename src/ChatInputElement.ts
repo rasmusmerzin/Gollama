@@ -5,30 +5,46 @@ import { ChatService } from "./ChatService";
 import { ChatMessage } from "./ChatMessage";
 
 export class ChatInputElement extends Element {
+  static instance: ChatInputElement | null = null;
+  static get() {
+    if (this.instance) return this.instance;
+    this.instance = new ChatInputElement();
+    return this.instance;
+  }
+
   chat_service = ChatService.get();
 
-  text_input = createElement("input", {
-    id: "input",
-    type: "text",
-    placeholder: "Write a message...",
-  });
-  file_input = createElement("input", {
-    type: "file",
-    accept: "image/*",
-    multiple: true,
-  });
-  text_container = createElement("div");
-  send_button = createElement("button", {
-    innerText: "➤",
-    className: "primary",
-  });
+  file_input: HTMLInputElement;
+  text_input: HTMLInputElement;
+  send_button: HTMLButtonElement;
+  file_container: HTMLElement;
 
   constructor() {
     super();
-    this.text_container.append(this.text_input, this.send_button);
-    this.append(this.file_input, this.text_container);
-    this.send_button.onclick = this.send.bind(this);
-    this.text_input.onkeydown = this.keydown.bind(this);
+    this.append(
+      createElement("div", {}, [
+        (this.file_container = createElement("div")),
+        (this.file_input = createElement("input", {
+          type: "file",
+          accept: "image/*",
+          multiple: true,
+          onchange: this.filechange.bind(this),
+        })),
+      ]),
+      createElement("div", {}, [
+        (this.text_input = createElement("input", {
+          id: "input",
+          type: "text",
+          placeholder: "Write a message...",
+          onkeydown: this.keydown.bind(this),
+        })),
+        (this.send_button = createElement("button", {
+          innerText: "➤",
+          className: "primary",
+          onclick: this.send.bind(this),
+        })),
+      ]),
+    );
   }
 
   set disabled(value: boolean) {
@@ -39,6 +55,19 @@ export class ChatInputElement extends Element {
 
   keydown({ key }: KeyboardEvent) {
     if (key === "Enter") this.send();
+  }
+
+  async filechange() {
+    for (const child of Array.from(this.file_container.children))
+      child.remove();
+    for (const image of await this.getImages())
+      this.file_container.append(
+        createElement("img", {
+          src: "data:;base64," + image,
+          alt: "Image",
+        }),
+      );
+    this.dispatchEvent(new Event("filechange"));
   }
 
   async send() {

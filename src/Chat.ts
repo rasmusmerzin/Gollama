@@ -7,6 +7,7 @@ export class Chat extends EventTarget {
   model = "gemma2:2b";
   index = new Set<string>();
   messages = new Map<string, ChatMessage>();
+  generating_title = false;
 
   static from({ id, title, model, index }: Partial<Chat> = {}) {
     const chat = new Chat();

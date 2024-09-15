@@ -34,9 +34,9 @@ export class ChatService {
     const chat = this.chat_store.chats.get(<string>chat_id);
     if (!chat) return;
     if (message) chat.add(message);
-    const promises = [this.generateResponse(chat)];
-    if (chat.title === "New Chat") promises.push(this.generateChatTitle(chat));
-    await Promise.all(promises);
+    if (chat.title === "New Chat" && !chat.generating_title)
+      this.generateChatTitle(chat);
+    await this.generateResponse(chat);
   }
 
   async generateResponse(chat: Chat) {
@@ -56,6 +56,7 @@ export class ChatService {
   }
 
   async generateChatTitle(chat: Chat) {
+    chat.generating_title = true;
     const history = Array.from(chat.messages.values());
     const content = "Write only one single short two-word title for this chat.";
     history.push(ChatMessage.from({ content }));
@@ -66,5 +67,6 @@ export class ChatService {
     const [first_line] = response.content.split("\n");
     if (chat.title === "New Chat")
       chat.setTitle(first_line.replaceAll(/['"]/g, ""));
+    chat.generating_title = false;
   }
 }

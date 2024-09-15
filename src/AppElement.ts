@@ -28,17 +28,24 @@ export class AppElement extends Element {
     super();
     this.append(this.navigation_element, this.main);
     this.bind(this.active_chat_store, "change");
-    this.bind(this.settings_store, "change");
+    this.bind(this.settings_store, "change", this.onsettings.bind(this));
+  }
+
+  onsettings() {
+    document.body.setAttribute("theme", this.settings_store.theme);
   }
 
   render() {
-    document.body.setAttribute("theme", this.settings_store.theme);
-    this.new_chat_element.remove();
-    this.chat_element?.remove();
     const { chat_id } = this.active_chat_store;
     const chat = this.chat_store.chats.get(<string>chat_id);
-    if (chat) this.main.append((this.chat_element = new ChatElement(chat)));
-    else {
+    if (chat) {
+      this.new_chat_element.remove();
+      if (this.chat_element?.chat !== chat) {
+        this.chat_element?.remove();
+        this.main.append((this.chat_element = new ChatElement(chat)));
+      }
+    } else {
+      this.chat_element?.remove();
       this.main.append(this.new_chat_element);
       this.new_chat_element.start();
     }

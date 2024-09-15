@@ -4,19 +4,52 @@ chat-input-element {
   display: flex;
   flex-direction: column;
   padding: 0 10px 10px;
-  height: 86px;
+  min-height: 86px;
   grid-gap: 4px;
   justify-content: flex-end;
   margin-left: -50px;
   width: calc(100% + 80px);
   background: var(--background);
 
-  > div {
+  > div:first-child {
+    position: relative;
+    border-radius: 4px;
+    border: 1px solid #888;
+    align-items: flex-end;
+    min-height: 30px;
+    > div {
+      display: inline-flex;
+      justify-content: flex-end;
+      &:not(:empty) {
+        padding: 8px 16px;
+        overflow: hidden;
+      }
+      display: flex;
+      img {
+        margin-left: -6px;
+        margin-right: -6px;
+        height: 64px;
+        border-radius: 4px;
+        transform: rotate(-5deg);
+      }
+    }
+  }
+
+  > div:last-child {
     display: flex;
     grid-gap: 4px;
-    input[type="text"] {
-      flex: 1;
-    }
+  }
+
+  input[type="text"] {
+    flex: 1;
+  }
+
+  input[type="file"] {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: none;
   }
 
   button {

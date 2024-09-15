@@ -48,13 +48,14 @@ export class ChatMessageElement extends Element {
     this.classList.add(this.message.role);
     this.content.innerHTML = MD.render(this.message.content);
     this.images.innerHTML = "";
-    for (const image_base64 of this.message.images) {
-      const img = createElement("img");
-      img.src = "data:;base64," + image_base64;
-      img.alt = "Image";
-      img.height = 96;
-      this.images.append(img);
-    }
+    for (const image_base64 of this.message.images)
+      this.images.append(
+        createElement("img", {
+          src: "data:;base64," + image_base64,
+          alt: "Image",
+          height: 96,
+        }),
+      );
   }
 }
 
