@@ -26,6 +26,12 @@ export class SettingsStore extends EventTarget {
     this.save();
   }
 
+  setNavigationOpen(open: boolean) {
+    this.navigation_open = open;
+    this.dispatchEvent(new Event("change"));
+    this.save();
+  }
+
   toggleNavigationOpen() {
     this.navigation_open = !this.navigation_open;
     this.dispatchEvent(new Event("change"));

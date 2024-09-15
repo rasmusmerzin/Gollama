@@ -5,7 +5,7 @@ chat-message-element {
     flex-direction: column;
     padding: 12px;
     min-height: 1em;
-    border-radius: 8px;
+    border-radius: 10px;
     position: relative;
     border: 1px solid #8888;
     > .author {
@@ -62,16 +62,23 @@ chat-message-element {
       }
     }
   }
+  @media (max-width: 600px) {
+    --message-padding: 0;
+  }
   &.user {
     padding-left: var(--message-padding, 64px);
     justify-content: flex-end;
     > div {
+      &,
+      > .author {
+        background: var(--primary);
+        color: #fff;
+        border-color: var(--primary);
+      }
       > .author {
         left: 100%;
         content: "ME";
-        background: #888;
       }
-      background: #888;
       > .images {
         justify-content: flex-end;
       }

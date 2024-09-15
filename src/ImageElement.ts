@@ -12,7 +12,6 @@ export class ImageElement extends Element {
 
   constructor({ src, alt }: Partial<ImageOptions> = {}) {
     super();
-    this.tabIndex = 0;
     if (src) this.img.src = src;
     this.img.alt = alt || "Image";
     this.append(this.img);

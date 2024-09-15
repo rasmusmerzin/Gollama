@@ -18,9 +18,7 @@ export class ChatElement extends Element {
 
   constructor(readonly chat: Chat) {
     super();
-    chat.load();
     this.append(this.container, this.input);
-    for (const message of chat.messages.values()) this.addMessage(message);
     this.bind(chat, "change");
     this.bind(window, "resize");
     this.bind(this.settings, "change");
@@ -29,6 +27,15 @@ export class ChatElement extends Element {
     this.bind(chat, "delete", this.ondelete.bind(this));
     this.bind(this.app.main, "scroll", this.onScroll.bind(this));
     this.render();
+    this.classList.add("loading");
+    setTimeout(() => this.start());
+  }
+
+  start() {
+    this.chat.load();
+    for (const message of this.chat.messages.values()) this.addMessage(message);
+    this.render();
+    this.classList.remove("loading");
   }
 
   onScroll() {

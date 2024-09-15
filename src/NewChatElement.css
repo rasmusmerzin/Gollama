@@ -17,17 +17,21 @@ new-chat-element {
   > form {
     display: flex;
     flex-direction: column;
-    grid-gap: 16px;
+    grid-gap: 32px;
     > div {
       display: flex;
       flex-direction: column;
+      grid-gap: 4px;
     }
     input[type="radio"],
     label {
       cursor: pointer;
     }
-    .models:empty {
-      &::after {
+    .models {
+      display: flex;
+      flex-direction: column;
+      grid-gap: 4px;
+      &:empty::after {
         content: "No models installed.";
         font-style: italic;
         opacity: 0.5;

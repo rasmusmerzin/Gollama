@@ -19,7 +19,6 @@ export class NavigationElement extends Element {
     this.append(
       (this.new_chat_button = createElement("button", {
         innerText: "New Chat",
-        className: "primary",
         onclick: () => this.active_chat_store.set(null),
       })),
       new ChatListElement(),
@@ -40,31 +39,37 @@ export class NavigationElement extends Element {
     );
     this.bind(this.settings_store, "change");
     this.bind(window, "keydown", this.keydown.bind(this));
+    this.bind(window, "resize", this.resize.bind(this));
     this.render();
+  }
+
+  resize() {
+    if (!this.settings_store.navigation_open) return;
+    if (innerWidth < 600) this.settings_store.setNavigationOpen(false);
   }
 
   keydown(event: Event) {
     const { key, ctrlKey, altKey } = event as KeyboardEvent;
     if (!ctrlKey && !altKey) return;
-    if (key === "0") {
-      this.new_chat_button.click();
-      this.new_chat_button.focus();
-    } else if (["I", "i"].includes(key)) {
-      this.settings_button.click();
-      this.settings_button.focus();
-    } else if (["N", "n"].includes(key)) {
-      this.menu_button.click();
-      this.menu_button.focus();
-    }
+    if (key === "0") this.new_chat_button.click();
+    else if (["I", "i"].includes(key)) this.settings_button.click();
+    else if (["N", "n"].includes(key)) this.menu_button.click();
   }
 
   toggle() {
     this.settings_store.toggleNavigationOpen();
+    const touch = () => this.settings_store.dispatchEvent(new Event("change"));
+    setTimeout(touch, 100);
   }
 
   render() {
-    if (this.settings_store.navigation_open) this.classList.remove("closed");
-    else this.classList.add("closed");
+    if (this.settings_store.navigation_open) {
+      this.classList.remove("closed");
+      this.menu_button.classList.remove("primary");
+    } else {
+      this.classList.add("closed");
+      this.menu_button.classList.add("primary");
+    }
   }
 }
 

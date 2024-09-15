@@ -20,6 +20,7 @@ export class NewChatElement extends HTMLElement {
   });
   submit_button = createElement("button", {
     innerText: "Create New Chat",
+    className: "primary",
     onclick: () => this.submit(),
   });
 

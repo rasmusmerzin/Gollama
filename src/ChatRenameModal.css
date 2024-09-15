@@ -8,6 +8,13 @@ chat-rename-modal > .container {
   > form {
     display: flex;
     flex-direction: column;
-    grid-gap: 16px;
+    grid-gap: 24px;
+    > div {
+      display: flex;
+      grid-gap: 8px;
+      * {
+        flex: 1;
+      }
+    }
   }
 }

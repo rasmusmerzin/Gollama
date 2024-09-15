@@ -4,24 +4,38 @@ import { Modal } from "./Modal";
 import { createElement } from "./createElement";
 
 export class ChatRenameModal extends Modal {
-  title_label = createElement("h2", { innerText: "Rename Chat" });
-  form = createElement("form");
-  input = createElement("input", { type: "text" });
-  button = createElement("button", { innerText: "Rename" });
+  input: HTMLInputElement;
+  submit_button: HTMLButtonElement;
 
   constructor(readonly chat: Chat) {
     super();
-    this.input.value = chat.title;
-    this.input.onchange = () => {
-      this.button.disabled = !this.input.value;
-    };
-    this.button.onclick = () => {
-      if (!this.input.value) return;
-      chat.setTitle(this.input.value.trim());
-      this.remove();
-    };
-    this.form.append(this.input, this.button);
-    this.container.append(this.title_label, this.form);
+    this.container.append(
+      createElement("h2", { innerText: "Rename Chat" }),
+      createElement("form", {}, [
+        (this.input = createElement("input", {
+          type: "text",
+          value: chat.title,
+          onchange: () => {
+            this.submit_button.disabled = !this.input.value;
+          },
+        })),
+        createElement("div", {}, [
+          createElement("button", {
+            innerText: "Cancel",
+            onclick: () => this.remove(),
+          }),
+          (this.submit_button = createElement("button", {
+            innerText: "Rename",
+            className: "primary",
+            onclick: () => {
+              if (!this.input.value) return;
+              chat.setTitle(this.input.value.trim());
+              this.remove();
+            },
+          })),
+        ]),
+      ]),
+    );
     this.input.focus();
   }
 }

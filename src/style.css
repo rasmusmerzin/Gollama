@@ -3,31 +3,30 @@ body {
   margin: 0;
   --foreground: #fff;
   --background: #222;
-  --primary: #0ff;
+  --primary: #08c;
   --red: #f44;
   @media (prefers-color-scheme: light) {
     --red: red;
     --background: #fff;
     --foreground: #000;
-    --primary: #088;
   }
   &[theme="dark"] {
     --red: #f44;
     --foreground: #fff;
     --background: #222;
-    --primary: #0ff;
   }
   &[theme="light"] {
     --red: red;
     --background: #fff;
     --foreground: #000;
-    --primary: #088;
   }
   color: var(--foreground);
   background: var(--background);
 }
 
 * {
+  box-sizing: border-box;
+  outline: none;
   &::-webkit-scrollbar {
     width: 6px;
     height: 6px;
@@ -59,10 +58,10 @@ a {
 input {
   user-select: none;
   padding: 4px;
-  border-radius: 4px;
+  border-radius: 10px;
   border: 1px solid #888;
   &[type="text"] {
-    padding: 4px 6px;
+    padding: 6px 8px;
     background: #8884;
     color: var(--foreground);
     &::placeholder {
@@ -77,27 +76,31 @@ input {
 }
 
 button {
+  --color: var(--foreground);
   user-select: none;
   cursor: pointer;
   padding: 6px 10px;
-  border-radius: 8px;
-  border: 1px solid #888;
+  border-radius: 10px;
+  border: 1px solid var(--color);
   font-size: 16px;
   background: none;
-  color: var(--foreground);
+  color: var(--color);
   &:hover {
     background: #8884;
   }
   &.primary {
-    background: var(--foreground);
-    color: var(--background);
+    --color: var(--primary);
+    background: var(--color);
+    border-color: var(--color);
+    color: #fff;
     &:hover {
-      background: #888;
+      filter: brightness(1.2);
     }
   }
   &:disabled {
     cursor: auto;
     background: #888;
+    border-color: #888;
     opacity: 0.5;
   }
 }
@@ -130,8 +133,10 @@ button {
 .loading {
   position: relative;
   &::after {
+    transition: 100ms;
     border-radius: inherit;
-    background: #8888;
+    background: #0004;
+    backdrop-filter: blur(4px);
     display: flex;
     justify-content: center;
     align-items: center;

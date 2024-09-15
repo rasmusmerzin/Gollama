@@ -19,7 +19,8 @@ export class ChatListElement extends Element {
     if (!ctrlKey && !altKey) return;
     const index = keyCode - 49;
     if (index < 0 || index > 8) return;
-    (this.children[index] as HTMLElement)?.click();
+    const item = Array.from(this.items.values())[index];
+    item?.click();
   }
 
   render() {

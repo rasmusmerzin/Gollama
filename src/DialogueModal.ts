@@ -11,10 +11,7 @@ export interface DialogueOptions {
 }
 
 export class DialogueModal extends Modal {
-  title_label = createElement("h2");
-  body_label = createElement("p");
-  cancel_button = createElement("button", { innerText: "Cancel" });
-  submit_button = createElement("button", { innerText: "OK" });
+  submit_button: HTMLButtonElement;
 
   constructor({
     title_text,
@@ -24,20 +21,25 @@ export class DialogueModal extends Modal {
     action,
   }: DialogueOptions) {
     super();
-    this.title_label.innerText = title_text;
-    this.body_label.innerText = body_text;
-    if (submit_text) this.submit_button.innerText = submit_text;
-    if (color) this.submit_button.style.color = color;
-    this.cancel_button.onclick = () => this.remove();
-    this.submit_button.onclick = () => {
-      this.remove();
-      action();
-    };
     this.container.append(
-      this.title_label,
-      this.body_label,
-      createElement("div", {}, [this.cancel_button, this.submit_button]),
+      createElement("h2", { innerText: title_text }),
+      createElement("p", { innerText: body_text }),
+      createElement("div", {}, [
+        createElement("button", {
+          innerText: "Cancel",
+          onclick: () => this.remove(),
+        }),
+        (this.submit_button = createElement("button", {
+          innerText: submit_text || "OK",
+          className: "primary",
+          onclick: () => {
+            this.remove();
+            action();
+          },
+        })),
+      ]),
     );
+    if (color) this.submit_button.style.setProperty("--color", color);
   }
 }
 

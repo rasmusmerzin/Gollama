@@ -26,7 +26,7 @@ export class ContextMenuElement extends Element {
       const button = document.createElement("button");
       button.innerText = option.name;
       button.onclick = option.action;
-      if (option.color) button.style.color = option.color;
+      if (option.color) button.style.setProperty("--color", option.color);
       this.append(button);
     }
     if (target) target.after(this);

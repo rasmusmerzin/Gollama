@@ -14,10 +14,16 @@ export class Mouse {
     addEventListener("mousemove", this.onmouse.bind(this));
     addEventListener("mousedown", this.onmouse.bind(this));
     addEventListener("mouseup", this.onmouse.bind(this));
-    addEventListener("click", this.onmouse.bind(this));
+    addEventListener("click", this.click.bind(this));
     addEventListener("wheel", this.onmouse.bind(this));
     addEventListener("contextmenu", this.onmouse.bind(this));
     addEventListener("keydown", this.keydown.bind(this));
+  }
+
+  click(event: MouseEvent) {
+    this.onmouse(event);
+    const target = event.target as HTMLElement;
+    if (target.tabIndex >= 0) target.focus();
   }
 
   keydown(event: KeyboardEvent) {
