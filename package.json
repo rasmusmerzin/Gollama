@@ -1,7 +1,7 @@
 {
   "name": "Gollama",
   "productName": "Gollama",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "GUI front-end for Ollama",
   "author": {
     "name": "Emil Rasmus Merzin",
