@@ -1,5 +1,12 @@
 export type Theme = "system" | "dark" | "light";
 export type Layout = "normal" | "dense";
+export enum Color {
+  Gray = "#888",
+  Blue = "#08c",
+  Orange = "#e30",
+  Green = "#4b5",
+  Pink = "#f28",
+}
 
 export class SettingsStore extends EventTarget {
   static instance: SettingsStore | null = null;
@@ -13,6 +20,13 @@ export class SettingsStore extends EventTarget {
   navigation_open = true;
   theme: Theme = "system";
   layout: Layout = "normal";
+  color: Color = Color.Gray;
+
+  setColor(color: Color) {
+    this.color = color;
+    this.dispatchEvent(new Event("change"));
+    this.save();
+  }
 
   setLayout(layout: Layout) {
     this.layout = layout;

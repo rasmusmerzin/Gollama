@@ -3,7 +3,7 @@ body {
   margin: 0;
   --foreground: #fff;
   --background: #222;
-  --primary: #08c;
+  --primary: #888;
   --red: #f44;
   @media (prefers-color-scheme: light) {
     --red: red;

@@ -1,6 +1,6 @@
 import "./SettingsModal.css";
 import { Modal } from "./Modal";
-import { SettingsStore } from "./SettingsStore";
+import { Color, SettingsStore } from "./SettingsStore";
 import { createElement } from "./createElement";
 
 export class SettingsModal extends Modal {
@@ -25,9 +25,22 @@ export class SettingsModal extends Modal {
     type: "radio",
   });
 
+  color_container = createElement("div");
+  color_labels = new Map<Color, HTMLElement>();
+
   constructor() {
     super();
     this.bind(this.settings, "change");
+    for (const color of Object.values(Color)) {
+      const label = createElement("label", {
+        className: "color",
+        tabIndex: 0,
+        onclick: () => this.settings.setColor(color),
+      });
+      label.style.background = color;
+      this.color_labels.set(color, label);
+      this.color_container.append(label);
+    }
     this.container.append(
       this.title_label,
       createElement("form", {}, [
@@ -81,6 +94,10 @@ export class SettingsModal extends Modal {
             ),
           ]),
         ]),
+        createElement("div", {}, [
+          createElement("div", { innerText: "Color" }),
+          this.color_container,
+        ]),
       ]),
       this.button,
     );
@@ -88,6 +105,10 @@ export class SettingsModal extends Modal {
   }
 
   render() {
+    for (const [color, label] of this.color_labels) {
+      if (this.settings.color === color) label.classList.add("active");
+      else label.classList.remove("active");
+    }
     this.theme_system_radio.checked = this.settings.theme === "system";
     this.theme_dark_radio.checked = this.settings.theme === "dark";
     this.theme_light_radio.checked = this.settings.theme === "light";

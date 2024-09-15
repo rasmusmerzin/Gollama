@@ -28,10 +28,12 @@ export class AppElement extends Element {
     super();
     this.append(this.navigation_element, this.main);
     this.bind(this.active_chat_store, "change");
-    this.bind(this.settings_store, "change", this.onsettings.bind(this));
+    this.bind(this.settings_store, "change", this.applySettings.bind(this));
+    this.applySettings();
   }
 
-  onsettings() {
+  applySettings() {
+    document.body.style.setProperty("--primary", this.settings_store.color);
     document.body.setAttribute("theme", this.settings_store.theme);
   }
 
