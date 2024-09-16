@@ -6,31 +6,37 @@ body {
   --dark-foreground: #fff;
   --dark-alert: #f44;
   --dark-warning: #ff4;
+  --dark-gray: #333;
 
   --light-background: #fff;
   --light-foreground: #000;
   --light-alert: #f44;
   --light-warning: #a80;
+  --light-gray: #ddd;
 
   --background: var(--dark-background);
   --foreground: var(--dark-foreground);
+  --gray: var(--dark-gray);
   --alert: var(--dark-alert);
   --warning: var(--dark-warning);
   @media (prefers-color-scheme: light) {
     --background: var(--light-background);
     --foreground: var(--light-foreground);
+    --gray: var(--light-gray);
     --alert: var(--light-alert);
     --warning: var(--light-warning);
   }
   &[theme="dark"] {
     --background: var(--dark-background);
     --foreground: var(--dark-foreground);
+    --gray: var(--dark-gray);
     --alert: var(--dark-alert);
     --warning: var(--dark-warning);
   }
   &[theme="light"] {
     --background: var(--light-background);
     --foreground: var(--light-foreground);
+    --gray: var(--light-gray);
     --alert: var(--light-alert);
     --warning: var(--light-warning);
   }

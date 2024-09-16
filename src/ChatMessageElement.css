@@ -26,19 +26,25 @@ chat-message-element {
     min-height: 40px;
     min-width: 40px;
     position: relative;
+    overflow: hidden;
 
     .alert {
       display: none;
     }
 
     &:not(.done):not(.loading) .alert {
+      background: inherit;
       display: block;
       color: var(--warning);
       position: absolute;
-      right: 10px;
       bottom: 0;
+      width: 40px;
+      height: 40px;
       font-size: 20px;
       font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       &::after {
         content: "⚠";
       }
@@ -90,6 +96,9 @@ chat-message-element {
     .author {
       content: "ME";
     }
+    .alert {
+      left: 0;
+    }
     image-list-element {
       justify-content: flex-end;
     }
@@ -98,11 +107,14 @@ chat-message-element {
   &.assistant {
     padding-right: 28px;
     .container {
-      background: #8882;
+      background: var(--gray);
     }
     .author {
       content: "AI";
-      background: #8882;
+      background: var(--gray);
+    }
+    .alert {
+      right: 0;
     }
   }
 }

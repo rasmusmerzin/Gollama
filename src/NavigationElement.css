@@ -7,7 +7,7 @@ navigation-element {
   width: var(--navigation-width);
   display: flex;
   flex-direction: column;
-  background: #8884;
+  background: var(--gray);
   padding: 8px 0;
   grid-gap: 8px;
   transition: 100ms;
