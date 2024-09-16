@@ -27,11 +27,20 @@ export class ChatMessageElement extends Element {
     this.bind(message, "change");
     this.content.onclick = (e) => e.preventDefault();
     this.container.oncontextmenu = this.contextmenu.bind(this);
+    this.bind(window, "keydown", this.keydown.bind(this));
+  }
+
+  keydown(event: Event) {
+    if (document.activeElement !== this.container) return;
+    const { key, ctrlKey, altKey } = event as KeyboardEvent;
+    if (ctrlKey || altKey) return;
+    if ([" ", "Enter"].includes(key))
+      (this.images.children[0] as HTMLElement)?.click();
   }
 
   contextmenu() {
     if (this.message.loading) return;
-    ChatMessageMenu({ target: this.container, message });
+    ChatMessageMenu({ target: this.container, message: this.message });
   }
 
   render() {
@@ -41,8 +50,13 @@ export class ChatMessageElement extends Element {
     this.classList.add(this.message.role);
     this.content.innerHTML = MD.render(this.message.content);
     this.images.innerHTML = "";
-    for (const image of this.message.images)
-      this.images.append(new ImageElement({ src: "data:;base64," + image }));
+    for (const image of this.message.images) {
+      const element = new ImageElement({
+        listed: true,
+        src: "data:;base64," + image,
+      });
+      this.images.append(element);
+    }
   }
 }
 

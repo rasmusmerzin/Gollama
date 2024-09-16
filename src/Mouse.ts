@@ -84,7 +84,7 @@ export class Mouse {
       case "CapsLock":
         break;
       default:
-        if (!modal && !modKey) input?.focus();
+        if (!modal && !modKey && key.length === 1) input?.focus();
         break;
     }
   }

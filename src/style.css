@@ -67,7 +67,7 @@ input {
   &:disabled {
     cursor: auto;
     color: #aaa;
-    opacity: 0.5;
+    opacity: 0.4;
   }
 }
 
@@ -97,7 +97,7 @@ button {
     cursor: auto;
     background: #888;
     border-color: #888;
-    opacity: 0.5;
+    opacity: 0.4;
   }
 }
 

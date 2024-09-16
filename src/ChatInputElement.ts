@@ -24,13 +24,13 @@ export class ChatInputElement extends Element {
     super();
     this.append(
       createElement("div", {}, [
-        (this.file_container = createElement("div")),
         (this.file_input = createElement("input", {
           type: "file",
           accept: "image/*",
           multiple: true,
           onchange: this.filechange.bind(this),
         })),
+        (this.file_container = createElement("div", { className: "images" })),
       ]),
       createElement("div", {}, [
         (this.text_input = createElement("input", {
