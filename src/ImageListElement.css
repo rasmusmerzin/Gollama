@@ -1,6 +1,7 @@
 image-list-element:not(:empty) {
   display: flex;
   grid-gap: 4px;
+  overflow: hidden;
   image-element:not(.open) {
     width: 96px;
     height: 96px;
@@ -12,12 +13,14 @@ image-list-element:not(:empty) {
       height: 100%;
     }
   }
-  position: relative;
   &.plenty {
     height: 96px;
+    box-sizing: content-box;
     min-width: 128px;
+    position: relative;
     image-element:not(.open) {
       --reverse-index: calc(var(--count) - var(--index) - 1);
+      border: 1px solid var(--foreground);
       position: absolute;
       right: calc(var(--reverse-index) * 16px);
       transform: rotate(calc(var(--reverse-index) * 2deg))

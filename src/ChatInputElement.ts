@@ -2,37 +2,27 @@ import "./ChatInputElement.css";
 import { ChatMessage } from "./ChatMessage";
 import { ChatService } from "./ChatService";
 import { Element } from "./Element";
-import { ImageElement } from "./ImageElement";
 import { createElement } from "./createElement";
 import { ImageListElement } from "./ImageListElement";
 
 export class ChatInputElement extends Element {
-  static instance: ChatInputElement | null = null;
-  static get() {
-    if (this.instance) return this.instance;
-    this.instance = new ChatInputElement();
-    return this.instance;
-  }
-
   chat_service = ChatService.get();
+  file_input = createElement("input", {
+    type: "file",
+    accept: "image/*",
+    multiple: true,
+    onchange: this.filechange.bind(this),
+  });
 
-  file_input: HTMLInputElement;
   text_input: HTMLInputElement;
+  file_button: HTMLButtonElement;
   send_button: HTMLButtonElement;
-  images = new ImageListElement();
+  images = new ImageListElement({ max_count: 5 });
 
   constructor() {
     super();
     this.append(
-      createElement("div", {}, [
-        (this.file_input = createElement("input", {
-          type: "file",
-          accept: "image/*",
-          multiple: true,
-          onchange: this.filechange.bind(this),
-        })),
-        this.images,
-      ]),
+      this.images,
       createElement("div", {}, [
         (this.text_input = createElement("input", {
           id: "input",
@@ -40,9 +30,19 @@ export class ChatInputElement extends Element {
           placeholder: "Write a message...",
           onkeydown: this.keydown.bind(this),
         })),
+        (this.file_button = createElement("button", {
+          innerText: "📂",
+          title: "Add images",
+          onclick: () => this.file_input.click(),
+          oncontextmenu: () => {
+            this.file_input.value = "";
+            this.filechange();
+          },
+        })),
         (this.send_button = createElement("button", {
           innerText: "➤",
           className: "primary",
+          title: "Send prompt and fetch response",
           onclick: this.send.bind(this),
         })),
       ]),
@@ -50,8 +50,8 @@ export class ChatInputElement extends Element {
   }
 
   set disabled(value: boolean) {
-    this.file_input.disabled = value;
     this.text_input.disabled = value;
+    this.file_button.disabled = value;
     this.send_button.disabled = value;
   }
 

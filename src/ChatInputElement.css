@@ -5,27 +5,28 @@ chat-input-element {
   display: flex;
   flex-direction: column;
   padding: 0 16px 16px;
-  grid-gap: 6px;
   justify-content: flex-end;
   background: var(--background);
 
-  > div:first-child {
+  > div {
     display: flex;
-    border: 1px solid #888;
-    border-radius: 8px;
-  }
-
-  > div:last-child {
-    display: flex;
-    grid-gap: 6px;
+    grid-gap: 8px;
+    width: 100%;
   }
 
   input[type="text"] {
     flex: 1;
   }
 
-  image-list-element {
-    justify-content: flex-end;
+  image-list-element:not(:empty) {
+    margin-bottom: 8px;
+    &:not(.plenty) {
+      padding: 8px;
+      border-radius: 10px;
+      grid-gap: 8px;
+      justify-content: flex-end;
+      border: 1px solid #888;
+    }
   }
 
   input[type="file"] {

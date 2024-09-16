@@ -112,15 +112,14 @@ input {
 }
 
 button {
-  --color: var(--foreground);
   user-select: none;
   cursor: pointer;
   padding: 6px 10px;
   border-radius: 10px;
-  border: 1px solid var(--color);
+  border: 1px solid var(--color, #888);
   font-size: 16px;
   background: none;
-  color: var(--color);
+  color: var(--color, var(--foreground));
   &:hover {
     background: #8884;
   }

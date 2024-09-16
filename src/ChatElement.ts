@@ -11,7 +11,7 @@ export class ChatElement extends Element {
   app = AppElement.get();
 
   container = createElement("div");
-  input = ChatInputElement.get();
+  input = new ChatInputElement();
   fixed_at_bottom = true;
 
   constructor(readonly chat: Chat) {
