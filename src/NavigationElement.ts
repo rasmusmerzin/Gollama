@@ -2,16 +2,16 @@ import "./NavigationElement.css";
 import { ActiveChatStore } from "./ActiveChatStore";
 import { ChatListElement } from "./ChatListElement";
 import { Element } from "./Element";
-import { SettingsModal } from "./SettingsModal";
-import { SettingsStore } from "./SettingsStore";
+import { PreferencesModal } from "./PreferencesModal";
+import { PreferencesStore } from "./PreferencesStore";
 import { createElement } from "./createElement";
 
 export class NavigationElement extends Element {
   active_chat_store = ActiveChatStore.get();
-  settings_store = SettingsStore.get();
+  preferences = PreferencesStore.get();
 
   new_chat_button: HTMLButtonElement;
-  settings_button: HTMLButtonElement;
+  preferences_button: HTMLButtonElement;
   menu_button: HTMLButtonElement;
 
   constructor() {
@@ -24,13 +24,14 @@ export class NavigationElement extends Element {
         onclick: () => this.active_chat_store.set(null),
       })),
       new ChatListElement(),
-      (this.settings_button = createElement("button", {
-        innerText: "Settings",
-        title: "Press Ctrl+I to toggle settings menu",
+      (this.preferences_button = createElement("button", {
+        innerText: "Preferences",
+        title: "Press Ctrl+P to toggle preferences menu",
         onclick: () => {
           const modal = document.getElementById("modal");
           if (modal) modal.remove();
-          if (!modal || !(modal instanceof SettingsModal)) new SettingsModal();
+          if (!modal || !(modal instanceof PreferencesModal))
+            new PreferencesModal();
         },
       })),
       (this.menu_button = createElement("button", {
@@ -39,33 +40,36 @@ export class NavigationElement extends Element {
         onclick: () => this.toggle(),
       })),
     );
-    this.bind(this.settings_store, "change");
+    this.bind(this.preferences, "change");
     this.bind(window, "keydown", this.keydown.bind(this));
     this.bind(window, "resize", this.resize.bind(this));
     this.render();
   }
 
   resize() {
-    if (!this.settings_store.navigation_open) return;
-    if (innerWidth < 600) this.settings_store.setNavigationOpen(false);
+    const { navigation_open, layout } = this.preferences;
+    if (navigation_open && innerWidth < 700)
+      this.preferences.setNavigationOpen(false);
+    if (layout === "cozy" && !navigation_open && innerWidth > 960)
+      this.preferences.setNavigationOpen(true);
   }
 
   keydown(event: Event) {
     const { key, ctrlKey, altKey } = event as KeyboardEvent;
     if (!ctrlKey && !altKey) return;
     if (["N", "n"].includes(key)) this.new_chat_button.click();
-    else if (["I", "i"].includes(key)) this.settings_button.click();
+    else if (["P", "p"].includes(key)) this.preferences_button.click();
     else if (["M", "m"].includes(key)) this.menu_button.click();
   }
 
   toggle() {
-    this.settings_store.toggleNavigationOpen();
-    const touch = () => this.settings_store.dispatchEvent(new Event("change"));
+    this.preferences.toggleNavigationOpen();
+    const touch = () => this.preferences.dispatchEvent(new Event("change"));
     setTimeout(touch, 100);
   }
 
   render() {
-    if (this.settings_store.navigation_open) {
+    if (this.preferences.navigation_open) {
       document.body.removeAttribute("navigation_closed");
       this.classList.remove("closed");
       this.menu_button.classList.remove("primary");

@@ -5,12 +5,10 @@ import { ChatInputElement } from "./ChatInputElement";
 import { ChatMessage } from "./ChatMessage";
 import { ChatMessageElement } from "./ChatMessageElement";
 import { Element } from "./Element";
-import { SettingsStore } from "./SettingsStore";
 import { createElement } from "./createElement";
 
 export class ChatElement extends Element {
   app = AppElement.get();
-  settings = SettingsStore.get();
 
   container = createElement("div");
   input = ChatInputElement.get();
@@ -21,7 +19,6 @@ export class ChatElement extends Element {
     this.append(this.container, this.input);
     this.bind(chat, "change");
     this.bind(window, "resize");
-    this.bind(this.settings, "change");
     this.bind(this.input, "filechange");
     this.bind(chat, "add", this.addLastMessage.bind(this));
     this.bind(chat, "delete", this.ondelete.bind(this));

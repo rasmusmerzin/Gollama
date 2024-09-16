@@ -18,7 +18,7 @@ export class ChatMessageElement extends Element {
   images = createElement("div", { className: "images" });
   alert = createElement("div", {
     className: "alert",
-    title: "Incomplete Message",
+    title: "Message is incomplete",
   });
 
   constructor(readonly message: ChatMessage) {
@@ -50,8 +50,8 @@ export class ChatMessageElement extends Element {
   render() {
     if (this.message.loading) this.container.classList.add("loading");
     else this.container.classList.remove("loading");
-    if (this.message.done) this.classList.add("done");
-    else this.classList.remove("done");
+    if (this.message.done) this.container.classList.add("done");
+    else this.container.classList.remove("done");
     this.author.innerText = this.message.role === "assistant" ? "AI" : "ME";
     this.classList.add(this.message.role);
     this.content.innerHTML = MD.render(this.message.content);

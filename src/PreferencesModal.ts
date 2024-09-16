@@ -1,12 +1,12 @@
-import "./SettingsModal.css";
+import "./PreferencesModal.css";
 import { Modal } from "./Modal";
-import { Color, SettingsStore } from "./SettingsStore";
+import { Color, PreferencesStore } from "./PreferencesStore";
 import { createElement } from "./createElement";
 
-export class SettingsModal extends Modal {
-  settings = SettingsStore.get();
+export class PreferencesModal extends Modal {
+  preferences = PreferencesStore.get();
 
-  title_label = createElement("h2", { innerText: "Settings" });
+  title_label = createElement("h2", { innerText: "Preferences" });
   button = createElement("button", {
     innerText: "Close",
     onclick: () => this.remove(),
@@ -30,12 +30,12 @@ export class SettingsModal extends Modal {
 
   constructor() {
     super();
-    this.bind(this.settings, "change");
+    this.bind(this.preferences, "change");
     for (const color of Object.values(Color)) {
       const label = createElement("label", {
         className: "color",
         tabIndex: 0,
-        onclick: () => this.settings.setColor(color),
+        onclick: () => this.preferences.setColor(color),
       });
       label.style.background = color;
       this.color_labels.set(color, label);
@@ -49,7 +49,7 @@ export class SettingsModal extends Modal {
           createElement("div", {}, [
             createElement(
               "div",
-              { onclick: () => this.settings.setTheme("system") },
+              { onclick: () => this.preferences.setTheme("system") },
               [
                 this.theme_system_radio,
                 createElement("label", { innerText: "System" }),
@@ -57,7 +57,7 @@ export class SettingsModal extends Modal {
             ),
             createElement(
               "div",
-              { onclick: () => this.settings.setTheme("dark") },
+              { onclick: () => this.preferences.setTheme("dark") },
               [
                 this.theme_dark_radio,
                 createElement("label", { innerText: "Dark" }),
@@ -65,7 +65,7 @@ export class SettingsModal extends Modal {
             ),
             createElement(
               "div",
-              { onclick: () => this.settings.setTheme("light") },
+              { onclick: () => this.preferences.setTheme("light") },
               [
                 this.theme_light_radio,
                 createElement("label", { innerText: "Light" }),
@@ -78,7 +78,7 @@ export class SettingsModal extends Modal {
           createElement("div", {}, [
             createElement(
               "div",
-              { onclick: () => this.settings.setLayout("cozy") },
+              { onclick: () => this.preferences.setLayout("cozy") },
               [
                 this.layout_cozy_radio,
                 createElement("label", { innerText: "Cozy" }),
@@ -86,7 +86,7 @@ export class SettingsModal extends Modal {
             ),
             createElement(
               "div",
-              { onclick: () => this.settings.setLayout("wide") },
+              { onclick: () => this.preferences.setLayout("wide") },
               [
                 this.layout_wide_radio,
                 createElement("label", { innerText: "Wide" }),
@@ -106,15 +106,15 @@ export class SettingsModal extends Modal {
 
   render() {
     for (const [color, label] of this.color_labels) {
-      if (this.settings.color === color) label.classList.add("active");
+      if (this.preferences.color === color) label.classList.add("active");
       else label.classList.remove("active");
     }
-    this.theme_system_radio.checked = this.settings.theme === "system";
-    this.theme_dark_radio.checked = this.settings.theme === "dark";
-    this.theme_light_radio.checked = this.settings.theme === "light";
-    this.layout_cozy_radio.checked = this.settings.layout === "cozy";
-    this.layout_wide_radio.checked = this.settings.layout === "wide";
+    this.theme_system_radio.checked = this.preferences.theme === "system";
+    this.theme_dark_radio.checked = this.preferences.theme === "dark";
+    this.theme_light_radio.checked = this.preferences.theme === "light";
+    this.layout_cozy_radio.checked = this.preferences.layout === "cozy";
+    this.layout_wide_radio.checked = this.preferences.layout === "wide";
   }
 }
 
-customElements.define("settings-modal", SettingsModal);
+customElements.define("preferences-modal", PreferencesModal);

@@ -6,7 +6,7 @@ import { Element } from "./Element";
 import { HeaderElement } from "./HeaderElement";
 import { NavigationElement } from "./NavigationElement";
 import { NewChatElement } from "./NewChatElement";
-import { SettingsStore } from "./SettingsStore";
+import { PreferencesStore } from "./PreferencesStore";
 
 export class AppElement extends Element {
   static instance: AppElement | null = null;
@@ -18,7 +18,7 @@ export class AppElement extends Element {
 
   active_chat_store = ActiveChatStore.get();
   chat_store = ChatStore.get();
-  settings_store = SettingsStore.get();
+  preferences = PreferencesStore.get();
 
   navigation_element = new NavigationElement();
   header_element = new HeaderElement();
@@ -30,14 +30,14 @@ export class AppElement extends Element {
     super();
     this.append(this.navigation_element, this.header_element, this.main);
     this.bind(this.active_chat_store, "change");
-    this.bind(this.settings_store, "change", this.applySettings.bind(this));
-    this.applySettings();
+    this.bind(this.preferences, "change", this.applyPreferences.bind(this));
+    this.applyPreferences();
   }
 
-  applySettings() {
-    document.body.setAttribute("layout", this.settings_store.layout);
-    document.body.style.setProperty("--primary", this.settings_store.color);
-    document.body.setAttribute("theme", this.settings_store.theme);
+  applyPreferences() {
+    document.body.setAttribute("layout", this.preferences.layout);
+    document.body.style.setProperty("--primary", this.preferences.color);
+    document.body.setAttribute("theme", this.preferences.theme);
   }
 
   render() {

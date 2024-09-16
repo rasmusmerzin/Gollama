@@ -8,11 +8,11 @@ export enum Color {
   Pink = "#f28",
 }
 
-export class SettingsStore extends EventTarget {
-  static instance: SettingsStore | null = null;
+export class PreferencesStore extends EventTarget {
+  static instance: PreferencesStore | null = null;
   static get() {
     if (this.instance) return this.instance;
-    this.instance = new SettingsStore();
+    this.instance = new PreferencesStore();
     this.instance.load();
     return this.instance;
   }
@@ -49,7 +49,7 @@ export class SettingsStore extends EventTarget {
   }
 
   load() {
-    const data = localStorage.getItem("settings");
+    const data = localStorage.getItem("preferences");
     if (!data) return;
     try {
       Object.assign(this, JSON.parse(data));
@@ -59,6 +59,6 @@ export class SettingsStore extends EventTarget {
   }
 
   save() {
-    localStorage.setItem("settings", JSON.stringify(this));
+    localStorage.setItem("preferences", JSON.stringify(this));
   }
 }
