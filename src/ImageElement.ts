@@ -5,7 +5,7 @@ import { createElement } from "./createElement";
 export interface ImageOptions {
   src: string;
   alt: string;
-  listed?: true;
+  listed?: boolean;
 }
 
 export class ImageElement extends Element {

@@ -4,6 +4,7 @@ import { ChatService } from "./ChatService";
 import { Element } from "./Element";
 import { ImageElement } from "./ImageElement";
 import { createElement } from "./createElement";
+import { ImageListElement } from "./ImageListElement";
 
 export class ChatInputElement extends Element {
   static instance: ChatInputElement | null = null;
@@ -18,7 +19,7 @@ export class ChatInputElement extends Element {
   file_input: HTMLInputElement;
   text_input: HTMLInputElement;
   send_button: HTMLButtonElement;
-  file_container: HTMLElement;
+  images = new ImageListElement();
 
   constructor() {
     super();
@@ -30,7 +31,7 @@ export class ChatInputElement extends Element {
           multiple: true,
           onchange: this.filechange.bind(this),
         })),
-        (this.file_container = createElement("div", { className: "images" })),
+        this.images,
       ]),
       createElement("div", {}, [
         (this.text_input = createElement("input", {
@@ -59,12 +60,8 @@ export class ChatInputElement extends Element {
   }
 
   async filechange() {
-    for (const child of Array.from(this.file_container.children))
-      child.remove();
-    for (const image of await this.getImages())
-      this.file_container.append(
-        new ImageElement({ src: "data:;base64," + image }),
-      );
+    this.images.clear();
+    this.images.add(...(await this.getImages()));
     this.dispatchEvent(new Event("filechange"));
   }
 

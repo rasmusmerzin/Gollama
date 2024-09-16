@@ -4,11 +4,9 @@ image-element {
   position: relative;
 
   &:not(.open) {
-    img {
-      cursor: pointer;
-      height: 100%;
-      border-radius: 8px;
-    }
+    cursor: pointer;
+    border-radius: 8px;
+    overflow: hidden;
     .left,
     .right {
       display: none;

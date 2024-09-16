@@ -45,14 +45,8 @@ chat-message-element {
     }
   }
 
-  .images:not(:empty) {
-    margin-top: 16px;
-    display: flex;
-    flex-wrap: wrap;
-    grid-gap: 4px;
-    image-element:not(.open) {
-      height: 96px;
-    }
+  image-list-element:not(:empty) {
+    margin-top: 8px;
   }
 
   .content {
@@ -96,7 +90,7 @@ chat-message-element {
     .author {
       content: "ME";
     }
-    .images {
+    image-list-element {
       justify-content: flex-end;
     }
   }

@@ -1,0 +1,28 @@
+image-list-element:not(:empty) {
+  display: flex;
+  grid-gap: 4px;
+  image-element:not(.open) {
+    width: 96px;
+    height: 96px;
+    position: relative;
+    img {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 100%;
+    }
+  }
+  position: relative;
+  &.plenty {
+    height: 96px;
+    min-width: 128px;
+    image-element:not(.open) {
+      --reverse-index: calc(var(--count) - var(--index) - 1);
+      position: absolute;
+      right: calc(var(--reverse-index) * 16px);
+      transform: rotate(calc(var(--reverse-index) * 2deg))
+        scale(calc(1 - var(--reverse-index) * 0.1));
+      opacity: calc(1 - var(--reverse-index) * 0.2);
+    }
+  }
+}

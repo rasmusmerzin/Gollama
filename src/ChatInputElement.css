@@ -10,10 +10,9 @@ chat-input-element {
   background: var(--background);
 
   > div:first-child {
-    position: relative;
-    border-radius: 10px;
+    display: flex;
     border: 1px solid #888;
-    min-height: 30px;
+    border-radius: 8px;
   }
 
   > div:last-child {
@@ -25,20 +24,12 @@ chat-input-element {
     flex: 1;
   }
 
-  .images:not(:empty) {
-    height: 96px;
-    display: flex;
+  image-list-element {
     justify-content: flex-end;
-    padding: 4px;
-    grid-gap: 4px;
   }
 
   input[type="file"] {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
+    min-width: 0;
     border: none;
   }
 

@@ -4,7 +4,7 @@ import { ChatMessage } from "./ChatMessage";
 import { ChatMessageMenu } from "./ChatMessageMenu";
 import { ChatService } from "./ChatService";
 import { Element } from "./Element";
-import { ImageElement } from "./ImageElement";
+import { ImageListElement } from "./ImageListElement";
 import { createElement } from "./createElement";
 
 const MD = markdownit();
@@ -15,7 +15,7 @@ export class ChatMessageElement extends Element {
   author = createElement("div", { className: "author" });
   container = createElement("div", { className: "container" });
   content = createElement("div", { className: "content" });
-  images = createElement("div", { className: "images" });
+  images = new ImageListElement({ listed: true });
   alert = createElement("div", {
     className: "alert",
     title: "Message is incomplete",
@@ -55,14 +55,8 @@ export class ChatMessageElement extends Element {
     this.author.innerText = this.message.role === "assistant" ? "AI" : "ME";
     this.classList.add(this.message.role);
     this.content.innerHTML = MD.render(this.message.content);
-    this.images.innerHTML = "";
-    for (const image of this.message.images) {
-      const element = new ImageElement({
-        listed: true,
-        src: "data:;base64," + image,
-      });
-      this.images.append(element);
-    }
+    this.images.clear();
+    this.images.add(...this.message.images);
   }
 }
 
