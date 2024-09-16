@@ -43,10 +43,6 @@ button:focus,
   outline: solid var(--foreground);
 }
 
-main {
-  outline: none;
-}
-
 a {
   color: var(--primary);
   text-decoration: none;
@@ -107,16 +103,7 @@ button {
 
 .focus {
   position: relative;
-  &::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    border: 4px solid #000;
-    border-radius: inherit;
-  }
+  outline: thick double var(--foreground);
   &::after {
     content: "";
     position: absolute;
@@ -125,8 +112,8 @@ button {
     top: 0;
     bottom: 0;
     border-radius: inherit;
-    background: #fff4;
-    border: 2px solid #fff;
+    background: var(--foreground);
+    opacity: 0.2;
   }
 }
 
