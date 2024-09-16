@@ -49,6 +49,6 @@ chat-input-element {
   }
 }
 
-[layout="normal"] chat-input-element {
+[layout="cozy"] chat-input-element {
   max-width: 800px;
 }

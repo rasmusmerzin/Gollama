@@ -50,10 +50,10 @@ header-element {
   }
 }
 
-[navigation_closed][layout="dense"] header-element > div {
+[navigation_closed][layout="wide"] header-element > div {
   padding: 0 56px;
 }
 
-[layout="normal"] header-element > div {
+[layout="cozy"] header-element > div {
   max-width: 800px;
 }

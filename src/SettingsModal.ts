@@ -16,11 +16,11 @@ export class SettingsModal extends Modal {
   theme_dark_radio = createElement("input", { name: "theme", type: "radio" });
   theme_light_radio = createElement("input", { name: "theme", type: "radio" });
 
-  layout_normal_radio = createElement("input", {
+  layout_cozy_radio = createElement("input", {
     name: "layout",
     type: "radio",
   });
-  layout_dense_radio = createElement("input", {
+  layout_wide_radio = createElement("input", {
     name: "layout",
     type: "radio",
   });
@@ -78,18 +78,18 @@ export class SettingsModal extends Modal {
           createElement("div", {}, [
             createElement(
               "div",
-              { onclick: () => this.settings.setLayout("normal") },
+              { onclick: () => this.settings.setLayout("cozy") },
               [
-                this.layout_normal_radio,
-                createElement("label", { innerText: "Normal" }),
+                this.layout_cozy_radio,
+                createElement("label", { innerText: "Cozy" }),
               ],
             ),
             createElement(
               "div",
-              { onclick: () => this.settings.setLayout("dense") },
+              { onclick: () => this.settings.setLayout("wide") },
               [
-                this.layout_dense_radio,
-                createElement("label", { innerText: "Dense" }),
+                this.layout_wide_radio,
+                createElement("label", { innerText: "Wide" }),
               ],
             ),
           ]),
@@ -112,8 +112,8 @@ export class SettingsModal extends Modal {
     this.theme_system_radio.checked = this.settings.theme === "system";
     this.theme_dark_radio.checked = this.settings.theme === "dark";
     this.theme_light_radio.checked = this.settings.theme === "light";
-    this.layout_normal_radio.checked = this.settings.layout === "normal";
-    this.layout_dense_radio.checked = this.settings.layout === "dense";
+    this.layout_cozy_radio.checked = this.settings.layout === "cozy";
+    this.layout_wide_radio.checked = this.settings.layout === "wide";
   }
 }
 

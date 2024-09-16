@@ -29,13 +29,10 @@ chat-element {
   }
 }
 
-[layout="normal"] chat-element > div {
+[layout="cozy"] chat-element > div {
   max-width: 800px;
 }
 
-[layout="dense"] chat-element {
+[layout="wide"] chat-element {
   --message-padding: 0;
-  > div {
-    grid-gap: 8px;
-  }
 }

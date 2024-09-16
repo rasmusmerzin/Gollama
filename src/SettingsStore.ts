@@ -1,5 +1,5 @@
 export type Theme = "system" | "dark" | "light";
-export type Layout = "normal" | "dense";
+export type Layout = "cozy" | "wide";
 export enum Color {
   Gray = "#888",
   Blue = "#08c",
@@ -19,35 +19,31 @@ export class SettingsStore extends EventTarget {
 
   navigation_open = true;
   theme: Theme = "system";
-  layout: Layout = "normal";
+  layout: Layout = "cozy";
   color: Color = Color.Gray;
 
   setColor(color: Color) {
     this.color = color;
-    this.dispatchEvent(new Event("change"));
-    this.save();
+    this.touch();
   }
-
   setLayout(layout: Layout) {
     this.layout = layout;
-    this.dispatchEvent(new Event("change"));
-    this.save();
+    this.touch();
   }
-
   setTheme(theme: Theme) {
     this.theme = theme;
-    this.dispatchEvent(new Event("change"));
-    this.save();
+    this.touch();
   }
-
   setNavigationOpen(open: boolean) {
     this.navigation_open = open;
-    this.dispatchEvent(new Event("change"));
-    this.save();
+    this.touch();
   }
-
   toggleNavigationOpen() {
     this.navigation_open = !this.navigation_open;
+    this.touch();
+  }
+
+  touch() {
     this.dispatchEvent(new Event("change"));
     this.save();
   }
