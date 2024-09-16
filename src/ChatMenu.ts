@@ -4,12 +4,12 @@ import { ChatService } from "./ChatService";
 import { ContextMenuElement } from "./ContextMenuElement";
 import { DialogueModal } from "./DialogueModal";
 
-interface ChatMenuParams {
+export interface ChatMenuParams {
   target?: HTMLElement;
   chat: Chat;
 }
 
-export function ChatMenuElement({ target, chat }: ChatMenuParams) {
+export function ChatMenu({ target, chat }: ChatMenuParams) {
   const chat_service = ChatService.get();
   new ContextMenuElement({
     target,

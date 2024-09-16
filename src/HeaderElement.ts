@@ -1,6 +1,6 @@
 import "./HeaderElement.css";
 import { ActiveChatStore } from "./ActiveChatStore";
-import { ChatMenuElement } from "./ChatMenuElement";
+import { ChatMenu } from "./ChatMenu";
 import { ChatStore } from "./ChatStore";
 import { Element } from "./Element";
 import { createElement } from "./createElement";
@@ -35,7 +35,7 @@ export class HeaderElement extends Element {
       chat.addEventListener("change", this.render.bind(this), this.chat_abort);
       this.heading.innerText = chat.title;
       this.model.innerText = chat.model;
-      this.oncontextmenu = () => ChatMenuElement({ chat });
+      this.oncontextmenu = () => ChatMenu({ chat });
       this.classList.remove("center");
     } else {
       this.classList.add("center");

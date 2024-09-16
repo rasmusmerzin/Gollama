@@ -8,19 +8,7 @@ context-menu-element {
   flex-direction: column;
   min-width: 100px;
 
-  border: 2px solid #fff;
   border-radius: 8px;
-  &::before {
-    pointer-events: none;
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    border: 1px solid #000;
-    border-radius: inherit;
-  }
 
   button {
     white-space: nowrap;

@@ -3,11 +3,11 @@ settings-modal > .container {
   flex-direction: column;
   grid-gap: 24px;
 
-  > h2 {
+  h2 {
     margin: 0;
   }
 
-  > form {
+  form {
     display: flex;
     flex-direction: column;
     grid-gap: 16px;
@@ -16,29 +16,36 @@ settings-modal > .container {
       justify-content: space-between;
       > div {
         display: flex;
-        grid-gap: 16px;
+        grid-gap: 8px;
       }
     }
-    input[type="radio"],
-    label {
-      cursor: pointer;
-    }
-    .color {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
+  }
+
+  button {
+    margin-top: 8px;
+  }
+
+  input[type="radio"],
+  label {
+    cursor: pointer;
+  }
+
+  .color {
+    margin-left: 4px;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    position: relative;
+    &.active::after {
       border-radius: 100%;
-      position: relative;
-      &.active::after {
-        border-radius: 100%;
-        content: "";
-        position: absolute;
-        left: -3px;
-        right: -3px;
-        top: -3px;
-        bottom: -3px;
-        border: 2px solid var(--foreground);
-      }
+      content: "";
+      position: absolute;
+      left: -3px;
+      right: -3px;
+      top: -3px;
+      bottom: -3px;
+      border: 2px solid var(--foreground);
     }
   }
 }

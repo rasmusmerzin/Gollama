@@ -1,11 +1,11 @@
 import "./ChatMessageElement.css";
-import { ChatMessage } from "./ChatMessage";
-import { ChatService } from "./ChatService";
-import { ContextMenuElement } from "./ContextMenuElement";
-import { Element } from "./Element";
-import { createElement } from "./createElement";
 import markdownit from "markdown-it";
+import { ChatMessage } from "./ChatMessage";
+import { ChatMessageMenu } from "./ChatMessageMenu";
+import { ChatService } from "./ChatService";
+import { Element } from "./Element";
 import { ImageElement } from "./ImageElement";
+import { createElement } from "./createElement";
 
 const MD = markdownit();
 
@@ -20,6 +20,7 @@ export class ChatMessageElement extends Element {
   constructor(readonly message: ChatMessage) {
     super();
     this.id = message.id;
+    this.container.tabIndex = 0;
     this.container.append(this.author, this.content, this.images);
     this.append(this.container);
     this.render();
@@ -30,16 +31,7 @@ export class ChatMessageElement extends Element {
 
   contextmenu() {
     if (this.message.loading) return;
-    new ContextMenuElement({
-      target: this.container,
-      options: [
-        {
-          name: "Delete Message",
-          color: "var(--red)",
-          action: () => this.chat_service.deleteMessage(this.id),
-        },
-      ],
-    });
+    ChatMessageMenu({ target: this.container, message });
   }
 
   render() {

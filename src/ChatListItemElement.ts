@@ -1,7 +1,7 @@
 import "./ChatListItemElement.css";
 import { ActiveChatStore } from "./ActiveChatStore";
 import { Chat } from "./Chat";
-import { ChatMenuElement } from "./ChatMenuElement";
+import { ChatMenu } from "./ChatMenu";
 import { Element } from "./Element";
 import { createElement } from "./createElement";
 
@@ -18,7 +18,7 @@ export class ChatListItemElement extends Element {
     this.bind(this.chat, "change");
     this.bind(this.active_chat_store, "change");
     this.onclick = () => this.active_chat_store.set(this.chat.id);
-    this.oncontextmenu = () => ChatMenuElement({ target: this, chat });
+    this.oncontextmenu = () => ChatMenu({ target: this, chat });
     this.render();
   }
 
