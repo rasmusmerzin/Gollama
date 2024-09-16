@@ -42,7 +42,8 @@ export class ChatService {
   async generateResponse(chat: Chat) {
     const history = Array.from(chat.messages.values());
     const message = ChatMessage.from({ role: "assistant" });
-    message.setLoading(true);
+    message.loading = true;
+    message.done = false;
     chat.add(message);
     try {
       await this.ollama_service.chatStreamingResponse(
@@ -50,6 +51,7 @@ export class ChatService {
         history,
         (msg) => message.push(msg),
       );
+      message.setDone(true);
     } finally {
       message.setLoading(false);
     }

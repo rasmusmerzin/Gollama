@@ -12,17 +12,21 @@ const MD = markdownit();
 export class ChatMessageElement extends Element {
   chat_service = ChatService.get();
 
-  container = createElement("div");
   author = createElement("div", { className: "author" });
+  container = createElement("div", { className: "container" });
   content = createElement("div", { className: "content" });
   images = createElement("div", { className: "images" });
+  alert = createElement("div", {
+    className: "alert",
+    title: "Incomplete Message",
+  });
 
   constructor(readonly message: ChatMessage) {
     super();
     this.id = message.id;
     this.container.tabIndex = 0;
-    this.container.append(this.author, this.content, this.images);
-    this.append(this.container);
+    this.append(this.author, this.container);
+    this.container.append(this.content, this.images, this.alert);
     this.render();
     this.bind(message, "change");
     this.content.onclick = (e) => e.preventDefault();
@@ -46,6 +50,8 @@ export class ChatMessageElement extends Element {
   render() {
     if (this.message.loading) this.container.classList.add("loading");
     else this.container.classList.remove("loading");
+    if (this.message.done) this.classList.add("done");
+    else this.classList.remove("done");
     this.author.innerText = this.message.role === "assistant" ? "AI" : "ME";
     this.classList.add(this.message.role);
     this.content.innerHTML = MD.render(this.message.content);

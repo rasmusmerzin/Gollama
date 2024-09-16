@@ -1,27 +1,44 @@
 body {
-  font-family: -apple-system, BlinkMacSystemFont, Helvetica, sans-serif;
-  margin: 0;
-  --foreground: #fff;
-  --background: #222;
   --primary: #888;
-  --red: #f44;
+
+  --dark-background: #222;
+  --dark-foreground: #fff;
+  --dark-red: #f44;
+  --dark-yellow: #ff4;
+
+  --light-background: #fff;
+  --light-foreground: #000;
+  --light-red: #f44;
+  --light-yellow: #a80;
+
+  --background: var(--dark-background);
+  --foreground: var(--dark-foreground);
+  --red: var(--dark-red);
+  --yellow: var(--dark-yellow);
   @media (prefers-color-scheme: light) {
-    --red: red;
-    --background: #fff;
-    --foreground: #000;
+    --background: var(--light-background);
+    --foreground: var(--light-foreground);
+    --red: var(--light-red);
+    --yellow: var(--light-yellow);
   }
+
   &[theme="dark"] {
-    --red: #f44;
-    --foreground: #fff;
-    --background: #222;
+    --background: var(--dark-background);
+    --foreground: var(--dark-foreground);
+    --red: var(--dark-red);
+    --yellow: var(--dark-yellow);
   }
   &[theme="light"] {
-    --red: red;
-    --background: #fff;
-    --foreground: #000;
+    --background: var(--light-background);
+    --foreground: var(--light-foreground);
+    --red: var(--light-red);
+    --yellow: var(--light-yellow);
   }
+
   color: var(--foreground);
   background: var(--background);
+  font-family: -apple-system, BlinkMacSystemFont, Helvetica, sans-serif;
+  margin: 0;
 }
 
 * {

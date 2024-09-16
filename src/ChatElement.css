@@ -10,10 +10,7 @@ chat-element {
     width: 100%;
     display: flex;
     flex-direction: column;
-    padding: 24px 64px;
-    @media (max-width: 720px) {
-      padding: 24px 16px;
-    }
+    padding: 24px 16px;
     grid-gap: 16px;
   }
 
@@ -31,8 +28,4 @@ chat-element {
 
 [layout="cozy"] chat-element > div {
   max-width: 800px;
-}
-
-[layout="wide"] chat-element {
-  --message-padding: 0;
 }
