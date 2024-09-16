@@ -1,6 +1,10 @@
+:root {
+  --navigation-width: 240px;
+}
+
 navigation-element {
-  flex: 0 0 240px;
-  width: 240px;
+  flex: 0 0 var(--navigation-width);
+  width: var(--navigation-width);
   display: flex;
   flex-direction: column;
   background: #8884;

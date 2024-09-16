@@ -3,7 +3,7 @@ header-element {
   position: fixed;
   top: 0;
   right: 0;
-  left: 240px;
+  left: var(--navigation-width);
   height: 52px;
   background: var(--background);
   border-bottom: 1px solid #888;
@@ -31,6 +31,9 @@ header-element {
   }
   h4 {
     margin: 0;
+  }
+  i {
+    font-size: 12px;
   }
 }
 

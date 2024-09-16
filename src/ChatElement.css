@@ -35,8 +35,8 @@ chat-element {
 }
 
 [layout="dense"] chat-element {
+  --message-padding: 0;
   > div {
-    --message-padding: 16px;
     grid-gap: 8px;
   }
 }
