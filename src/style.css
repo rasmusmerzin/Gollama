@@ -1,44 +1,67 @@
 body {
   --primary: #888;
+  --primary-foreground: #fff;
 
   --dark-background: #222;
   --dark-foreground: #fff;
-  --dark-red: #f44;
-  --dark-yellow: #ff4;
+  --dark-alert: #f44;
+  --dark-warning: #ff4;
 
   --light-background: #fff;
   --light-foreground: #000;
-  --light-red: #f44;
-  --light-yellow: #a80;
+  --light-alert: #f44;
+  --light-warning: #a80;
 
   --background: var(--dark-background);
   --foreground: var(--dark-foreground);
-  --red: var(--dark-red);
-  --yellow: var(--dark-yellow);
+  --alert: var(--dark-alert);
+  --warning: var(--dark-warning);
   @media (prefers-color-scheme: light) {
     --background: var(--light-background);
     --foreground: var(--light-foreground);
-    --red: var(--light-red);
-    --yellow: var(--light-yellow);
+    --alert: var(--light-alert);
+    --warning: var(--light-warning);
   }
-
   &[theme="dark"] {
     --background: var(--dark-background);
     --foreground: var(--dark-foreground);
-    --red: var(--dark-red);
-    --yellow: var(--dark-yellow);
+    --alert: var(--dark-alert);
+    --warning: var(--dark-warning);
   }
   &[theme="light"] {
     --background: var(--light-background);
     --foreground: var(--light-foreground);
-    --red: var(--light-red);
-    --yellow: var(--light-yellow);
+    --alert: var(--light-alert);
+    --warning: var(--light-warning);
   }
 
   color: var(--foreground);
   background: var(--background);
   font-family: -apple-system, BlinkMacSystemFont, Helvetica, sans-serif;
   margin: 0;
+}
+
+[color="gray"] {
+  --primary: #888;
+}
+[color="red"] {
+  --primary: #c00;
+}
+[color="green"] {
+  --primary: #495;
+}
+[color="yellow"] {
+  --primary: #dd0;
+  --primary-foreground: #000;
+}
+[color="blue"] {
+  --primary: #08c;
+}
+[color="magenta"] {
+  --primary: #f28;
+}
+[color="cyan"] {
+  --primary: #488;
 }
 
 * {
@@ -102,10 +125,11 @@ button {
     background: #8884;
   }
   &.primary {
+    --text: var(--primary-foreground);
     --color: var(--primary);
     background: var(--color);
     border-color: var(--color);
-    color: #fff;
+    color: var(--text);
     &:hover {
       filter: brightness(1.2);
     }

@@ -1,11 +1,13 @@
 export type Theme = "system" | "dark" | "light";
 export type Layout = "cozy" | "wide";
 export enum Color {
-  Gray = "#888",
-  Blue = "#08c",
-  Orange = "#e30",
-  Green = "#4b5",
-  Pink = "#f28",
+  Gray = "gray",
+  Red = "red",
+  Green = "green",
+  Yellow = "yellow",
+  Blue = "blue",
+  Magenta = "magenta",
+  Cyan = "cyan",
 }
 
 export class PreferencesStore extends EventTarget {
@@ -20,7 +22,7 @@ export class PreferencesStore extends EventTarget {
   navigation_open = true;
   theme: Theme = "system";
   layout: Layout = "cozy";
-  color: Color = Color.Blue;
+  color: Color = Color.Cyan;
 
   setColor(color: Color) {
     this.color = color;

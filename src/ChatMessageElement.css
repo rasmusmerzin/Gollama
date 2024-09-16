@@ -33,7 +33,7 @@ chat-message-element {
 
     &:not(.done):not(.loading) .alert {
       display: block;
-      color: var(--yellow);
+      color: var(--warning);
       position: absolute;
       right: 10px;
       bottom: 0;
@@ -91,7 +91,7 @@ chat-message-element {
     .author {
       background: var(--primary);
       border-color: var(--primary);
-      color: #fff;
+      color: var(--primary-foreground);
     }
     .author {
       content: "ME";

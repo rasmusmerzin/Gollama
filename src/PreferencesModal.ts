@@ -37,7 +37,7 @@ export class PreferencesModal extends Modal {
         tabIndex: 0,
         onclick: () => this.preferences.setColor(color),
       });
-      label.style.background = color;
+      label.setAttribute("color", color);
       this.color_labels.set(color, label);
       this.color_container.append(label);
     }

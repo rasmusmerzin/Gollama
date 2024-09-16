@@ -36,8 +36,8 @@ export class AppElement extends Element {
 
   applyPreferences() {
     document.body.setAttribute("layout", this.preferences.layout);
-    document.body.style.setProperty("--primary", this.preferences.color);
     document.body.setAttribute("theme", this.preferences.theme);
+    document.body.setAttribute("color", this.preferences.color);
   }
 
   render() {

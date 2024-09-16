@@ -20,13 +20,13 @@ export function ChatMenu({ target, chat }: ChatMenuParams) {
       },
       {
         name: "Delete",
-        color: "var(--red)",
+        color: "var(--alert)",
         action: () =>
           new DialogueModal({
             title_text: `Delete chat?`,
             body_text: `Are you sure you want to delete chat "${chat.title.trim()}"?`,
             submit_text: "Delete",
-            color: "var(--red)",
+            color: "var(--alert)",
             action: () => chat_service.deleteChat(chat.id),
           }),
       },

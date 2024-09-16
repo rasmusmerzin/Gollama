@@ -31,6 +31,7 @@ preferences-modal > .container {
   }
 
   .color {
+    background: var(--primary);
     margin-left: 4px;
     display: inline-block;
     width: 20px;

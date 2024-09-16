@@ -18,7 +18,7 @@ export function ChatMessageMenu({ target, message }: ChatMessageMenuParams) {
       },
       {
         name: "Delete Message",
-        color: "var(--red)",
+        color: "var(--alert)",
         action: () => chat_service.deleteMessage(message.id),
       },
     ],
