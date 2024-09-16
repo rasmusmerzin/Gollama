@@ -12,6 +12,7 @@ export class NewChatElement extends HTMLElement {
 
   models: Array<OllamaModel> | null = null;
   model: string | null = null;
+  error?: Error;
 
   model_items = new Map<string, HTMLInputElement>();
   title_input = createElement("input", {
@@ -35,6 +36,8 @@ export class NewChatElement extends HTMLElement {
     this.classList.add("loading");
     try {
       this.models = await this.ollama_service.listModels();
+    } catch (error) {
+      this.error = error as Error;
     } finally {
       this.classList.remove("loading");
       this.render();
@@ -43,9 +46,32 @@ export class NewChatElement extends HTMLElement {
 
   render() {
     this.innerHTML = "";
-    if (!this.models) return;
+    if (this.error) {
+      this.append(
+        createElement("img", {
+          src: "/src/ollama.svg",
+        }),
+        createElement("div", {
+          innerText: "Couldn't communicate with Ollama service.",
+        }),
+        createElement("code", {
+          innerText: this.error.toString(),
+        }),
+        createElement("div", {
+          innerText: "Make sure you have Ollama installed.",
+        }),
+        createElement("a", {
+          innerText: "View installation instructions here.",
+          href: "https://ollama.com/download",
+          target: "_blank",
+        }),
+      );
+      this.classList.add("error");
+      return;
+    }
+    this.classList.remove("error");
     const model_container = createElement("div", { className: "models" });
-    for (const model of this.models) {
+    for (const model of this.models || []) {
       const input = createElement("input", { type: "radio", name: "model" });
       this.model_items.set(model.name, input);
       model_container.append(

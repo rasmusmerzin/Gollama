@@ -20,7 +20,7 @@ export class PreferencesStore extends EventTarget {
   navigation_open = true;
   theme: Theme = "system";
   layout: Layout = "cozy";
-  color: Color = Color.Gray;
+  color: Color = Color.Blue;
 
   setColor(color: Color) {
     this.color = color;

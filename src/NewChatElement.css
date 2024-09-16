@@ -1,20 +1,22 @@
 new-chat-element {
   user-select: none;
-  margin: 24px 16px;
-  width: 320px;
-  max-width: 80%;
-  &:not(.loading):empty {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    &::after {
-      content: "Couldn't communicate with the service. Check your Ollama installation.";
-      font-style: italic;
-      text-align: center;
+  padding: 32px 16px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  grid-gap: 16px;
+
+  &.error {
+    img {
+      height: 64px;
+      margin-bottom: 16px;
     }
   }
-  > form {
+
+  form {
+    width: 400px;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
     grid-gap: 32px;

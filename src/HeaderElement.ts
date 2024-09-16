@@ -39,7 +39,7 @@ export class HeaderElement extends Element {
       this.classList.remove("center");
     } else {
       this.classList.add("center");
-      this.heading.innerText = "Create New Chat";
+      this.heading.innerText = "New Chat";
       this.model.innerText = "";
       this.oncontextmenu = null;
     }
