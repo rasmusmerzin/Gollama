@@ -42,6 +42,7 @@ export class ChatService {
   async generateResponse(chat: Chat) {
     const history = Array.from(chat.messages.values());
     const message = ChatMessage.from({ role: "assistant" });
+    message.controller = new AbortController();
     message.loading = true;
     message.done = false;
     chat.add(message);
@@ -50,6 +51,7 @@ export class ChatService {
         chat.model,
         history,
         (msg) => message.push(msg),
+        message.controller.signal,
       );
       message.setDone(true);
     } finally {

@@ -30,7 +30,8 @@ export class ChatMessageElement extends Element {
     this.render();
     this.bind(message, "change");
     this.content.onclick = (e) => e.preventDefault();
-    this.container.oncontextmenu = this.contextmenu.bind(this);
+    this.container.oncontextmenu = () =>
+      ChatMessageMenu({ target: this.container, message });
     this.bind(window, "keydown", this.keydown.bind(this));
   }
 
@@ -40,11 +41,6 @@ export class ChatMessageElement extends Element {
     if (ctrlKey || altKey) return;
     if ([" ", "Enter"].includes(key))
       (this.images.children[0] as HTMLElement)?.click();
-  }
-
-  contextmenu() {
-    if (this.message.loading) return;
-    ChatMessageMenu({ target: this.container, message: this.message });
   }
 
   render() {

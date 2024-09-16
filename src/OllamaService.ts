@@ -24,10 +24,11 @@ export class OllamaService {
   async chatResponse(
     model: string,
     messages: Array<ChatMessage>,
+    signal?: AbortSignal,
   ): Promise<ChatMessage> {
     const url = new URL("/api/chat", this.origin);
     const body = JSON.stringify({ model, messages, stream: false });
-    const response = await fetch(url, { method: "post", body });
+    const response = await fetch(url, { method: "post", body, signal });
     const object = await response.json();
     return ChatMessage.from(object.message);
   }
@@ -36,10 +37,11 @@ export class OllamaService {
     model: string,
     messages: Array<ChatMessage>,
     onmessage: (msg: ChatMessage) => unknown,
+    signal?: AbortSignal,
   ): Promise<void> {
     const url = new URL("/api/chat", this.origin);
     const body = JSON.stringify({ model, messages });
-    const response = await fetch(url, { method: "post", body });
+    const response = await fetch(url, { method: "post", body, signal });
     if (!response.body) return;
     const reader = response.body.getReader();
     const decoder = new TextDecoder();

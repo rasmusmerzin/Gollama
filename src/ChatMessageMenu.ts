@@ -1,6 +1,6 @@
 import { ChatMessage } from "./ChatMessage";
 import { ChatService } from "./ChatService";
-import { ContextMenuElement } from "./ContextMenuElement";
+import { ContextMenuElement, ContextMenuOption } from "./ContextMenuElement";
 
 export interface ChatMessageMenuParams {
   target?: HTMLElement;
@@ -9,9 +9,15 @@ export interface ChatMessageMenuParams {
 
 export function ChatMessageMenu({ target, message }: ChatMessageMenuParams) {
   const chat_service = ChatService.get();
-  new ContextMenuElement({
-    target,
-    options: [
+  const options = new Array<ContextMenuOption>();
+  if (message.loading)
+    options.push({
+      name: "Abort",
+      color: "var(--alert)",
+      action: () => message.controller?.abort(),
+    });
+  else
+    options.push(
       {
         name: "Copy Text",
         action: () => navigator.clipboard.writeText(message.content),
@@ -21,6 +27,6 @@ export function ChatMessageMenu({ target, message }: ChatMessageMenuParams) {
         color: "var(--alert)",
         action: () => chat_service.deleteMessage(message.id),
       },
-    ],
-  });
+    );
+  new ContextMenuElement({ target, options });
 }

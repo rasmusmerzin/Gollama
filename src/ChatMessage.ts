@@ -6,6 +6,7 @@ export class ChatMessage extends EventTarget {
   role: "user" | "assistant" = "user";
   content = "";
   images = new Array<string>();
+  controller?: AbortController;
   loading = false;
   done = true;
   chat: Chat | null = null;
