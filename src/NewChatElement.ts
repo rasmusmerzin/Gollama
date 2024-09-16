@@ -23,7 +23,6 @@ export class NewChatElement extends HTMLElement {
   submit_button = createElement("button", {
     innerText: "Create New Chat",
     className: "primary",
-    onclick: () => this.submit(),
   });
 
   constructor() {
@@ -83,7 +82,7 @@ export class NewChatElement extends HTMLElement {
     }
     this.submit_button.disabled = true;
     this.append(
-      createElement("form", {}, [
+      createElement("form", { onsubmit: this.submit.bind(this) }, [
         createElement("div", {}, [
           createElement("div", { innerText: "Title" }),
           this.title_input,
@@ -104,7 +103,8 @@ export class NewChatElement extends HTMLElement {
     if (input) input.checked = true;
   }
 
-  submit() {
+  submit(event: Event) {
+    event.preventDefault();
     const { model } = this;
     if (!model) return;
     const chat = Chat.from({ model, title: this.title_input.value });

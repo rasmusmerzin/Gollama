@@ -1,3 +1,5 @@
+import { elementHasDescendant } from "./elementHasDescendant";
+
 export class Mouse {
   static instance: Mouse | null = null;
   static get() {
@@ -50,7 +52,8 @@ export class Mouse {
         else target.click();
         break;
       case "Enter":
-        event.preventDefault();
+        if (!elementHasDescendant(target, (e) => e.nodeName === "FORM"))
+          event.preventDefault();
         if (modKey) target?.dispatchEvent(new Event("contextmenu"));
         else target.click();
         break;

@@ -81,6 +81,7 @@ input:focus,
 button:focus,
 [tabindex="0"]:focus {
   outline: solid var(--foreground);
+  z-index: 1;
 }
 
 a {
