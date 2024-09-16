@@ -4,16 +4,18 @@ chat-list-item-element {
   padding: 8px 12px;
   border-radius: 8px;
   border: 1px solid #8880;
+  position: relative;
   &:hover {
     background: #8882;
   }
-  > div {
+  .name {
     height: 1.2em;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    padding-right: 16px;
   }
-  > i {
+  .model {
     opacity: 0.5;
     font-size: 12px;
     display: block;
@@ -21,6 +23,11 @@ chat-list-item-element {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+  .loader {
+    position: absolute;
+    right: 16px;
+    top: 16px;
   }
   &.selected {
     border: 1px solid #888;
