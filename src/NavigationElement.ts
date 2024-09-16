@@ -19,6 +19,8 @@ export class NavigationElement extends Element {
     this.append(
       (this.new_chat_button = createElement("button", {
         innerText: "New Chat",
+        className: "primary",
+        title: "Press Ctrl+N to open new chat form",
         onclick: () => this.active_chat_store.set(null),
       })),
       new ChatListElement(),
@@ -51,7 +53,7 @@ export class NavigationElement extends Element {
   keydown(event: Event) {
     const { key, ctrlKey, altKey } = event as KeyboardEvent;
     if (!ctrlKey && !altKey) return;
-    if (key === "0") this.new_chat_button.click();
+    if (["N", "n"].includes(key)) this.new_chat_button.click();
     else if (["I", "i"].includes(key)) this.settings_button.click();
     else if (["M", "m"].includes(key)) this.menu_button.click();
   }

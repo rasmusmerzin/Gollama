@@ -1,6 +1,6 @@
 new-chat-element {
   user-select: none;
-  margin: 96px 16px;
+  margin: 24px 16px;
   width: 320px;
   max-width: 80%;
   &:not(.loading):empty {

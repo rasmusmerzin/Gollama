@@ -1,10 +1,14 @@
+:root {
+  --header-height: 52px;
+}
+
 header-element {
   z-index: 2;
   position: fixed;
   top: 0;
   right: 0;
   left: var(--navigation-width);
-  height: 52px;
+  height: var(--header-height);
   background: var(--background);
   border-bottom: 1px solid #888;
   display: flex;

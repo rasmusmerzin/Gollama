@@ -8,7 +8,7 @@ function createWindow() {
     width: 800,
     height: 600,
     minWidth: 600,
-    minHeight: 300,
+    minHeight: 420,
     icon: path.join(__dirname, "ollama.png"),
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
