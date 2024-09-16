@@ -18,8 +18,12 @@ ollama pull gemma2:2b
 
 Make sure you have `nodejs`, `npm` and `ollama` installed.
 
-Clone the project with `git` and inside the repository run `npm install` and
-`npm run make`.
+Clone the project with `git` and inside the repository run the following.
+
+```
+npm install
+npm run make
+```
 
 The `make` script will output distributables in `./out/make/` directory.
 
