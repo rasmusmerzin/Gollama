@@ -33,13 +33,20 @@ chat-message-element {
     }
 
     &:not(.done):not(.loading) .alert {
+      opacity: 0.5;
+      &:hover {
+        opacity: 1;
+      }
       background: inherit;
       display: block;
       color: var(--warning);
       position: absolute;
-      bottom: 0;
-      width: 40px;
-      height: 40px;
+      bottom: 8px;
+      right: 8px;
+      width: 36px;
+      height: 36px;
+      border-radius: 100%;
+      border: 1px solid #888;
       font-size: 20px;
       font-weight: bold;
       display: flex;
