@@ -33,6 +33,7 @@ export class ChatMessage extends EventTarget {
 
   setDone(done: boolean) {
     this.done = done;
+    this.save();
     this.dispatchEvent(new Event("change"));
   }
 
