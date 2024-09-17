@@ -22,13 +22,13 @@ export class ChatMessage extends EventTarget {
   }
 
   toJSON() {
-    const obj: Partial<ChatMessage> = {};
-    obj.id = this.id;
-    obj.role = this.role;
-    obj.content = this.content;
-    obj.images = this.images;
-    if (!this.done) obj.done = this.done;
-    return obj;
+    return {
+      id: this.id,
+      role: this.role,
+      content: this.content,
+      images: this.images,
+      done: this.done,
+    };
   }
 
   setDone(done: boolean) {
