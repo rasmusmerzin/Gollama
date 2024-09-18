@@ -1,0 +1,13 @@
+error-element {
+  padding: 32px 16px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  grid-gap: 16px;
+
+  img {
+    height: 64px;
+    margin-bottom: 16px;
+  }
+}

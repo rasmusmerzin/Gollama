@@ -7,13 +7,6 @@ new-chat-element {
   align-items: center;
   grid-gap: 16px;
 
-  &.error {
-    img {
-      height: 64px;
-      margin-bottom: 16px;
-    }
-  }
-
   form {
     width: 400px;
     max-width: 100%;

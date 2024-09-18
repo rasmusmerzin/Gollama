@@ -1,13 +1,13 @@
 import "./NavigationElement.css";
-import { ActiveChatStore } from "./ActiveChatStore";
 import { ChatListElement } from "./ChatListElement";
 import { Element } from "./Element";
 import { PreferencesModal } from "./PreferencesModal";
 import { PreferencesStore } from "./PreferencesStore";
+import { RouteStore } from "./RouteStore";
 import { createElement } from "./createElement";
 
 export class NavigationElement extends Element {
-  active_chat_store = ActiveChatStore.get();
+  route_store = RouteStore.get();
   preferences = PreferencesStore.get();
 
   new_chat_button: HTMLButtonElement;
@@ -21,7 +21,7 @@ export class NavigationElement extends Element {
         innerText: "New Chat",
         className: "primary",
         title: "Press Ctrl+N to open new chat form",
-        onclick: () => this.active_chat_store.set(null),
+        onclick: () => this.route_store.set("new-chat"),
       })),
       new ChatListElement(),
       (this.preferences_button = createElement("button", {

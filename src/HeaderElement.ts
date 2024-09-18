@@ -1,12 +1,12 @@
 import "./HeaderElement.css";
-import { ActiveChatStore } from "./ActiveChatStore";
+import { RouteStore } from "./RouteStore";
 import { ChatMenu } from "./ChatMenu";
 import { ChatStore } from "./ChatStore";
 import { Element } from "./Element";
 import { createElement } from "./createElement";
 
 export class HeaderElement extends Element {
-  active_chat_store = ActiveChatStore.get();
+  route_store = RouteStore.get();
   chat_store = ChatStore.get();
 
   heading = createElement("h4");
@@ -16,7 +16,7 @@ export class HeaderElement extends Element {
 
   constructor() {
     super();
-    this.bind(this.active_chat_store, "change");
+    this.bind(this.route_store, "change");
     this.append(createElement("div", {}, [this.heading, this.model]));
     this.render();
   }
@@ -28,7 +28,7 @@ export class HeaderElement extends Element {
 
   render() {
     this.chat_abort?.abort();
-    const { chat_id } = this.active_chat_store;
+    const { chat_id, route } = this.route_store;
     const chat = this.chat_store.chats.get(<string>chat_id);
     if (chat) {
       this.chat_abort = new AbortController();
@@ -37,11 +37,18 @@ export class HeaderElement extends Element {
       this.model.innerText = chat.model;
       this.oncontextmenu = () => ChatMenu({ chat });
       this.classList.remove("center");
-    } else {
-      this.classList.add("center");
-      this.heading.innerText = "New Chat";
-      this.model.innerText = "";
-      this.oncontextmenu = null;
+      return;
+    }
+    this.classList.add("center");
+    this.model.innerText = "";
+    this.oncontextmenu = null;
+    switch (route) {
+      case "error":
+        this.heading.innerText = "Error";
+        break;
+      case "new-chat":
+        this.heading.innerText = "New Chat";
+        break;
     }
   }
 }

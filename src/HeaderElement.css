@@ -4,7 +4,7 @@
 
 header-element {
   z-index: 2;
-  position: fixed;
+  position: fixed !important;
   top: 0;
   right: 0;
   left: var(--navigation-width);

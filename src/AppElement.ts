@@ -1,5 +1,5 @@
 import "./AppElement.css";
-import { ActiveChatStore } from "./ActiveChatStore";
+import { RouteStore } from "./RouteStore";
 import { ChatElement } from "./ChatElement";
 import { ChatStore } from "./ChatStore";
 import { Element } from "./Element";
@@ -7,6 +7,7 @@ import { HeaderElement } from "./HeaderElement";
 import { NavigationElement } from "./NavigationElement";
 import { NewChatElement } from "./NewChatElement";
 import { PreferencesStore } from "./PreferencesStore";
+import { ErrorElement } from "./ErrorElement";
 
 export class AppElement extends Element {
   static instance: AppElement | null = null;
@@ -16,7 +17,7 @@ export class AppElement extends Element {
     return this.instance;
   }
 
-  active_chat_store = ActiveChatStore.get();
+  route_store = RouteStore.get();
   chat_store = ChatStore.get();
   preferences = PreferencesStore.get();
 
@@ -24,12 +25,12 @@ export class AppElement extends Element {
   header_element = new HeaderElement();
   main = document.createElement("main");
   new_chat_element = new NewChatElement();
-  chat_element: ChatElement | null = null;
+  error_element = new ErrorElement();
 
   constructor() {
     super();
     this.append(this.navigation_element, this.header_element, this.main);
-    this.bind(this.active_chat_store, "change");
+    this.bind(this.route_store, "change");
     this.bind(this.preferences, "change", this.applyPreferences.bind(this));
     this.applyPreferences();
   }
@@ -41,16 +42,21 @@ export class AppElement extends Element {
   }
 
   render() {
-    const { chat_id } = this.active_chat_store;
+    for (const child of Array.from(this.main.children)) child.remove();
+    const { chat_id } = this.route_store;
     const chat = this.chat_store.chats.get(<string>chat_id);
-    if (chat) {
-      this.new_chat_element.remove();
-      this.chat_element?.remove();
-      this.main.append((this.chat_element = new ChatElement(chat)));
-    } else {
-      this.chat_element?.remove();
-      this.main.append(this.new_chat_element);
-      this.new_chat_element.start();
+    switch (this.route_store.route) {
+      case "new-chat":
+        this.main.append(this.new_chat_element);
+        this.new_chat_element.start();
+        break;
+      case "chat":
+        if (chat) this.main.append(new ChatElement(chat));
+        break;
+      case "error":
+        this.main.append(this.error_element);
+        this.error_element.start();
+        break;
     }
   }
 }

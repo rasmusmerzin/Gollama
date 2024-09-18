@@ -1,8 +1,8 @@
-import { ActiveChatStore } from "./ActiveChatStore";
 import { Chat } from "./Chat";
 import { ChatMessage } from "./ChatMessage";
 import { ChatStore } from "./ChatStore";
 import { OllamaService } from "./OllamaService";
+import { RouteStore } from "./RouteStore";
 
 export class ChatService {
   static instance: ChatService | null = null;
@@ -12,25 +12,24 @@ export class ChatService {
     return this.instance;
   }
 
-  active_chat_store = ActiveChatStore.get();
+  route_store = RouteStore.get();
   chat_store = ChatStore.get();
   ollama_service = OllamaService.get();
 
   deleteChat(chat_id: string) {
-    if (this.active_chat_store.chat_id === chat_id)
-      this.active_chat_store.set(null);
+    if (this.route_store.chat_id === chat_id) this.route_store.set("new-chat");
     this.chat_store.delete(chat_id);
   }
 
   deleteMessage(message_id: string) {
-    const { chat_id } = this.active_chat_store;
+    const { chat_id } = this.route_store;
     const chat = this.chat_store.chats.get(<string>chat_id);
     if (!chat) return;
     chat.delete(message_id);
   }
 
   async ask(message: ChatMessage | null) {
-    const { chat_id } = this.active_chat_store;
+    const { chat_id } = this.route_store;
     const chat = this.chat_store.chats.get(<string>chat_id);
     if (!chat) return;
     if (message) chat.add(message);
