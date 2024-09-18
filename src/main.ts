@@ -15,7 +15,8 @@ function createWindow() {
     },
   });
   window.webContents.setWindowOpenHandler(({ url }) => {
-    shell.openExternal(url);
+    if (url.endsWith("devtools")) window.webContents.toggleDevTools();
+    else shell.openExternal(url);
     return { action: "deny" };
   });
   window.setMenu(null);

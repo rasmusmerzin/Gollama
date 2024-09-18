@@ -1,4 +1,4 @@
-import { elementHasDescendant } from "./elementHasDescendant";
+import { getElementDescendant } from "./getElementDescendant";
 
 export class Mouse {
   static instance: Mouse | null = null;
@@ -40,21 +40,26 @@ export class Mouse {
     const is_text_input =
       target.nodeName === "INPUT" &&
       (target as HTMLInputElement).type === "text";
+    const form = getElementDescendant(
+      target,
+      (e) => e.nodeName === "FORM",
+    ) as HTMLFormElement;
     switch (key) {
+      case "I":
+        if (ctrlKey) open("devtools");
+        break;
       case "w":
-      case "W":
         if (ctrlKey) window.close();
         break;
       case " ":
         if (is_text_input) break;
-        event.preventDefault();
         if (modKey) target?.dispatchEvent(new Event("contextmenu"));
         else target.click();
         break;
       case "Enter":
-        if (!elementHasDescendant(target, (e) => e.nodeName === "FORM"))
-          event.preventDefault();
-        if (modKey) target?.dispatchEvent(new Event("contextmenu"));
+        event.preventDefault();
+        if (is_text_input && form) form.dispatchEvent(new Event("submit"));
+        else if (modKey) target?.dispatchEvent(new Event("contextmenu"));
         else target.click();
         break;
       case "Escape":
