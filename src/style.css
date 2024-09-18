@@ -150,7 +150,16 @@ button {
 
 .focus {
   position: relative;
-  outline: thick double var(--foreground);
+  &::before {
+    content: "";
+    position: absolute;
+    left: 1px;
+    right: 1px;
+    top: 1px;
+    bottom: 1px;
+    border-radius: inherit;
+    border: 1px solid var(--foreground);
+  }
   &::after {
     content: "";
     position: absolute;

@@ -35,7 +35,7 @@ export class HeaderElement extends Element {
       chat.addEventListener("change", this.render.bind(this), this.chat_abort);
       this.heading.innerText = chat.title;
       this.model.innerText = chat.model;
-      this.oncontextmenu = () => ChatMenu({ chat });
+      this.oncontextmenu = () => ChatMenu({ target: this, chat });
       this.classList.remove("center");
       return;
     }
