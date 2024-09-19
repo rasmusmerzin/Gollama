@@ -37,20 +37,24 @@ export class NavigationElement extends Element {
       (this.menu_button = createElement("button", {
         className: "menu",
         title: "Press Ctrl+M to toggle chat list",
-        onclick: () => this.toggle(),
+        onclick: (event: Event) => {
+          event.stopPropagation();
+          this.toggle();
+        },
       })),
     );
     this.bind(this.preferences, "change");
     this.bind(window, "keydown", this.keydown.bind(this));
-    this.bind(window, "resize", this.resize.bind(this));
+    this.bind(window, "resize", this.autoToggle.bind(this));
+    this.onclick = this.autoToggle.bind(this);
     this.render();
   }
 
-  resize() {
-    const { navigation_open, layout } = this.preferences;
-    if (navigation_open && innerWidth < 700)
+  autoToggle() {
+    const { navigation_open } = this.preferences;
+    if (navigation_open && innerWidth < 600)
       this.preferences.setNavigationOpen(false);
-    if (layout === "cozy" && !navigation_open && innerWidth > 960)
+    if (!navigation_open && innerWidth > 960)
       this.preferences.setNavigationOpen(true);
   }
 

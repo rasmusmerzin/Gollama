@@ -7,7 +7,7 @@ function createWindow() {
   const window = new BrowserWindow({
     width: 800,
     height: 600,
-    minWidth: 560,
+    minWidth: 400,
     minHeight: 420,
     icon: path.join(__dirname, "ollama.png"),
     webPreferences: {

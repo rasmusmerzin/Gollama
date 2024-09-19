@@ -41,6 +41,12 @@ header-element {
   }
 }
 
+@media (max-width: 600px) {
+  header-element {
+    left: 0;
+  }
+}
+
 [navigation_closed] header-element {
   left: 0;
   > div {

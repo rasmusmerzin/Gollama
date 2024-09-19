@@ -3,6 +3,7 @@
 }
 
 navigation-element {
+  z-index: 4;
   flex: 0 0 var(--navigation-width);
   width: var(--navigation-width);
   display: flex;
@@ -12,6 +13,23 @@ navigation-element {
   grid-gap: 8px;
   transition: 100ms;
   border-right: 1px solid #888;
+  position: relative;
+
+  @media (max-width: 600px) {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    &:not(.closed)::after {
+      content: "";
+      background: #0008;
+      position: absolute;
+      left: calc(100% + 1px);
+      top: 0;
+      bottom: 0;
+      width: 100dvw;
+    }
+  }
 
   > chat-list-element {
     margin: 8px 0;
@@ -24,7 +42,6 @@ navigation-element {
     overflow: hidden;
     text-overflow: ellipsis;
     &.menu {
-      z-index: 4;
       &::after {
         content: "Hide";
       }
