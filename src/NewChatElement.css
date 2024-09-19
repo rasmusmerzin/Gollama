@@ -18,10 +18,6 @@ new-chat-element {
       flex-direction: column;
       grid-gap: 4px;
     }
-    input[type="radio"],
-    label {
-      cursor: pointer;
-    }
     .models {
       display: flex;
       flex-direction: column;
@@ -30,6 +26,25 @@ new-chat-element {
         content: "No models installed.";
         font-style: italic;
         opacity: 0.5;
+      }
+      > div {
+        cursor: pointer;
+        border-radius: 8px;
+        border: 1px solid #8884;
+        padding: 0 8px 0 4px;
+        height: 40px;
+        display: flex;
+        grid-gap: 2px;
+        align-items: center;
+        &:hover {
+          background: #8882;
+        }
+        > input {
+          height: 1em;
+        }
+        > label {
+          flex: 1;
+        }
       }
     }
   }

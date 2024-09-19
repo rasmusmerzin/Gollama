@@ -2,6 +2,7 @@ import { ChatMessage } from "./ChatMessage";
 
 export interface OllamaModel {
   name: string;
+  size: number;
 }
 
 export class OllamaService {

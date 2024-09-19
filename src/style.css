@@ -109,6 +109,7 @@ input {
     color: var(--foreground);
     &::placeholder {
       color: var(--foreground);
+      opacity: 0.5;
     }
   }
   &:disabled {

@@ -1,9 +1,10 @@
 import "./NewChatElement.css";
-import { RouteStore } from "./RouteStore";
 import { Chat } from "./Chat";
 import { ChatStore } from "./ChatStore";
-import { createElement } from "./createElement";
 import { OllamaModel, OllamaService } from "./OllamaService";
+import { RouteStore } from "./RouteStore";
+import { Size } from "./Size";
+import { createElement } from "./createElement";
 
 export class NewChatElement extends HTMLElement {
   route_store = RouteStore.get();
@@ -52,6 +53,7 @@ export class NewChatElement extends HTMLElement {
         createElement("div", { onclick: () => this.selectModel(model.name) }, [
           input,
           createElement("label", { innerText: model.name }),
+          createElement("span", { innerText: new Size(model.size).toString() }),
         ]),
       );
     }
