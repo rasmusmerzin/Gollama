@@ -3,6 +3,7 @@
 }
 
 header-element {
+  user-select: none;
   z-index: 2;
   position: fixed !important;
   top: 0;

@@ -1,9 +1,9 @@
 import "./NewChatElement.css";
 import { Chat } from "./Chat";
 import { ChatStore } from "./ChatStore";
+import { NewChatModelElement } from "./NewChatModelElement";
 import { OllamaModel, OllamaService } from "./OllamaService";
 import { RouteStore } from "./RouteStore";
-import { Size } from "./Size";
 import { createElement } from "./createElement";
 
 export class NewChatElement extends HTMLElement {
@@ -14,7 +14,7 @@ export class NewChatElement extends HTMLElement {
   models: Array<OllamaModel> | null = null;
   model: string | null = null;
 
-  model_items = new Map<string, HTMLInputElement>();
+  model_elements = new Map<string, NewChatModelElement>();
   title_input = createElement("input", {
     id: "input",
     type: "text",
@@ -45,17 +45,14 @@ export class NewChatElement extends HTMLElement {
 
   render() {
     this.innerHTML = "";
+    for (const element of this.model_elements.values()) element.remove();
+    this.model_elements.clear();
     const model_container = createElement("div", { className: "models" });
     for (const model of this.models || []) {
-      const input = createElement("input", { type: "radio", name: "model" });
-      this.model_items.set(model.name, input);
-      model_container.append(
-        createElement("div", { onclick: () => this.selectModel(model.name) }, [
-          input,
-          createElement("label", { innerText: model.name }),
-          createElement("span", { innerText: new Size(model.size).toString() }),
-        ]),
-      );
+      const element = new NewChatModelElement(model);
+      element.onclick = () => this.selectModel(model.name);
+      this.model_elements.set(model.name, element);
+      model_container.append(element);
     }
     this.submit_button.disabled = true;
     this.append(
@@ -71,13 +68,14 @@ export class NewChatElement extends HTMLElement {
         this.submit_button,
       ]),
     );
+    this.title_input.focus();
   }
 
   selectModel(model: string) {
     this.model = model;
     this.submit_button.disabled = false;
-    const input = this.model_items.get(model);
-    if (input) input.checked = true;
+    for (const [name, element] of this.model_elements)
+      element.set(name === model);
   }
 
   submit(event: Event) {

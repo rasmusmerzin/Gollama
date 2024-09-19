@@ -1,0 +1,21 @@
+new-chat-model-element {
+  user-select: none;
+  cursor: pointer;
+  padding: 0 8px 0 4px;
+  height: 40px;
+  display: flex;
+  grid-gap: 2px;
+  align-items: center;
+  border-radius: 8px;
+  border: 1px solid #8884;
+  &.selected {
+    border: 1px solid #888;
+    background: var(--gray);
+  }
+  &:hover {
+    background: #8882;
+  }
+  > label {
+    flex: 1;
+  }
+}
