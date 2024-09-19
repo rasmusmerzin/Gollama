@@ -16,7 +16,13 @@ ollama pull gemma2:2b
 
 ## Building the Application
 
-Make sure you have `nodejs`, `npm` and `ollama` installed.
+Make requirements:
+
+- `nodejs`
+- `npm`
+- `rpm-build`
+- `dpkg`
+- `fakeroot`
 
 Clone the project with `git` and inside the repository run the following.
 
@@ -28,12 +34,6 @@ npm run make
 The `make` script will output distributables in `./out/make/` directory.
 
 ## Installing Distributables
-
-On Windows run the setup `.exe` with
-
-```cmd
-"out\make\squirrel.windows\x64\Gollama-0.2.1 Setup.exe"
-```
 
 On Fedora install the `.rpm` package with
 
