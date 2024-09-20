@@ -1,7 +1,7 @@
 import { Chat } from "./Chat";
 
 export class ChatStore extends EventTarget {
-  static instance: ChatStore | null = null;
+  static instance?: ChatStore;
   static get() {
     if (this.instance) return this.instance;
     this.instance = new ChatStore();

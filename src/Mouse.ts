@@ -1,7 +1,7 @@
 import { getElementDescendant } from "./getElementDescendant";
 
 export class Mouse {
-  static instance: Mouse | null = null;
+  static instance?: Mouse;
   static get() {
     if (this.instance) return this.instance;
     this.instance = new Mouse();

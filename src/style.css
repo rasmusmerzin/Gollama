@@ -179,7 +179,7 @@ button {
   &::after {
     transition: 100ms;
     border-radius: inherit;
-    background: #0004;
+    background: #0008;
     display: flex;
     justify-content: center;
     align-items: center;

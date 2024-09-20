@@ -11,7 +11,7 @@ export enum Color {
 }
 
 export class PreferencesStore extends EventTarget {
-  static instance: PreferencesStore | null = null;
+  static instance?: PreferencesStore;
   static get() {
     if (this.instance) return this.instance;
     this.instance = new PreferencesStore();

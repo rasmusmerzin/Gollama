@@ -1,6 +1,5 @@
 new-chat-element {
   padding: 32px 16px;
-  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;

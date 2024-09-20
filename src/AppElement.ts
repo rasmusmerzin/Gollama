@@ -10,7 +10,7 @@ import { PreferencesStore } from "./PreferencesStore";
 import { ErrorElement } from "./ErrorElement";
 
 export class AppElement extends Element {
-  static instance: AppElement | null = null;
+  static instance?: AppElement;
   static get() {
     if (this.instance) return this.instance;
     this.instance = new AppElement();

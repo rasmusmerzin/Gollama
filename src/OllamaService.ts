@@ -6,7 +6,7 @@ export interface OllamaModel {
 }
 
 export class OllamaService {
-  static instance: OllamaService | null = null;
+  static instance?: OllamaService;
   static get() {
     if (this.instance) return this.instance;
     this.instance = new OllamaService();

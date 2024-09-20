@@ -1,7 +1,7 @@
 export type Route = "new-chat" | "chat" | "error";
 
 export class RouteStore extends EventTarget {
-  static instance: RouteStore | null = null;
+  static instance?: RouteStore;
   static get() {
     if (!this.instance) this.instance = new RouteStore();
     return this.instance;

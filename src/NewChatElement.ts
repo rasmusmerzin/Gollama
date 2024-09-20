@@ -1,19 +1,20 @@
 import "./NewChatElement.css";
 import { Chat } from "./Chat";
 import { ChatStore } from "./ChatStore";
+import { Element } from "./Element";
+import { ModelService } from "./ModelService";
+import { ModelStore } from "./ModelStore";
 import { NewChatModelElement } from "./NewChatModelElement";
-import { OllamaModel, OllamaService } from "./OllamaService";
 import { RouteStore } from "./RouteStore";
 import { createElement } from "./createElement";
 
-export class NewChatElement extends HTMLElement {
-  route_store = RouteStore.get();
+export class NewChatElement extends Element {
   chat_store = ChatStore.get();
-  ollama_service = OllamaService.get();
+  model_service = ModelService.get();
+  model_store = ModelStore.get();
+  route_store = RouteStore.get();
 
-  models: Array<OllamaModel> | null = null;
   model: string | null = null;
-
   model_elements = new Map<string, NewChatModelElement>();
   title_input = createElement("input", {
     id: "input",
@@ -28,14 +29,14 @@ export class NewChatElement extends HTMLElement {
   constructor() {
     super();
     this.start();
+    this.render();
   }
 
   async start() {
-    this.innerHTML = "";
     this.classList.add("loading");
+    this.bind(this.model_store, "change");
     try {
-      this.models = await this.ollama_service.listModels();
-      this.render();
+      await this.model_service.load();
     } catch (error) {
       this.route_store.set("error", String(error));
     } finally {
@@ -44,18 +45,17 @@ export class NewChatElement extends HTMLElement {
   }
 
   render() {
-    this.innerHTML = "";
     for (const element of this.model_elements.values()) element.remove();
     this.model_elements.clear();
     const model_container = createElement("div", { className: "models" });
-    for (const model of this.models || []) {
+    for (const model of this.model_store.models.values()) {
       const element = new NewChatModelElement(model);
       element.onclick = () => this.selectModel(model.name);
       this.model_elements.set(model.name, element);
       model_container.append(element);
     }
     this.submit_button.disabled = true;
-    this.append(
+    this.replaceChildren(
       createElement("form", { onsubmit: this.submit.bind(this) }, [
         createElement("div", {}, [
           createElement("div", { innerText: "Title" }),

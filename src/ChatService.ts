@@ -5,7 +5,7 @@ import { OllamaService } from "./OllamaService";
 import { RouteStore } from "./RouteStore";
 
 export class ChatService {
-  static instance: ChatService | null = null;
+  static instance?: ChatService;
   static get() {
     if (this.instance) return this.instance;
     this.instance = new ChatService();
