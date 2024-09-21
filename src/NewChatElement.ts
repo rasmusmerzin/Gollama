@@ -26,13 +26,8 @@ export class NewChatElement extends Element {
     className: "primary",
   });
 
-  constructor() {
-    super();
-    this.start();
-    this.render();
-  }
-
   async start() {
+    this.render();
     this.classList.add("loading");
     this.bind(this.model_store, "change");
     try {

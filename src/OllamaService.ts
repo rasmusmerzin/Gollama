@@ -1,9 +1,5 @@
 import { ChatMessage } from "./ChatMessage";
-
-export interface OllamaModel {
-  name: string;
-  size: number;
-}
+import { Model } from "./Model";
 
 export class OllamaService {
   static instance?: OllamaService;
@@ -15,11 +11,11 @@ export class OllamaService {
 
   readonly origin = "http://localhost:11434";
 
-  async listModels(): Promise<Array<OllamaModel>> {
+  async listModels(): Promise<Array<Model>> {
     const url = new URL("/api/tags", this.origin);
     const response = await fetch(url);
     const object = await response.json();
-    return object.models;
+    return object.models.map(Model.from);
   }
 
   async chatResponse(

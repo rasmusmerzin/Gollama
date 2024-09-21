@@ -1,4 +1,4 @@
-export type Route = "new-chat" | "chat" | "error";
+export type Route = "new-chat" | "chat" | "error" | "models";
 
 export class RouteStore extends EventTarget {
   static instance?: RouteStore;

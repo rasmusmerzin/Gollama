@@ -1,0 +1,18 @@
+model-list-item-element {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #888;
+  display: flex;
+  flex-direction: column;
+
+  > b {
+    margin-bottom: 4px;
+  }
+
+  > * {
+    height: 1.2em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

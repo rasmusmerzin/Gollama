@@ -1,13 +1,14 @@
 import "./AppElement.css";
-import { RouteStore } from "./RouteStore";
 import { ChatElement } from "./ChatElement";
 import { ChatStore } from "./ChatStore";
 import { Element } from "./Element";
+import { ErrorElement } from "./ErrorElement";
 import { HeaderElement } from "./HeaderElement";
+import { ModelListElement } from "./ModelListElement";
 import { NavigationElement } from "./NavigationElement";
 import { NewChatElement } from "./NewChatElement";
 import { PreferencesStore } from "./PreferencesStore";
-import { ErrorElement } from "./ErrorElement";
+import { RouteStore } from "./RouteStore";
 
 export class AppElement extends Element {
   static instance?: AppElement;
@@ -26,6 +27,7 @@ export class AppElement extends Element {
   main = document.createElement("main");
   new_chat_element = new NewChatElement();
   error_element = new ErrorElement();
+  model_list_element = new ModelListElement();
 
   constructor() {
     super();
@@ -46,6 +48,10 @@ export class AppElement extends Element {
     const { chat_id } = this.route_store;
     const chat = this.chat_store.chats.get(<string>chat_id);
     switch (this.route_store.route) {
+      case "models":
+        this.main.append(this.model_list_element);
+        this.model_list_element.start();
+        break;
       case "new-chat":
         this.main.append(this.new_chat_element);
         this.new_chat_element.start();

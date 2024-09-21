@@ -5,6 +5,7 @@ import { Element } from "./Element";
 
 export class ChatListElement extends Element {
   chat_store = ChatStore.get();
+
   items = new Map<string, ChatListItemElement>();
 
   constructor() {

@@ -10,7 +10,7 @@ navigation-element {
   flex-direction: column;
   background: var(--gray);
   padding: 8px 0;
-  grid-gap: 8px;
+  grid-gap: 4px;
   transition: 100ms;
   border-right: 1px solid #888;
   position: relative;

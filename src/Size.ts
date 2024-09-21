@@ -11,5 +11,6 @@ export class Size {
       if (value < 1) continue;
       return value.toFixed(1) + prefix + "B";
     }
+    return "";
   }
 }

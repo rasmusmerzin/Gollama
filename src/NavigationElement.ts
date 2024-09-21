@@ -11,6 +11,7 @@ export class NavigationElement extends Element {
   preferences = PreferencesStore.get();
 
   new_chat_button: HTMLButtonElement;
+  models_button: HTMLButtonElement;
   preferences_button: HTMLButtonElement;
   menu_button: HTMLButtonElement;
 
@@ -24,6 +25,11 @@ export class NavigationElement extends Element {
         onclick: () => this.route_store.set("new-chat"),
       })),
       new ChatListElement(),
+      (this.models_button = createElement("button", {
+        innerText: "Models",
+        title: "Press Ctrl+Shift+M to open model list",
+        onclick: () => this.route_store.set("models"),
+      })),
       (this.preferences_button = createElement("button", {
         innerText: "Preferences",
         title: "Press Ctrl+P to toggle preferences menu",

@@ -17,6 +17,7 @@ header-element {
   transition: 100ms;
   &.center > div {
     align-items: center;
+    text-transform: capitalize;
   }
   > div {
     width: 100%;

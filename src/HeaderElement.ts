@@ -42,14 +42,7 @@ export class HeaderElement extends Element {
     this.classList.add("center");
     this.model.innerText = "";
     this.oncontextmenu = null;
-    switch (route) {
-      case "error":
-        this.heading.innerText = "Error";
-        break;
-      case "new-chat":
-        this.heading.innerText = "New Chat";
-        break;
-    }
+    this.heading.innerText = route.replaceAll("-", " ");
   }
 }
 

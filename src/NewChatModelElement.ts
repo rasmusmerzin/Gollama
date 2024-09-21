@@ -1,17 +1,16 @@
 import "./NewChatModelElement.css";
-import { OllamaModel } from "./OllamaService";
-import { Size } from "./Size";
+import { Model } from "./Model";
 import { createElement } from "./createElement";
 
 export class NewChatModelElement extends HTMLElement {
   input: HTMLInputElement;
 
-  constructor(readonly model: OllamaModel) {
+  constructor(readonly model: Model) {
     super();
     this.append(
       (this.input = createElement("input", { type: "radio", name: "model" })),
       createElement("label", { innerText: model.name }),
-      createElement("span", { innerText: new Size(model.size).toString() }),
+      createElement("span", { innerText: model.getSizeString() }),
     );
   }
 
