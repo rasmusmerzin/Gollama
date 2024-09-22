@@ -22,8 +22,18 @@ export class ModelStore extends EventTarget {
     this.dispatchEvent(new Event("change"));
   }
 
-  add(model: Model) {
-    this.models.set(model.name, model);
+  setRunning(models: Model[]) {
+    for (const [name, model] of this.models) {
+      if (models.find((m) => m.name === name)) continue;
+      model.setRunning(false);
+    }
+    for (const model of models) {
+      let slot = this.models.get(model.name);
+      if (slot) slot.apply(model);
+      else slot = model;
+      slot.setRunning(true);
+      this.models.set(model.name, model);
+    }
     this.dispatchEvent(new Event("change"));
   }
 }

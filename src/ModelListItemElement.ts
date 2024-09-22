@@ -10,6 +10,10 @@ export class ModelListItemElement extends Element {
   family = createElement("div");
   parameters = createElement("div");
   quantization = createElement("div");
+  indicator = createElement("div", {
+    className: "indicator",
+    title: "Model is running",
+  });
 
   constructor(readonly model: Model) {
     super();
@@ -20,7 +24,9 @@ export class ModelListItemElement extends Element {
       this.format,
       this.family,
       this.quantization,
+      this.indicator,
     );
+    this.bind(model, "change");
     this.render();
   }
 
@@ -37,6 +43,8 @@ export class ModelListItemElement extends Element {
     this.quantization.innerText = quantization_level
       ? `Quantization: ${quantization_level}`
       : "";
+    if (this.model.running) this.classList.add("running");
+    else this.classList.remove("running");
   }
 }
 

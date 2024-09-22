@@ -12,7 +12,11 @@ export class ModelService {
   model_store = ModelStore.get();
 
   async load() {
-    const models = await this.ollama_service.listModels();
+    const [models, running] = await Promise.all([
+      this.ollama_service.listModels(),
+      this.ollama_service.listRunningModels(),
+    ]);
     this.model_store.set(models);
+    this.model_store.setRunning(running);
   }
 }

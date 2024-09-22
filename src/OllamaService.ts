@@ -18,6 +18,13 @@ export class OllamaService {
     return object.models.map(Model.from);
   }
 
+  async listRunningModels(): Promise<Array<Model>> {
+    const url = new URL("/api/ps", this.origin);
+    const response = await fetch(url);
+    const object = await response.json();
+    return object.models.map(Model.from);
+  }
+
   async chatResponse(
     model: string,
     messages: Array<ChatMessage>,
