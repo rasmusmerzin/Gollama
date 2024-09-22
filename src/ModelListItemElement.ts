@@ -20,6 +20,7 @@ export class ModelListItemElement extends Element {
 
   constructor(readonly model: Model) {
     super();
+    this.tabIndex = 0;
     this.append(
       this.name,
       this.size,

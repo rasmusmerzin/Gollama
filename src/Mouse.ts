@@ -53,7 +53,9 @@ export class Mouse {
         break;
       case " ":
         if (is_text_input) break;
-        if (modKey) target?.dispatchEvent(new Event("contextmenu"));
+        event.preventDefault();
+        if (target.nodeName === "BODY") input?.focus();
+        else if (modKey) target?.dispatchEvent(new Event("contextmenu"));
         else target.click();
         break;
       case "Enter":

@@ -69,7 +69,8 @@ export class NavigationElement extends Element {
     if (!ctrlKey && !altKey) return;
     if (["N", "n"].includes(key)) this.new_chat_button.click();
     else if (["P", "p"].includes(key)) this.preferences_button.click();
-    else if (["M", "m"].includes(key)) this.menu_button.click();
+    else if (key === "m") this.menu_button.click();
+    else if (key === "M") this.models_button.click();
   }
 
   toggle() {
