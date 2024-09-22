@@ -2,8 +2,11 @@ import "./ModelListItemElement.css";
 import { Element } from "./Element";
 import { Model } from "./Model";
 import { createElement } from "./createElement";
+import { RouteStore } from "./RouteStore";
 
 export class ModelListItemElement extends Element {
+  route_store = RouteStore.get();
+
   name = createElement("b");
   size = createElement("div");
   format = createElement("div");
@@ -27,6 +30,7 @@ export class ModelListItemElement extends Element {
       this.indicator,
     );
     this.bind(model, "change");
+    this.onclick = () => this.route_store.set("new-chat", this.model.name);
     this.render();
   }
 

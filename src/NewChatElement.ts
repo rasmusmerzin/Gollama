@@ -63,6 +63,7 @@ export class NewChatElement extends Element {
         this.submit_button,
       ]),
     );
+    this.model_elements.get(<string>this.route_store.detail)?.click();
     this.title_input.focus();
   }
 

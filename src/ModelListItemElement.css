@@ -1,11 +1,16 @@
 model-list-item-element {
+  user-select: none;
+  cursor: pointer;
   padding: 8px;
   border-radius: 8px;
   border: 1px solid #888;
-  background: var(--gray);
   display: flex;
   flex-direction: column;
   position: relative;
+
+  &:hover {
+    background: var(--gray);
+  }
 
   > b {
     margin-bottom: 4px;
