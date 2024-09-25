@@ -33,27 +33,25 @@ chat-message-element {
     }
 
     &:not(.done):not(.loading) .alert {
-      opacity: 0.5;
-      &:hover {
-        opacity: 1;
-      }
-      background: inherit;
       display: block;
+      user-select: none;
+      background: inherit;
       color: var(--warning);
       position: absolute;
-      bottom: 8px;
-      right: 8px;
-      width: 36px;
-      height: 36px;
+      bottom: 4px;
+      right: 4px;
+      width: 30px;
+      height: 30px;
       border-radius: 100%;
-      border: 1px solid #888;
-      font-size: 20px;
+      border: 1px solid var(--warning);
+      font-size: 14px;
       font-weight: bold;
       display: flex;
       align-items: center;
       justify-content: center;
-      &::after {
-        content: "⚠";
+      opacity: 0.5;
+      &:hover {
+        opacity: 1;
       }
     }
   }

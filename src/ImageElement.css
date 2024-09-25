@@ -46,7 +46,7 @@ image-element {
   }
 
   &.open {
-    z-index: 10;
+    z-index: 10 !important;
     position: fixed;
     left: 0;
     right: 0;

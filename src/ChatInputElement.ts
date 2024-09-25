@@ -31,7 +31,8 @@ export class ChatInputElement extends Element {
           onkeydown: this.keydown.bind(this),
         })),
         (this.file_button = createElement("button", {
-          innerText: "📂",
+          innerText: "attach_file",
+          className: "material-icons",
           title: "Add images",
           onclick: () => this.file_input.click(),
           oncontextmenu: () => {
@@ -40,8 +41,8 @@ export class ChatInputElement extends Element {
           },
         })),
         (this.send_button = createElement("button", {
-          innerText: "➤",
-          className: "primary",
+          innerText: "send",
+          className: "material-icons primary",
           title: "Send prompt and fetch response",
           onclick: this.send.bind(this),
         })),

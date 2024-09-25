@@ -147,6 +147,11 @@ button {
     border-color: #888;
     opacity: 0.4;
   }
+  &.material-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .focus {

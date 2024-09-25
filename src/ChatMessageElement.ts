@@ -17,7 +17,8 @@ export class ChatMessageElement extends Element {
   content = createElement("div", { className: "content" });
   images = new ImageListElement({ listed: true });
   alert = createElement("div", {
-    className: "alert",
+    className: "alert material-icons",
+    innerText: "warning",
     title: "Message is incomplete",
   });
 
