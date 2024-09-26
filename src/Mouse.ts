@@ -16,7 +16,6 @@ export class Mouse {
     addEventListener("mousemove", this.onmouse.bind(this));
     addEventListener("mousedown", this.onmouse.bind(this));
     addEventListener("mouseup", this.onmouse.bind(this));
-    addEventListener("click", this.click.bind(this));
     addEventListener("wheel", this.onmouse.bind(this));
     addEventListener("contextmenu", this.onmouse.bind(this));
     addEventListener("keydown", this.keydown.bind(this));

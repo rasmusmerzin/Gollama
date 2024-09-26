@@ -1,6 +1,7 @@
 import "./TooltipElement.css";
 import { getElementDescendant } from "./getElementDescendant";
 import { createElement } from "./createElement";
+import { Mouse } from "./Mouse";
 
 export class TooltipElement extends HTMLElement {
   static instance?: TooltipElement;
@@ -9,17 +10,24 @@ export class TooltipElement extends HTMLElement {
     return this.instance;
   }
 
+  mouse = Mouse.get();
   target: HTMLElement | null = null;
   span = createElement("span");
 
   constructor() {
     super();
     this.append(this.span);
-    addEventListener("mousemove", this.onmouse.bind(this));
-    addEventListener("click", this.onmouse.bind(this));
+    addEventListener("mousemove", this.mousemove.bind(this));
+    addEventListener("click", this.mouseclick.bind(this));
   }
 
-  onmouse(event: MouseEvent) {
+  mouseclick(event: MouseEvent) {
+    const { clientX, clientY } = event;
+    if (clientX === this.mouse.x && clientY === this.mouse.y)
+      this.mousemove(event);
+  }
+
+  mousemove(event: MouseEvent) {
     this.target = getElementDescendant(
       event.target as HTMLElement,
       (descendant) => descendant.hasAttribute("tooltip"),
