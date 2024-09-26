@@ -7,9 +7,10 @@ model-list-item-element {
   display: flex;
   flex-direction: column;
   position: relative;
+  background: var(--gray);
 
   &:hover {
-    background: var(--gray);
+    filter: brightness(1.2);
   }
 
   > b {

@@ -1,8 +1,10 @@
 import "./Modal.css";
 import { Element } from "./Element";
 import { createElement } from "./createElement";
+import { RouteStore } from "./RouteStore";
 
 export class Modal extends Element {
+  route_store = RouteStore.get();
   container = createElement("div", { className: "container" });
   restores = new Array<() => unknown>();
 
@@ -18,6 +20,7 @@ export class Modal extends Element {
       if (key === "Escape") this.remove();
     });
     this.disableBackgroundTabs(document.body);
+    this.route_store.setModal(this);
     document.body.append(this);
   }
 
@@ -32,5 +35,6 @@ export class Modal extends Element {
   remove() {
     super.remove();
     for (const restore of this.restores) restore();
+    if (this.route_store.modal === this) this.route_store.setModal(null);
   }
 }

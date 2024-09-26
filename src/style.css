@@ -141,6 +141,13 @@ button {
       filter: brightness(1.2);
     }
   }
+  &:active,
+  &.active {
+    background: var(--foreground);
+    border-color: var(--foreground);
+    color: var(--background);
+    font-weight: 900;
+  }
   &:disabled {
     cursor: auto;
     background: #888;

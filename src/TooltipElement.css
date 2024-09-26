@@ -16,6 +16,7 @@ tooltip-element {
     padding: 0 2px;
     border-radius: 8px;
     background: #000;
+    color: #fff;
     width: var(--width, 500px);
     max-width: calc(100dvw - 20px);
     line-height: 1;

@@ -49,6 +49,7 @@ export class NavigationElement extends Element {
         },
       })),
     );
+    this.bind(this.route_store, "change");
     this.bind(this.preferences, "change");
     this.bind(window, "keydown", this.keydown.bind(this));
     this.bind(window, "resize", this.autoToggle.bind(this));
@@ -80,6 +81,14 @@ export class NavigationElement extends Element {
   }
 
   render() {
+    const { route, modal } = this.route_store;
+    if (route === "new-chat") this.new_chat_button.classList.add("active");
+    else this.new_chat_button.classList.remove("active");
+    if (route === "models") this.models_button.classList.add("active");
+    else this.models_button.classList.remove("active");
+    if (modal instanceof PreferencesModal)
+      this.preferences_button.classList.add("active");
+    else this.preferences_button.classList.remove("active");
     if (this.preferences.navigation_open) {
       document.body.removeAttribute("navigation_closed");
       this.classList.remove("closed");

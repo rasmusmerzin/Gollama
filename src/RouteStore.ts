@@ -9,6 +9,7 @@ export class RouteStore extends EventTarget {
 
   route: Route = "new-chat";
   detail: string | null = null;
+  modal: HTMLElement | null = null;
 
   constructor() {
     super();
@@ -21,6 +22,11 @@ export class RouteStore extends EventTarget {
   }
   get error(): string | null {
     return this.route === "error" ? this.detail : null;
+  }
+
+  setModal(modal: HTMLElement | null) {
+    this.modal = modal;
+    this.touch();
   }
 
   set(route: Route, id?: string) {
@@ -46,5 +52,9 @@ export class RouteStore extends EventTarget {
 
   save() {
     localStorage.setItem("route", JSON.stringify(this));
+  }
+
+  toJSON() {
+    return { route: this.route, detail: this.detail };
   }
 }
