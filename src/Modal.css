@@ -11,6 +11,7 @@
   align-items: center;
   background: #0008;
   backdrop-filter: blur(4px);
+  animation: 100ms fadein;
 
   > .container {
     width: 400px;
@@ -18,5 +19,14 @@
     border: 1px solid #888;
     padding: 32px 24px;
     border-radius: 16px;
+  }
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

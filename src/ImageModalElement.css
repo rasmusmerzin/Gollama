@@ -1,0 +1,25 @@
+image-modal-element {
+  position: relative;
+  button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 64px;
+    height: 64px;
+    border-radius: 100%;
+    font-size: 36px !important;
+    &.left {
+      left: 16px;
+    }
+    &.right {
+      right: 16px;
+    }
+    &:disabled {
+      display: none;
+    }
+  }
+  img {
+    max-width: calc(100% - (96px * 2));
+    max-height: calc(100% - 64px);
+  }
+}
