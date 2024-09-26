@@ -68,10 +68,18 @@ chat-message-element {
       margin-bottom: 0;
     }
     pre {
-      padding: 4px;
+      padding: 8px;
       border-radius: 8px;
       background: #222;
       color: #fff;
+      button {
+        width: 32px;
+        height: 32px;
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        font-size: 16px;
+      }
     }
     code {
       border-radius: 4px;
@@ -82,6 +90,7 @@ chat-message-element {
     pre {
       white-space: pre-wrap;
       word-break: break-word;
+      position: relative;
     }
     pre code {
       padding: 0;

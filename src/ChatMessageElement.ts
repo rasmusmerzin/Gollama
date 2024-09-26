@@ -51,9 +51,28 @@ export class ChatMessageElement extends Element {
     else this.container.classList.remove("done");
     this.author.innerText = this.message.role === "assistant" ? "AI" : "ME";
     this.classList.add(this.message.role);
-    this.content.innerHTML = MD.render(this.message.content);
     this.images.clear();
     this.images.add(...this.message.images);
+    this.renderContent();
+  }
+
+  renderContent() {
+    this.content.innerHTML = MD.render(this.message.content);
+    if (!this.message.loading) this.renderBlockButtons();
+  }
+
+  renderBlockButtons() {
+    const blocks = this.content.querySelectorAll("pre");
+    for (const block of blocks) {
+      const content = block.innerText;
+      const button = createElement("button", {
+        className: "material-icons",
+        innerText: "content_copy",
+        title: "Copy code block",
+        onclick: () => navigator.clipboard.writeText(content),
+      });
+      block.append(button);
+    }
   }
 }
 
