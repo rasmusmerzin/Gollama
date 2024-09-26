@@ -19,7 +19,7 @@ export class ChatMessageElement extends Element {
   alert = createElement("div", {
     className: "alert material-icons",
     innerText: "warning",
-    title: "Message is incomplete",
+    tooltip: "Message is incomplete",
   });
 
   constructor(readonly message: ChatMessage) {
@@ -68,8 +68,13 @@ export class ChatMessageElement extends Element {
       const button = createElement("button", {
         className: "material-icons",
         innerText: "content_copy",
-        title: "Copy code block",
-        onclick: () => navigator.clipboard.writeText(content),
+        tooltip: "Copy code block",
+        onclick: () => {
+          navigator.clipboard.writeText(content);
+          const tooltip = button.getAttribute("tooltip") || "";
+          button.setAttribute("tooltip", "Copied");
+          setTimeout(() => button.setAttribute("tooltip", tooltip));
+        },
       });
       block.append(button);
     }

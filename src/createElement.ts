@@ -6,5 +6,9 @@ export function createElement<K extends keyof HTMLElementTagNameMap>(
   document.createElement;
   const element = document.createElement(key);
   for (const child of children) element.append(child);
-  return Object.assign(element, properties);
+  for (const [key, value] of Object.entries(properties)) {
+    if (key in element) (element as Record<string, unknown>)[key] = value;
+    else element.setAttribute(key, String(value));
+  }
+  return element;
 }

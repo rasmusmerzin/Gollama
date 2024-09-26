@@ -15,7 +15,7 @@ export class ModelListItemElement extends Element {
   quantization = createElement("div");
   indicator = createElement("div", {
     className: "indicator",
-    title: "Model is running",
+    tooltip: "Model is running",
   });
 
   constructor(readonly model: Model) {

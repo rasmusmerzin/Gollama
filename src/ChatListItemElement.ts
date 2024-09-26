@@ -29,7 +29,7 @@ export class ChatListItemElement extends Element {
     else this.classList.remove("selected");
     if (this.chat.last_message?.loading) this.loader.classList.add("loading");
     else this.loader.classList.remove("loading");
-    this.title = this.name.innerText = this.chat.title;
+    this.setAttribute("tooltip", (this.name.innerText = this.chat.title));
     this.model.innerText = this.chat.model;
   }
 }

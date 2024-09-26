@@ -21,18 +21,18 @@ export class NavigationElement extends Element {
       (this.new_chat_button = createElement("button", {
         innerText: "New Chat",
         className: "primary",
-        title: "Press Ctrl+N to open new chat form",
+        tooltip: "Press Ctrl+N to open new chat form",
         onclick: () => this.route_store.set("new-chat"),
       })),
       new ChatListElement(),
       (this.models_button = createElement("button", {
         innerText: "Models",
-        title: "Press Ctrl+Shift+M to open model list",
+        tooltip: "Press Ctrl+Shift+M to open model list",
         onclick: () => this.route_store.set("models"),
       })),
       (this.preferences_button = createElement("button", {
         innerText: "Preferences",
-        title: "Press Ctrl+P to toggle preferences menu",
+        tooltip: "Press Ctrl+P to toggle preferences menu",
         onclick: () => {
           const modal = document.getElementById("modal");
           if (modal) modal.remove();
@@ -42,7 +42,7 @@ export class NavigationElement extends Element {
       })),
       (this.menu_button = createElement("button", {
         className: "menu",
-        title: "Press Ctrl+M to toggle chat list",
+        tooltip: "Press Ctrl+M to toggle chat list",
         onclick: (event: Event) => {
           event.stopPropagation();
           this.toggle();

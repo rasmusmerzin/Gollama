@@ -15,20 +15,22 @@ export class TooltipElement extends HTMLElement {
   constructor() {
     super();
     this.append(this.span);
-    addEventListener("mousemove", this.mousemove.bind(this));
+    addEventListener("mousemove", this.onmouse.bind(this));
+    addEventListener("click", this.onmouse.bind(this));
   }
 
-  mousemove(event: MouseEvent) {
+  onmouse(event: MouseEvent) {
     this.target = getElementDescendant(
       event.target as HTMLElement,
-      (descendant) => !!descendant.title,
+      (descendant) => descendant.hasAttribute("tooltip"),
     );
     this.render();
   }
 
   render() {
     if (!this.target) return this.remove();
-    this.span.innerText = this.target.title;
+    this.span.innerText = this.target.getAttribute("tooltip") || "";
+    if (!this.span.innerText) return this.remove();
     const height = this.span.clientHeight + 4;
     const target_rect = this.target.getBoundingClientRect();
     const x = target_rect.left + this.target.clientWidth / 2;

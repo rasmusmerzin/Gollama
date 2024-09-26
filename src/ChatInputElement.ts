@@ -33,7 +33,7 @@ export class ChatInputElement extends Element {
         (this.file_button = createElement("button", {
           innerText: "attach_file",
           className: "material-icons",
-          title: "Add images",
+          tooltip: "Add images",
           onclick: () => this.file_input.click(),
           oncontextmenu: () => {
             this.file_input.value = "";
@@ -43,7 +43,7 @@ export class ChatInputElement extends Element {
         (this.send_button = createElement("button", {
           innerText: "send",
           className: "material-icons primary",
-          title: "Send prompt and fetch response",
+          tooltip: "Send prompt and fetch response",
           onclick: this.send.bind(this),
         })),
       ]),
