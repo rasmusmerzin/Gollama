@@ -38,13 +38,13 @@ chat-message-element {
       background: inherit;
       color: var(--warning);
       position: absolute;
-      bottom: 4px;
-      right: 4px;
-      width: 30px;
-      height: 30px;
+      bottom: 8px;
+      right: 8px;
+      width: 22px;
+      height: 22px;
       border-radius: 100%;
       border: 1px solid var(--warning);
-      font-size: 14px;
+      font-size: 12px;
       font-weight: bold;
       display: flex;
       align-items: center;
@@ -80,6 +80,14 @@ chat-message-element {
         top: 6px;
         right: 6px;
         font-size: 16px;
+        background: #222;
+        opacity: 0.5;
+        &:hover {
+          opacity: 1;
+        }
+        &:disabled {
+          opacity: 0.2;
+        }
       }
     }
     code {
@@ -111,9 +119,6 @@ chat-message-element {
     .author {
       content: "ME";
     }
-    .alert {
-      left: 0;
-    }
     image-list-element {
       justify-content: flex-end;
     }
@@ -127,9 +132,6 @@ chat-message-element {
     .author {
       content: "AI";
       background: var(--gray);
-    }
-    .alert {
-      right: 0;
     }
   }
 }

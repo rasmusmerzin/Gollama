@@ -1,9 +1,11 @@
 import "./ChatInputElement.css";
+import { Chat } from "./Chat";
 import { ChatMessage } from "./ChatMessage";
 import { ChatService } from "./ChatService";
+import { DialogueModal } from "./DialogueModal";
 import { Element } from "./Element";
-import { createElement } from "./createElement";
 import { ImageListElement } from "./ImageListElement";
+import { createElement } from "./createElement";
 
 export class ChatInputElement extends Element {
   chat_service = ChatService.get();
@@ -19,7 +21,7 @@ export class ChatInputElement extends Element {
   send_button: HTMLButtonElement;
   images = new ImageListElement({ max_count: 5 });
 
-  constructor() {
+  constructor(readonly chat: Chat) {
     super();
     this.append(
       this.images,
@@ -29,6 +31,7 @@ export class ChatInputElement extends Element {
           type: "text",
           placeholder: "Write a message...",
           onkeydown: this.keydown.bind(this),
+          oninput: this.render.bind(this),
         })),
         (this.file_button = createElement("button", {
           innerText: "attach_file",
@@ -43,11 +46,11 @@ export class ChatInputElement extends Element {
         (this.send_button = createElement("button", {
           innerText: "send",
           className: "material-icons primary",
-          tooltip: "Send prompt and fetch response",
           onclick: this.send.bind(this),
         })),
       ]),
     );
+    this.render();
   }
 
   set disabled(value: boolean) {
@@ -60,21 +63,48 @@ export class ChatInputElement extends Element {
     if (key === "Enter") this.send();
   }
 
+  async send() {
+    const message = await this.getMessage();
+    this.clear();
+    const action = () => this.chat_service.ask(message);
+    if (message || this.chat.last_message?.role === "user") action();
+    else
+      new DialogueModal({
+        title_text: "Empty Message",
+        body_text:
+          "Generate a response without a prompt? This is generally undesired.",
+        action,
+      });
+  }
+
+  clear() {
+    this.file_input.value = "";
+    this.text_input.value = "";
+    this.filechange();
+    this.render();
+  }
+
+  render() {
+    this.text_input.value = this.text_input.value.trimStart();
+    const { value } = this.text_input;
+    const tooltip = value
+      ? "Send prompt and generate a response"
+      : "Generate a response";
+    this.send_button.setAttribute("tooltip", tooltip);
+    this.send_button.innerText = value ? "send" : "contact_support";
+  }
+
   async filechange() {
     this.images.clear();
     this.images.add(...(await this.getImages()));
     this.dispatchEvent(new Event("filechange"));
   }
 
-  async send() {
+  async getMessage() {
     const content = this.text_input.value;
     const images = await this.getImages();
-    const message =
-      content || images.length ? ChatMessage.from({ content, images }) : null;
-    this.file_input.value = "";
-    this.text_input.value = "";
-    this.filechange();
-    await this.chat_service.ask(message);
+    if (!content && !images.length) return null;
+    return ChatMessage.from({ content, images });
   }
 
   async getImages() {

@@ -28,7 +28,7 @@ export class Modal extends Element {
     const index = element.tabIndex;
     this.restores.push(() => (element.tabIndex = index));
     element.tabIndex = -1;
-    for (const child of element.children)
+    for (const child of element.childNodes)
       if (child instanceof HTMLElement) this.disableBackgroundTabs(child);
   }
 

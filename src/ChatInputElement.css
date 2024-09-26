@@ -5,13 +5,13 @@ chat-input-element {
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 0 16px 16px;
+  padding: 12px;
   justify-content: flex-end;
   background: var(--background);
 
   > div {
     display: flex;
-    grid-gap: 8px;
+    grid-gap: 6px;
     width: 100%;
   }
 

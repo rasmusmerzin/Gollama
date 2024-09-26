@@ -11,12 +11,12 @@ export class ChatElement extends Element {
   app = AppElement.get();
 
   container = createElement("div");
-  input = new ChatInputElement();
+  input: ChatInputElement;
   fixed_at_bottom = true;
 
   constructor(readonly chat: Chat) {
     super();
-    this.append(this.container, this.input);
+    this.append(this.container, (this.input = new ChatInputElement(chat)));
     this.bind(chat, "change");
     this.bind(window, "resize");
     this.bind(this.input, "filechange");
