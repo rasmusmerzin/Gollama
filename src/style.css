@@ -154,31 +154,6 @@ button {
   }
 }
 
-.focus {
-  position: relative;
-  &::before {
-    content: "";
-    position: absolute;
-    left: 1px;
-    right: 1px;
-    top: 1px;
-    bottom: 1px;
-    border-radius: inherit;
-    border: 1px solid var(--foreground);
-  }
-  &::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    border-radius: inherit;
-    background: var(--foreground);
-    opacity: 0.2;
-  }
-}
-
 .loading {
   position: relative;
   &::after {

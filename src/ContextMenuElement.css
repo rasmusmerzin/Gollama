@@ -25,3 +25,17 @@ context-menu-element {
     }
   }
 }
+
+.context-menu-focus {
+  position: relative;
+  outline: solid var(--foreground);
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: #0004;
+  }
+}

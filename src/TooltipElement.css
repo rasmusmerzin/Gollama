@@ -5,25 +5,29 @@ tooltip-element {
   left: calc(var(--x) * 1px);
   top: calc(var(--y) * 1px);
   font-size: 12px;
+  animation: 100ms tooltip-fadein;
 
-  span {
+  .container {
     position: absolute;
+    box-sizing: content-box;
     left: calc(50% + var(--shift) * 1px);
     transform: translateX(-50%);
-    padding: 6px 8px;
+    border: 6px solid #000;
+    padding: 0 2px;
     border-radius: 8px;
-    display: block;
-    max-width: 400px;
+    background: #000;
+    width: var(--width, 400px);
+    line-height: 1;
+    max-height: 10em;
     overflow: hidden;
     text-overflow: ellipsis;
-    background: #000;
-    white-space: pre;
-  }
-  &:not(.bottom) span {
-    bottom: 0;
-  }
-  &.bottom span {
-    top: 0;
+    text-align: center;
+    &:not(.bottom) {
+      bottom: 0;
+    }
+    &.bottom {
+      top: 0;
+    }
   }
 
   &::before {
@@ -35,5 +39,14 @@ tooltip-element {
     height: 7px;
     background: #000;
     transform: translate(-50%, -50%) rotate(45deg);
+  }
+}
+
+@keyframes tooltip-fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

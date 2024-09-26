@@ -32,7 +32,7 @@ export class ContextMenuElement extends Element {
     if (target) target.after(this);
     else document.body.append(this);
     setTimeout(() => {
-      this.target?.classList.add("focus");
+      this.target?.classList.add("context-menu-focus");
       this.bind(window, "click", () => this.remove());
       this.bind(window, "contextmenu", () => this.remove());
       this.bind(window, "wheel", () => this.remove());
@@ -57,7 +57,7 @@ export class ContextMenuElement extends Element {
 
   remove() {
     super.remove();
-    this.target?.classList.remove("focus");
+    this.target?.classList.remove("context-menu-focus");
   }
 
   keydown(event: Event) {
