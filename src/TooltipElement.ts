@@ -1,35 +1,21 @@
 import "./TooltipElement.css";
-import { getElementDescendant } from "./getElementDescendant";
 import { createElement } from "./createElement";
-import { Mouse } from "./Mouse";
+import { getElementDescendant } from "./getElementDescendant";
 
-export class TooltipElement extends HTMLElement {
-  static instance?: TooltipElement;
-  static get() {
-    if (!this.instance) this.instance = new TooltipElement();
-    return this.instance;
-  }
-
-  mouse = Mouse.get();
+class TooltipElement extends HTMLElement {
   target: HTMLElement | null = null;
   container = createElement("div", { className: "container" });
   text = createElement("span", { className: "text" });
+  observer = new MutationObserver(() => this.render());
 
   constructor() {
     super();
     this.container.append(this.text);
     this.append(this.container);
-    addEventListener("mousemove", this.mousemove.bind(this));
-    addEventListener("click", this.mouseclick.bind(this));
+    addEventListener("mousemove", this.updateTarget.bind(this));
   }
 
-  mouseclick(event: MouseEvent) {
-    const { clientX, clientY } = event;
-    if (clientX === this.mouse.x && clientY === this.mouse.y)
-      this.mousemove(event);
-  }
-
-  mousemove(event: MouseEvent) {
+  updateTarget(event: Event) {
     const target = getElementDescendant(
       event.target as HTMLElement,
       (descendant) => descendant.hasAttribute("tooltip"),
@@ -41,10 +27,12 @@ export class TooltipElement extends HTMLElement {
   }
 
   render() {
+    this.observer.disconnect();
     this.container.style.removeProperty("--width");
     if (!this.target) return this.remove();
     const content = (this.target.getAttribute("tooltip") || "").trim();
     if (!content) return this.remove();
+    this.observer.observe(this.target, { attributes: true });
     this.text.innerText = content;
     if (!this.parentElement) document.body.append(this);
     this.renderWidth();
@@ -84,4 +72,4 @@ export class TooltipElement extends HTMLElement {
 
 customElements.define("tooltip-element", TooltipElement);
 
-TooltipElement.get();
+new TooltipElement();

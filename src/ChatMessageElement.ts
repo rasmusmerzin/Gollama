@@ -73,7 +73,11 @@ export class ChatMessageElement extends Element {
           navigator.clipboard.writeText(content);
           const tooltip = button.getAttribute("tooltip") || "";
           button.setAttribute("tooltip", "Copied");
-          setTimeout(() => button.setAttribute("tooltip", tooltip));
+          button.disabled = true;
+          setTimeout(() => {
+            button.setAttribute("tooltip", tooltip);
+            button.disabled = false;
+          }, 2000);
         },
       });
       block.append(button);
