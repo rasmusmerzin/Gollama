@@ -11,9 +11,12 @@ export class Modal extends Element {
     document.getElementById("modal")?.remove();
     this.id = "modal";
     this.append(this.container);
-    this.bind(window, "keydown", this.keydown.bind(this));
     this.bind(this.container, "click", (event) => event.stopPropagation());
     this.bind(this, "click", () => this.remove());
+    this.bind(window, "keydown", (event: Event) => {
+      const { key } = event as KeyboardEvent;
+      if (key === "Escape") this.remove();
+    });
     this.disableBackgroundTabs(document.body);
     document.body.append(this);
   }
@@ -29,10 +32,5 @@ export class Modal extends Element {
   remove() {
     super.remove();
     for (const restore of this.restores) restore();
-  }
-
-  keydown(event: Event) {
-    const { key } = event as KeyboardEvent;
-    if (key === "Escape") this.remove();
   }
 }

@@ -20,7 +20,22 @@ export class ImageModalElement extends Modal {
     this.img.onclick = (e) => e.stopPropagation();
     this.left.onclick = this.leftClick.bind(this);
     this.right.onclick = this.rightClick.bind(this);
+    this.bind(window, "keydown", this.keydown.bind(this));
     this.render();
+  }
+
+  keydown(event: Event) {
+    const { key } = event as KeyboardEvent;
+    switch (key) {
+      case "ArrowLeft":
+      case "ArrowUp":
+        this.left.click();
+        break;
+      case "ArrowRight":
+      case "ArrowDown":
+        this.right.click();
+        break;
+    }
   }
 
   leftClick(event: Event) {

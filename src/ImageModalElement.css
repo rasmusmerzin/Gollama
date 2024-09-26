@@ -4,8 +4,8 @@ image-modal-element {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 64px;
-    height: 64px;
+    width: 48px;
+    height: 48px;
     border-radius: 100%;
     font-size: 36px !important;
     &.left {
@@ -19,7 +19,7 @@ image-modal-element {
     }
   }
   img {
-    max-width: calc(100% - (96px * 2));
+    max-width: calc(100% - (80px * 2));
     max-height: calc(100% - 64px);
   }
 }
